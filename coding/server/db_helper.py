@@ -1,20 +1,17 @@
 import psycopg2
-
-HOST = "localhost"
-DB_NAME = "naochallenge23"
-USER = "postgres"
-PASSWORD = "postgres"
+import config_helper
 
 
 class DB:
-    def __init__(self):
-        self.connection = psycopg2.connect(host=HOST, database=DB_NAME,
-                                           user=USER, password=PASSWORD)
+    def __init__(self, config: config_helper.Config):
+        self.connection = psycopg2.connect(host=config.db_host, database=config.db_name,
+                                           user=config.db_user, password=config.db_password)
+
         with self.connection:
             with self.connection.cursor() as cur:
                 cur.execute("""
                     CREATE TABLE IF NOT EXISTS Reports(
-                        id SERIAL PRIMARY KEY,
+                        id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
                         date DATE NOT NULL UNIQUE,
                         temperature NUMERIC(5, 2) NOT NULL,
                         co2 NUMERIC(6),
