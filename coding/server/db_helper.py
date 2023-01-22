@@ -1,5 +1,6 @@
 import psycopg2
 import config_helper
+from datetime import datetime
 
 
 class DB:
@@ -9,34 +10,45 @@ class DB:
 
         with self.connection:
             with self.connection.cursor() as cur:
-                cur.execute("""
+                cur.execute('''
                     CREATE TABLE IF NOT EXISTS Reports(
                         id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-                        date DATE NOT NULL UNIQUE,
+                        date TEXT NOT NULL UNIQUE,
                         temperature NUMERIC(5, 2) NOT NULL,
                         co2 NUMERIC(6),
-                        humidity NUMERIC(3));""")
+                        humidity NUMERIC(3));''')
 
-                print("Esito inizializzazione db:", cur.statusmessage)
+                print('DB initialized:', cur.statusmessage)
 
     def save_report(self, report):
         with self.connection:
             with self.connection.cursor() as cur:
-                print(report)
-                cur.execute("""
-                    INSERT INTO Reports(date, temperature, co2, humidity)
-                    VALUES (%s, %s, %s, %s)""",
-                            (report['date'], report['temperature'], report['co2'], report['humidity']))
+                if (report.get('date', '') == ''):
+                    report['date'] = datetime.now().isoformat()
+
+                if (report.get('id', '') == ''):
+                    cur.execute('''
+                        INSERT INTO Reports(date, temperature, co2, humidity)
+                        VALUES (%s, %s, %s, %s);''',
+                                (report['date'], report['temperature'], report['co2'], report['humidity']))
+                else:
+                    cur.execute('''
+                        UPDATE Reports
+                        SET date = %s, temperature = %s, co2 = %s, humidity = %s
+                        WHERE id = %s
+                        ORDER BY date;''',
+                                (report['date'], report['temperature'], report['co2'], report['humidity'], report['id']))
 
                 return cur.statusmessage
 
     def get_report(self, id):
         with self.connection:
             with self.connection.cursor() as cur:
-                cur.execute("""
+                cur.execute('''
                     SELECT * FROM Reports
-                    WHERE id = %s;""",
-                            (id,))
+                    WHERE id::text = %s
+                    ORDER BY date;''',
+                            (str(id),))
 
                 if (cur.rowcount == 0):
                     return {}
@@ -47,7 +59,9 @@ class DB:
         with self.connection:
             with self.connection.cursor() as cur:
                 data = []
-                cur.execute("""SELECT * FROM Reports""")
+                cur.execute('''
+                    SELECT * FROM Reports
+                    ORDER BY date;''')
 
                 for tupla in cur:
                     data.append(

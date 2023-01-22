@@ -1,5 +1,4 @@
-import yaml
-
+import utilities
 
 class Config:
     srv_host: str
@@ -12,7 +11,7 @@ class Config:
     db_password: str
 
     def __init__(self):
-        configuration = self.read_yaml('config.yaml')
+        configuration = utilities.read_yaml('config.yaml')
 
         print("Loaded configuration:", configuration)
 
@@ -27,7 +26,3 @@ class Config:
         self.db_name = config['database']['name']
         self.db_user = config['database']['user']
         self.db_password = config['database']['password']
-
-    def read_yaml(self, file_path):
-        with open(file_path, 'r') as f:
-            return yaml.safe_load(f)

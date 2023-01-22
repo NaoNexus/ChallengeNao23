@@ -1,7 +1,10 @@
 import config_helper
 import db_helper
+import utilities
+
 import time
-from flask import Flask, request, jsonify
+
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -11,22 +14,43 @@ def index():
     return ''
 
 
-@app.route('/info', methods=['GET'])
+@app.route('/reports')
+def reports_screen():
+    reports = db_helper.get_reports()
+
+    return render_template('reports.html', reports=reports)
+
+
+@app.route('/api/info', methods=['GET'])
 def info():
-    return jsonify({'Status': 'online', 'Elapsed time': time.time() - startTime})
+    return jsonify({'code': 200, 'status': 'online', 'elapsed time': utilities.getElapsedTime(startTime)}), 200
 
 
-@app.route('/api/report/<int:id>', methods=['GET', 'POST'])
+@app.route('/api/report', methods=['POST'])
+def save_report():
+    try:
+        return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(request.json)}), 201
+    except Exception as e:
+        return jsonify({'code': 500, 'message': str(e)}), 500
+
+
+@app.route('/api/report/<int:id>', methods=['GET'])
 def report(id):
-    if (request.method == 'POST'):
-        return jsonify(db_helper.save_report(request.json))
-    elif (request.method == 'GET' and id != None):
-        return jsonify(db_helper.get_report(id))
+    if (id != None):
+        try:
+            return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_report(id)}), 200
+        except Exception as e:
+            return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        return jsonify({'code': 500, 'message': 'No id was passed'}), 500
 
 
 @app.route('/api/reports', methods=['GET'])
 def reports():
-    return jsonify(db_helper.get_reports())
+    try:
+        return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_reports()}), 200
+    except Exception as e:
+        return jsonify({'code': 500, 'message': str(e)}), 500
 
 
 if __name__ == '__main__':
