@@ -45,9 +45,9 @@ def save_pdf_report():
         return jsonify({'code': 500, 'message': str(e)}), 500
 
 
-@app.route('/api/report/<int:id>', methods=['GET'])
+@app.route('/api/report/<id>', methods=['GET'])
 def report(id):
-    if (id != None):
+    if (id != None and id != ''):
         try:
             return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_report(id)}), 200
         except Exception as e:
