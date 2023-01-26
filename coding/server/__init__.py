@@ -34,9 +34,20 @@ def save_report():
         return jsonify({'code': 500, 'message': str(e)}), 500
 
 
-@app.route('/api/report/<int:id>', methods=['GET'])
+@app.route('/api/pdf_report', methods=['POST'])
+def save_pdf_report():
+    try:
+        uploaded_file = request.files['file']
+        if (uploaded_file.filename != ''):
+            uploaded_file.save(f'report_pdfs/{uploaded_file.filename}')
+            # TODO: analyse file and save it in the db
+    except Exception as e:
+        return jsonify({'code': 500, 'message': str(e)}), 500
+
+
+@app.route('/api/report/<id>', methods=['GET'])
 def report(id):
-    if (id != None):
+    if (id != None and id != ''):
         try:
             return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_report(id)}), 200
         except Exception as e:
