@@ -40,6 +40,7 @@ def save_pdf_report():
         uploaded_file = request.files['file']
         if (uploaded_file.filename != ''):
             uploaded_file.save(f'report_pdfs/{uploaded_file.filename}')
+            
             # TODO: analyse file and save it in the db
     except Exception as e:
         return jsonify({'code': 500, 'message': str(e)}), 500
