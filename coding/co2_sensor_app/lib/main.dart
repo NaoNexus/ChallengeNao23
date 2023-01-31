@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Co2 Sensor App',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Co2 Sensor App'),
+          title: const Text('Co2 Sensor App'),
         ),
         body: const HomePage(),
       ),
