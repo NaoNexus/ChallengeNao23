@@ -34,9 +34,13 @@ class _SettingsPopupState extends State<SettingsPopup> {
     setState(() {
       if (_ipController.text.isEmpty) {
         _isIpEmpty = true;
+      } else {
+        _isIpEmpty = false;
       }
       if (_portController.text.isEmpty) {
         _isPortEmpty = true;
+      } else {
+        _isPortEmpty = false;
       }
     });
   }
