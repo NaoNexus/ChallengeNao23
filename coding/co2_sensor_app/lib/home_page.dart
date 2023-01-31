@@ -1,5 +1,7 @@
 import 'package:co2_sensor_app/api.dart';
+import 'package:co2_sensor_app/settings_popup.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,6 +12,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Api _appApi;
+  late String _ip;
+  late int _port;
 
   @override
   void initState() {
@@ -27,7 +31,17 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               icon: const Icon(Icons.settings_outlined, color: Colors.white),
               onPressed: () {
-                //TODO: show settings popup with ip and port
+                showDialog(
+                  context: context,
+                  builder: (context) => SettingsPopup(
+                    onValuesSubmitted: (ip, port) {
+                      setState(() {
+                        _ip = ip;
+                        _port = int.parse(port);
+                      });
+                    },
+                  ),
+                );
               },
             )
           ],
@@ -56,7 +70,16 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(16.0),
                       textStyle: const TextStyle(fontSize: 20),
                     ),
-                    onPressed: () {}, //TODO: call send server data class
+                    onPressed: () {
+                      _appApi = Api(ip: _ip, port: _port);
+                      Fluttertoast.showToast(
+                          msg: 'Sent to ip: $_ip on port: $_port',
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.black,
+                          fontSize: 16.0);
+                    },
                     child: const Text('SUBMIT'),
                   ),
                 ),
