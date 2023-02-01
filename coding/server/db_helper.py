@@ -2,7 +2,6 @@ import psycopg2
 import config_helper
 from datetime import datetime
 
-
 class DB:
     def __init__(self, config: config_helper.Config):
         self.connection = psycopg2.connect(host=config.db_host, database=config.db_name,

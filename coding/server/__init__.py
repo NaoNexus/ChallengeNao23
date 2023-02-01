@@ -1,5 +1,6 @@
-import config_helper
-import db_helper
+from config_helper import Config
+from db_helper import DB
+from pdf_analyzer import PDFAnalyzer
 import utilities
 
 import time
@@ -40,8 +41,12 @@ def save_pdf_report():
         uploaded_file = request.files['file']
         if (uploaded_file.filename != ''):
             uploaded_file.save(f'report_pdfs/{uploaded_file.filename}')
+
+            analyzed_pdf = PDFAnalyzer(f'report_pdfs/{uploaded_file.filename}')
             
-            # TODO: analyse file and save it in the db
+            return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(analyzed_pdf.report)}), 201
+        else:
+            return jsonify({'code': 500, 'message': 'No file was passed'}), 500
     except Exception as e:
         return jsonify({'code': 500, 'message': str(e)}), 500
 
@@ -66,8 +71,8 @@ def reports():
 
 
 if __name__ == '__main__':
-    config_helper = config_helper.Config()
-    db_helper = db_helper.DB(config_helper)
+    config_helper = Config()
+    db_helper = DB(config_helper)
     startTime = time.time()
     app.run(host=config_helper.srv_host, port=config_helper.srv_port,
             debug=config_helper.srv_debug)
