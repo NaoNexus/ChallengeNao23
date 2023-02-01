@@ -1,26 +1,15 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-class SettingsPopup extends StatefulWidget {
-  final Function(String, String) onValuesSubmitted;
-  const SettingsPopup({super.key, required this.onValuesSubmitted});
+class SubmitPopup extends StatefulWidget {
+  const SubmitPopup({super.key});
 
   @override
-  State<SettingsPopup> createState() => _SettingsPopupState();
+  State<SubmitPopup> createState() => _SubmitPopupState();
 }
 
-class _SettingsPopupState extends State<SettingsPopup> {
+class _SubmitPopupState extends State<SubmitPopup> {
   final _formKey = GlobalKey<FormState>();
-  final _ipController = TextEditingController();
-  final _portController = TextEditingController();
-  static String _ip = '';
-  static String _port = '';
-
-  @override
-  void dispose() {
-    _ipController.dispose();
-    _portController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,20 +33,7 @@ class _SettingsPopupState extends State<SettingsPopup> {
                       child: Column(
                         children: [
                           TextFormField(
-                            controller: _ipController,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'IP cannot be empty';
-                              }
-                              return null;
-                            },
-                            decoration: const InputDecoration(
-                              labelText: 'IP',
-                            ),
-                          ),
-                          const SizedBox(height: 20.0),
-                          TextFormField(
-                            controller: _portController,
+                            controller: null,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Port cannot be empty';
@@ -68,6 +44,23 @@ class _SettingsPopupState extends State<SettingsPopup> {
                               labelText: 'Port',
                             ),
                           ),
+                          const SizedBox(height: 40.0),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                foregroundColor: Colors.black,
+                                backgroundColor: Colors.red,
+                                padding: const EdgeInsets.all(16.0),
+                                textStyle: const TextStyle(fontSize: 20),
+                              ),
+                              onPressed: () async {
+                                final result =
+                                    await FilePicker.platform.pickFiles();
+                              },
+                              child: const Text('SELECT FILE'),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -76,18 +69,12 @@ class _SettingsPopupState extends State<SettingsPopup> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           TextButton(
-                            onPressed: () {
-                              _ipController.clear();
-                              _portController.clear();
-                            },
+                            onPressed: () {},
                             child: const Text('CANCEL'),
                           ),
                           TextButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                _ip = _ipController.text;
-                                _port = _portController.text;
-                                widget.onValuesSubmitted(_ip, _port);
                                 Navigator.pop(context);
                               }
                             },

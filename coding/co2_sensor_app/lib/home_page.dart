@@ -1,7 +1,7 @@
 import 'package:co2_sensor_app/api.dart';
 import 'package:co2_sensor_app/settings_popup.dart';
+import 'package:co2_sensor_app/submit_popup.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,8 +12,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Api _appApi;
-  late String _ip;
-  late int _port;
+  String? _ip;
+  int? _port;
 
   @override
   void initState() {
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               },
-            )
+            ),
           ],
         ),
         body: Center(
@@ -71,14 +71,14 @@ class _HomePageState extends State<HomePage> {
                       textStyle: const TextStyle(fontSize: 20),
                     ),
                     onPressed: () {
-                      _appApi = Api(ip: _ip, port: _port);
-                      Fluttertoast.showToast(
-                          msg: 'Sent to ip: $_ip on port: $_port',
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.CENTER,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.black,
-                          fontSize: 16.0);
+                      if (_ip == null || _port == null) return;
+                      _appApi = Api(ip: _ip!, port: _port!);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Sent to ip: $_ip on port: $_port'),
+                          behavior: SnackBarBehavior.floating,
+                        ),
+                      );
                     },
                     child: const Text('SUBMIT'),
                   ),
@@ -86,6 +86,15 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          elevation: 20,
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) => const SubmitPopup(),
+            );
+          },
         ),
       ),
     );
