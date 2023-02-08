@@ -1,4 +1,5 @@
-import 'package:co2_sensor_app/home_page.dart';
+import 'package:co2_sensor_app/app_colors.dart';
+import 'package:co2_sensor_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,11 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Co2 Sensor App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Co2 Sensor App'),
-        ),
-        body: const HomePage(),
+      home: const HomePage(),
+      theme: ThemeData.from(
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
       ),
     );
   }
