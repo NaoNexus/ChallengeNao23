@@ -2,6 +2,7 @@ import psycopg2
 import config_helper
 from datetime import datetime
 
+
 class DB:
     def __init__(self, config: config_helper.Config):
         self.connection = psycopg2.connect(host=config.db_host, database=config.db_name,
@@ -15,7 +16,10 @@ class DB:
                         date TEXT NOT NULL UNIQUE,
                         temperature NUMERIC(5, 2) NOT NULL,
                         co2 NUMERIC(6),
-                        humidity NUMERIC(3));''')
+                        humidity NUMERIC(3),
+                        nPeople NUMERIC(4),
+                        interiorLight NUMERIC(4),
+                        exteriorLight NUMERIC(4));''')
 
                 print('DB initialized:', cur.statusmessage)
 
@@ -27,16 +31,16 @@ class DB:
 
                 if (report.get('id', '') == ''):
                     cur.execute('''
-                        INSERT INTO Reports(date, temperature, co2, humidity)
-                        VALUES (%s, %s, %s, %s);''',
-                                (report['date'], report['temperature'], report['co2'], report['humidity']))
+                        INSERT INTO Reports(date, temperature, co2, humidity, nPeople, interiorLight, exteriorLight)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s);''',
+                                (report['date'], report['temperature'], report['co2'], report['humidity'], report.get('nPeople', 0), report.get('interiorLight', 0), report.get('exteriorLight', 0),))
                 else:
                     cur.execute('''
                         UPDATE Reports
-                        SET date = %s, temperature = %s, co2 = %s, humidity = %s
+                        SET date = %s, temperature = %s, co2 = %s, humidity = %s, nPeople = %s, interiorLight = %s, exteriorLight = %s
                         WHERE id = %s
                         ORDER BY date;''',
-                                (report['date'], report['temperature'], report['co2'], report['humidity'], report['id']))
+                                (report['date'], report['temperature'], report['co2'], report['humidity'], report['nPeople'], report['interiorLight'], report['exteriorLight'], report['id']))
 
                 return cur.statusmessage
 
