@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" />
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', { 'packages': ['corechart'] });
@@ -49,7 +50,8 @@
         var options = {
             title: 'Sensor reports',
             curveType: 'function',
-            legend: { position: 'bottom' }
+            legend: { position: 'bottom' },
+            backgroundColor: '#f8fafc',
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
@@ -60,37 +62,58 @@
 </head>
 
 <body class="bg-slate-500">
-    <div class="mx-40 my-10 p-10 rounded-xl bg-slate-50 space-y-4">
-        <h1 class="text-2xl font-medium text-slate-800">REPORTS GRAPH</h1>
-        <div id="curve_chart" class="w-full h-[500px] rounded-lg overflow-hidden bg-transparent"></div>
-        <div class="flex flex-row mt-2 space-x-2">
-            <input class="hidden peer/co2" checked type="radio" id="co2" name="contact"
-                onclick="graphSelectionClick(this);" value="co2" />
-            <label
-                class="py-1 px-3 text-xl font-medium text-slate-800 border-2 border-slate-300 rounded-full peer-checked/co2:bg-sky-500 peer-checked/co2:text-white peer-checked/co2:border-0"
-                for="co2">CO2</label>
-            <input class="hidden peer/temp" type="radio" id="temperature" name="contact"
-                onclick="graphSelectionClick(this);" value="temperature" />
-            <label
-                class="py-1 px-3 text-xl font-medium text-slate-800 border-2 border-slate-300 rounded-full peer-checked/temp:bg-sky-500 peer-checked/temp:text-white peer-checked/temp:border-0"
-                for="temperature">TEMPERATURE</label>
-            <input class="hidden peer/hum" type="radio" id="humidity" name="contact"
-                onclick="graphSelectionClick(this);" value="humidity" />
-            <label
-                class="py-1 px-3 text-xl font-medium text-slate-800 border-2 border-slate-300 rounded-full peer-checked/hum:bg-sky-500 peer-checked/hum:text-white peer-checked/hum:border-0"
-                for="humidity">HUMIDITY</label>
+    <div class="mx-10 xl:mx-40 my-10 p-10 rounded-xl bg-slate-50 space-y-4">
+        <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-row space-x-2">
+                <span class="px-2 pt-1 rounded-full mdi mdi-chart-line text-white bg-sky-500"></span>
+                <h1 class="text-2xl font-medium text-slate-800">REPORTS GRAPH</h1>
+            </div>
+            <div class="flex flex-row mt-2 space-x-2">
+                <input class="hidden peer/co2" checked type="radio" id="co2" name="contact"
+                    onclick="graphSelectionClick(this);" value="co2" />
+                <label
+                    class="flex flex-row py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/co2:bg-sky-500 peer-checked/co2:text-white peer-checked/co2:border-sky-500 transition-all"
+                    for="co2">
+                    <span class="mdi mdi-molecule-co2"></span>
+                    <span>CO2</span>
+                </label>
+                <input class="hidden peer/temp" type="radio" id="temperature" name="contact"
+                    onclick="graphSelectionClick(this);" value="temperature" />
+                <label
+                    class="flex flex-row py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/temp:bg-sky-500 peer-checked/temp:text-white peer-checked/temp:border-sky-500 transition-all"
+                    for="temperature">
+                    <span class="mdi mdi-thermometer"></span>
+                    <span>TEMPERATURE</span>
+                </label>
+                <input class="hidden peer/hum" type="radio" id="humidity" name="contact"
+                    onclick="graphSelectionClick(this);" value="humidity" />
+                <label
+                    class="flex flex-row py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/hum:bg-sky-500 peer-checked/hum:text-white peer-checked/hum:border-sky-500 transition-all"
+                    for="humidity">
+                    <span class="mdi mdi-water-outline"></span>
+                    <span>HUMIDITY</span>
+                </label>
+            </div>
         </div>
+        <div id="curve_chart" class="w-full h-[500px] rounded-lg overflow-hidden bg-transparent"></div>
     </div>
-    <div class="mx-40 my-10 p-10 rounded-xl bg-slate-50 space-y-4">
-        <h1 class="text-2xl font-medium text-slate-800">REPORTS LIST</h1>
-        <table class="w-full border-2 border-slate-200">
+    <div class="mx-10 xl:mx-40 my-10 p-10 rounded-xl bg-slate-50 space-y-4">
+        <div class="flex flex-row space-x-2">
+            <span class="px-2 pt-1 rounded-full mdi mdi-format-list-bulleted text-white bg-sky-500"></span>
+            <h1 class="text-2xl font-medium text-slate-800">REPORTS LIST</h1>
+        </div>
+        <table class="w-full border-2 border-slate-200 rounded-md">
             <thead>
                 <tr>
+                    <th class="border-2 border-slate-200"></th>
                     <th class="border-2 border-slate-200">ID</th>
                     <th class="border-2 border-slate-200">Date</th>
                     <th class="border-2 border-slate-200">CO2</th>
                     <th class="border-2 border-slate-200">Temperature</th>
                     <th class="border-2 border-slate-200">Humidity</th>
+                    <th class="border-2 border-slate-200">N° People</th>
+                    <th class="border-2 border-slate-200">Internal light</th>
+                    <th class="border-2 border-slate-200">External light</th>
                 </tr>
             </thead>
             <tbody>
@@ -101,10 +124,19 @@
                     <td class="border-x-2 border-slate-200 text-center">{{report['co2']}} PPM</td>
                     <td class="border-x-2 border-slate-200 text-center">{{report['temperature']}} °C</td>
                     <td class="border-x-2 border-slate-200 text-center">{{report['humidity']}} %</td>
+                    <td class="border-x-2 border-slate-200 text-center">{{report['nPeople']}}</td>
+                    <td class="border-x-2 border-slate-200 text-center">{{report['internalLight']}} lux</td>
+                    <td class="border-x-2 border-slate-200 text-center">{{report['externalLight']}} lux</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+
+        <!--<button
+            class="mt-10 mx-auto px-4 py-2 rounded-md flex flex-row text-medium text-white tracking-wider bg-green-500">
+            <span class="mdi mdi-plus"></span>
+            <h1>NEW REPORT</h1>
+        </button>-->
     </div>
 </body>
 
