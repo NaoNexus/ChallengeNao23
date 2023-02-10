@@ -1,38 +1,39 @@
 import 'package:co2_sensor_app/app_colors.dart';
+import 'package:co2_sensor_app/utilities.dart';
+import 'package:co2_sensor_app/widgets/file_picker_input.dart';
+import 'package:environment_sensors/environment_sensors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:io';
+
+import 'package:co2_sensor_app/api.dart';
 
 class SettingsPopup extends StatefulWidget {
-  const SettingsPopup({
-    super.key,
-    required this.onValuesSubmitted,
-    required this.ip,
-    required this.port,
-  });
-
-  final Function(String, String) onValuesSubmitted;
-  final String ip, port;
+  const SettingsPopup({super.key});
 
   @override
   State<SettingsPopup> createState() => _SettingsPopupState();
 }
 
 class _SettingsPopupState extends State<SettingsPopup> {
-  final _formKey = GlobalKey<FormState>();
-  final _ipController = TextEditingController();
-  final _portController = TextEditingController();
+  final String _ip = '192.168.0.150';
+  final int _port = 6969;
+
+  File? _pdf;
+
+  final environmentSensors = EnvironmentSensors();
+
+  final TextEditingController _nPeopleController = TextEditingController();
+
+  final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
   void initState() {
-    _ipController.text = widget.ip;
-    _portController.text = widget.port;
     super.initState();
   }
 
   @override
   void dispose() {
-    _ipController.dispose();
-    _portController.dispose();
     super.dispose();
   }
 
@@ -40,117 +41,121 @@ class _SettingsPopupState extends State<SettingsPopup> {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(12.0),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                autofocus: false,
-                controller: _ipController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'IP cannot be empty';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  label: const Text('IP Address'),
-                ),
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                autofocus: false,
-                controller: _portController,
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(
-                    RegExp(r'\d+'),
-                  ),
-                ],
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Port cannot be empty';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  label: const Text('Port'),
-                ),
-              ),
-              const SizedBox(height: 16.0),
-              Row(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        //backgroundColor: Colors.grey.withLightness(0.85),
-                        padding: const EdgeInsets.all(16.0),
-                        textStyle: const TextStyle(fontSize: 20),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
+                  const SizedBox(height: 14),
+                  TextFormField(
+                    controller: _nPeopleController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp(r'\d+'),
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
-                        'CANCEL',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                          letterSpacing: 1.5,
-                        ),
+                    ],
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Number of people cannot be empty';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
+                      label: const Text('Number of people in the room'),
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: AppColors.red.withLightness(0.85),
-                        padding: const EdgeInsets.all(16.0),
-                        textStyle: const TextStyle(fontSize: 20),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
+                  const SizedBox(height: 16),
+                  FilePickerInput(
+                    initialFile: _pdf,
+                    validator: (file) {
+                      if (file == null) return "File cannot be empty";
+                      return null;
+                    },
+                    onSelected: (file) {
+                      _pdf = file;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: AppColors.red.withLightness(0.85),
+                      padding: const EdgeInsets.all(16.0),
+                      textStyle: const TextStyle(fontSize: 20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          widget.onValuesSubmitted(
-                            _ipController.text,
-                            _portController.text,
+                    ),
+                    onPressed: () async {
+                      double light = 0;
+                      if (await environmentSensors
+                          .getSensorAvailable(SensorType.Light)) {
+                        light = await environmentSensors.light.first;
+                      }
+                      if (context.mounted) {
+                        if (!_formKey.currentState!.validate()) return;
+                        Api appApi = Api(ip: _ip, port: _port);
+
+                        try {
+                          appApi.postFile(
+                              _pdf!.path,
+                              int.parse(_nPeopleController.text),
+                              light.round());
+                          showSnackBar(
+                            context: context,
+                            text:
+                                'Sent to ip: $_ip on port: $_port  light $light',
+                            color: Colors.green,
+                            icon: Icons.check,
                           );
-                          Navigator.pop(context);
+                        } catch (e) {
+                          showSnackBar(
+                            context: context,
+                            text: e.toString(),
+                            color: Colors.red,
+                            icon: Icons.error_outline,
+                          );
                         }
-                      },
-                      child: const Text(
-                        'SAVE',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.red,
-                          letterSpacing: 1.5,
+                      }
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'SUBMIT',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.red,
+                            letterSpacing: 1.5,
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Icon(
+                          Icons.cloud_upload_outlined,
+                          color: AppColors.red,
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
