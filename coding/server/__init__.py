@@ -43,7 +43,7 @@ def save_pdf_report():
             uploaded_file.save(f'report_pdfs/{uploaded_file.filename}')
 
             analyzed_pdf = PDFAnalyzer(f'report_pdfs/{uploaded_file.filename}')
-            
+
             return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(analyzed_pdf.report)}), 201
         else:
             return jsonify({'code': 500, 'message': 'No file was passed'}), 500
