@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:co2_sensor_app/widgets/file_picker_input.dart';
 
+import 'package:environment_sensors/environment_sensors.dart';
 import 'package:co2_sensor_app/api.dart';
 import 'package:co2_sensor_app/app_colors.dart';
 import 'package:co2_sensor_app/settings_popup.dart';
@@ -18,8 +19,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String? _ip;
   int? _port;
-
   File? _pdf;
+  final environmentSensors = EnvironmentSensors();
 
   final TextEditingController _nPeopleController = TextEditingController();
 
@@ -111,15 +112,35 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  onPressed: () {
-                    if (!_formKey.currentState!.validate()) return;
-                    Api appApi = Api(ip: _ip!, port: _port!);
-                    showSnackBar(
-                      context: context,
-                      text: 'Sent to ip: $_ip on port: $_port',
-                      color: Colors.green,
-                      icon: Icons.check,
-                    );
+                  onPressed: () async {
+                    double light = 0;
+                    if (await environmentSensors
+                        .getSensorAvailable(SensorType.Light)) {
+                      light = await environmentSensors.light.first;
+                    }
+                    if (context.mounted) {
+                      if (!_formKey.currentState!.validate()) return;
+                      Api appApi = Api(ip: _ip!, port: _port!);
+
+                      try {
+                        appApi.postFile(_pdf!.path,
+                            int.parse(_nPeopleController.text), light.round());
+                        showSnackBar(
+                          context: context,
+                          text:
+                              'Sent to ip: $_ip on port: $_port  light $light',
+                          color: Colors.green,
+                          icon: Icons.check,
+                        );
+                      } catch (e) {
+                        showSnackBar(
+                          context: context,
+                          text: e.toString(),
+                          color: Colors.red,
+                          icon: Icons.error_outline,
+                        );
+                      }
+                    }
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

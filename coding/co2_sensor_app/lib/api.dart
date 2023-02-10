@@ -10,7 +10,7 @@ class Api {
 
   void postFile(String path, int numberOfPeople, int light) async {
     http.MultipartRequest request =
-        http.MultipartRequest('POST', Uri.parse(address))
+        http.MultipartRequest('POST', Uri.parse('http://' + address))
           ..files.add(await http.MultipartFile.fromPath('pdf', path))
           ..fields['numberPeople'] = numberOfPeople.toString()
           ..fields['light'] = light.toString();
