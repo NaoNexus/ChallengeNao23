@@ -17,7 +17,7 @@ class Api {
       http.MultipartRequest request =
           http.MultipartRequest('POST', Uri.http(address, 'api/pdf_report'))
             ..files.add(await http.MultipartFile.fromPath('file', path))
-            ..fields['numberPeople'] = numberOfPeople.toString()
+            ..fields['nPeople'] = numberOfPeople.toString()
             ..fields['internalLight'] = light.toString();
 
       log(request.url.toString());
