@@ -1,6 +1,6 @@
 import 'package:environment_sensors/environment_sensors.dart';
 import 'package:co2_sensor_app/app_colors.dart';
-import 'package:co2_sensor_app/settings_popup.dart';
+import 'package:co2_sensor_app/send_popup.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
             showDialog(
               context: context,
               barrierDismissible: true,
-              builder: (context) => SettingsPopup(),
+              builder: (context) => const SendPopup(),
             );
           },
           backgroundColor: AppColors.teal,

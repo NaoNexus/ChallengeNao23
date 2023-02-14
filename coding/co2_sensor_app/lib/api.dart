@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
@@ -8,12 +11,20 @@ class Api {
 
   String get address => '$ip${port != null ? ':$port' : ''}';
 
-  void postFile(String path, int numberOfPeople, int light) async {
-    http.MultipartRequest request =
-        http.MultipartRequest('POST', Uri.parse('http://' + address))
-          ..files.add(await http.MultipartFile.fromPath('pdf', path))
-          ..fields['numberPeople'] = numberOfPeople.toString()
-          ..fields['internalLight'] = light.toString();
-    await request.send();
+  void postFile(
+      BuildContext context, String path, int numberOfPeople, int light) async {
+    try {
+      http.MultipartRequest request =
+          http.MultipartRequest('POST', Uri.http(address, 'api/pdf_report'))
+            ..files.add(await http.MultipartFile.fromPath('file', path))
+            ..fields['numberPeople'] = numberOfPeople.toString()
+            ..fields['internalLight'] = light.toString();
+
+      log(request.url.toString());
+
+      var response = await request.send();
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

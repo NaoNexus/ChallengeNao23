@@ -8,16 +8,16 @@ import 'dart:io';
 
 import 'package:co2_sensor_app/api.dart';
 
-class SettingsPopup extends StatefulWidget {
-  const SettingsPopup({super.key});
+class SendPopup extends StatefulWidget {
+  const SendPopup({super.key});
 
   @override
-  State<SettingsPopup> createState() => _SettingsPopupState();
+  State<SendPopup> createState() => _SendPopupState();
 }
 
-class _SettingsPopupState extends State<SettingsPopup> {
+class _SendPopupState extends State<SendPopup> {
   final String _ip = '192.168.0.150';
-  final int _port = 6969;
+  final int _port = 5000;
 
   File? _pdf;
 
@@ -109,6 +109,7 @@ class _SettingsPopupState extends State<SettingsPopup> {
 
                         try {
                           appApi.postFile(
+                              context,
                               _pdf!.path,
                               int.parse(_nPeopleController.text),
                               light.round());
@@ -119,6 +120,7 @@ class _SettingsPopupState extends State<SettingsPopup> {
                             color: Colors.green,
                             icon: Icons.check,
                           );
+                          Navigator.pop(context);
                         } catch (e) {
                           showSnackBar(
                             context: context,

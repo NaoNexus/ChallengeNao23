@@ -42,7 +42,8 @@ def save_pdf_report():
         if (uploaded_file.filename != ''):
             uploaded_file.save(f'report_pdfs/{uploaded_file.filename}')
 
-            analyzed_pdf = PDFAnalyzer(f'report_pdfs/{uploaded_file.filename}')
+            analyzed_pdf = PDFAnalyzer(
+                f'report_pdfs/{uploaded_file.filename}', request.form['internalLight'], request.form['nPeople'])
 
             return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(analyzed_pdf.report)}), 201
         else:
