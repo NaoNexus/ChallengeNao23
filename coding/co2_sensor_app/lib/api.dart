@@ -13,7 +13,7 @@ class Api {
         http.MultipartRequest('POST', Uri.parse('http://' + address))
           ..files.add(await http.MultipartFile.fromPath('pdf', path))
           ..fields['numberPeople'] = numberOfPeople.toString()
-          ..fields['light'] = light.toString();
+          ..fields['internalLight'] = light.toString();
     await request.send();
   }
 }
