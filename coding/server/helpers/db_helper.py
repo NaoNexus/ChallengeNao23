@@ -1,5 +1,5 @@
 import psycopg2
-import config_helper
+import helpers.config_helper as config_helper
 from datetime import datetime
 
 

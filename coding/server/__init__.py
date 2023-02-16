@@ -1,9 +1,12 @@
-from config_helper import Config
-from db_helper import DB
-from pdf_analyzer import PDFAnalyzer
+from helpers.config_helper import Config
+from helpers.db_helper import DB
+from helpers.logging_helper import CustomFormatter
+from helpers.pdf_analyzer import PDFAnalyzer
+
 import utilities
 
 import time
+import logging
 
 from flask import Flask, request, jsonify, render_template
 
@@ -32,6 +35,7 @@ def save_report():
     try:
         return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(request.json)}), 201
     except Exception as e:
+        logger.error(str(e))
         return jsonify({'code': 500, 'message': str(e)}), 500
 
 
@@ -47,8 +51,10 @@ def save_pdf_report():
 
             return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(analyzed_pdf.report)}), 201
         else:
+            logger.error('No file passed')
             return jsonify({'code': 500, 'message': 'No file was passed'}), 500
     except Exception as e:
+        logger.error(str(e))
         return jsonify({'code': 500, 'message': str(e)}), 500
 
 
@@ -58,8 +64,10 @@ def report(id):
         try:
             return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_report(id)}), 200
         except Exception as e:
+            logger.error(str(e))
             return jsonify({'code': 500, 'message': str(e)}), 500
     else:
+        logger.error('No id argument passed')
         return jsonify({'code': 500, 'message': 'No id was passed'}), 500
 
 
@@ -68,10 +76,21 @@ def reports():
     try:
         return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_reports()}), 200
     except Exception as e:
+        logger.error(str(e))
         return jsonify({'code': 500, 'message': str(e)}), 500
 
 
 if __name__ == '__main__':
+    # create logger with 'spam_application'
+    logger = logging.getLogger("My_app")
+    logger.setLevel(logging.DEBUG)
+
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.DEBUG)
+    ch.setFormatter(CustomFormatter())
+
+    logger.addHandler(ch)
+
     config_helper = Config()
     db_helper = DB(config_helper)
     startTime = time.time()
