@@ -1,5 +1,8 @@
 import utilities
 
+from helpers.logging_helper import logger
+
+
 class Config:
     srv_host: str
     srv_port: int
@@ -13,7 +16,7 @@ class Config:
     def __init__(self):
         configuration = utilities.read_yaml('config.yaml')
 
-        print("Loaded configuration:", configuration)
+        logger.info(f"Loaded configuration: {configuration}")
 
         self.load_config(configuration)
 

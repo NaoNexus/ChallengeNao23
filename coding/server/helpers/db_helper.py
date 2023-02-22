@@ -71,3 +71,13 @@ class DB:
                         {'id': tupla[0], 'date': tupla[1], 'temperature': tupla[2], 'co2': tupla[3], 'humidity': tupla[4], 'nPeople': tupla[5], 'internalLight': tupla[6], 'externalLight': tupla[7]})
 
                 return data
+
+    def delete_report(self, id):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                    DELETE FROM Reports
+                    WHERE id::text = %s;''',
+                            (str(id),))
+            
+                return id

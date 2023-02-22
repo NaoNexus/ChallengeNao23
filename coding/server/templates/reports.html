@@ -8,6 +8,9 @@
     <meta http-equiv="refresh" content="10">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" />
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -90,9 +93,9 @@
         }
 
         var options = {
-            title: 'Sensor reports',
+            title: '',
             curveType: 'function',
-            legend: { position: 'bottom' },
+            legend: { position: 'none' },
             backgroundColor: '#f8fafc',
             series: {
                 0: { color: color }
@@ -102,6 +105,17 @@
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
         chart.draw(view, options);
+        }
+
+        async function deleteReport(url) {
+            await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
+
+            window.location.reload();
         }
     </script>
 </head>
@@ -182,6 +196,7 @@
                     <th class="border-2 border-slate-200">N° People</th>
                     <th class="border-2 border-slate-200">Internal light</th>
                     <th class="border-2 border-slate-200">External light</th>
+                    <th class="border-2 border-slate-200"></th>
                 </tr>
             </thead>
             <tbody>
@@ -195,6 +210,15 @@
                     <td class="border-x-2 border-slate-200 text-center">{{report['nPeople']}}</td>
                     <td class="border-x-2 border-slate-200 text-center">{{report['internalLight']}} lux</td>
                     <td class="border-x-2 border-slate-200 text-center">{{report['externalLight']}} lux</td>
+                    <td class="flex flex-row justify-center space-x-2">
+                        <a onclick="deleteReport('/api/report/{{report['id']}}')"
+                            class="rounded-md py-1 px-2 m-1 bg-slate-100 hover:bg-slate-200 transition-all"><span
+                                class="mdi mdi-delete-outline text-red-500"></span></a>
+
+                        <!--<a onclick=""
+                            class="rounded-md py-1 px-2 m-1 bg-slate-100 hover:bg-slate-200 transition-all"><span
+                                class="mdi mdi-pencil-outline text-blue-500"></span></a>-->
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

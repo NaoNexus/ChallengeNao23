@@ -1,6 +1,8 @@
 import PyPDF2
 from datetime import datetime
 
+from helpers.logging_helper import logger
+
 
 class PDFAnalyzer:
     pdf_path: str
@@ -34,16 +36,16 @@ class PDFAnalyzer:
         date_start = page_content.index("Summary") + 7
         date = page_content[date_start:date_start+18]
         self.date = datetime.strptime(date, '%m/%d/%Y%H:%M:%S')
-        print(self.date)
+        logger.info(f'Date extracted: {self.date}')
 
         co2_start = page_content.index("AverageCO2:") + 11
         self.co2 = page_content[co2_start:co2_start+4]
-        print(self.co2)
+        logger.info(f'C=2 extracted: {self.co2} PPM')
 
         temp_start = page_content.index("AverageTemp:") + 12
         self.temperature = page_content[temp_start:temp_start+5]
-        print(self.temperature)
+        logger.info(f'Temperature extracted: {self.temperature} °C')
 
         humi_start = page_content.index("AverageHumi:") + 12
         self.humidity = page_content[humi_start:humi_start+5]
-        print(self.humidity)
+        logger.info(f'Humidity extracted: {self.humidity} %')
