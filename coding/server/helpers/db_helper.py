@@ -31,13 +31,13 @@ class DB:
 
                 if (report.get('id', '') == ''):
                     cur.execute('''
-                        INSERT INTO Reports(date, temperature, co2, humidity, nPeople, internalLight, externalLight)
+                        INSERT INTO Reports(date, temperature, co2, humidity, "nPeople", "internalLight", "externalLight")
                         VALUES (%s, %s, %s, %s, %s, %s, %s);''',
                                 (report['date'], report['temperature'], report['co2'], report['humidity'], report.get('nPeople', 0), report.get('internalLight', 0), report.get('externalLight', 0),))
                 else:
                     cur.execute('''
                         UPDATE Reports
-                        SET date = %s, temperature = %s, co2 = %s, humidity = %s, nPeople = %s, internalLight = %s, externalLight = %s
+                        SET date = %s, temperature = %s, co2 = %s, humidity = %s, "nPeople" = %s, "internalLight" = %s, "externalLight" = %s
                         WHERE id = %s
                         ORDER BY date;''',
                                 (report['date'], report['temperature'], report['co2'], report['humidity'], report['nPeople'], report['internalLight'], report['externalLight'], report['id']))

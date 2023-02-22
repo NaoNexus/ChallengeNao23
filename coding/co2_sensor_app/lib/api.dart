@@ -21,8 +21,8 @@ class Api {
             ..fields['internalLight'] = light.toString();
 
       log(request.url.toString());
-
-      var response = await request.send();
+      
+      await request.send();
     } catch (e) {
       log(e.toString());
     }
