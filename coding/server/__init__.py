@@ -60,28 +60,27 @@ def save_pdf_report():
 @app.route('/api/report/<id>', methods=['GET', 'POST', 'DELETE'])
 def report(id):
     if (id != None and id != ''):
-        match request.method:
-            case 'GET':
-                try:
-                    return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_report(id)}), 200
-                except Exception as e:
-                    logger.error(str(e))
-                    return jsonify({'code': 500, 'message': str(e)}), 500
-            case 'POST':
-                try:
-                    json = request.json
-                    if (json.get('id', '')):
-                        json['id'] = id
-                    return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(json)}), 201
-                except Exception as e:
-                    logger.error(str(e))
-                    return jsonify({'code': 500, 'message': str(e)}), 500
-            case 'DELETE':
-                try:
-                    return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.delete_report(id)}), 201
-                except Exception as e:
-                    logger.error(str(e))
-                    return jsonify({'code': 500, 'message': str(e)}), 500
+        if request.method == 'GET':
+            try:
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_report(id)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+        elif request.method == 'POST':
+            try:
+                json = request.json
+                if (json.get('id', '')):
+                    json['id'] = id
+                return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(json)}), 201
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+        elif request.method == 'DELETE':
+            try:
+                return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.delete_report(id)}), 201
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
     else:
         logger.error('No id argument passed')
         return jsonify({'code': 500, 'message': 'No id was passed'}), 500
