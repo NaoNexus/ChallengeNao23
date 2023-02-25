@@ -15,8 +15,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final environmentSensors = EnvironmentSensors();
 
-  late Future<List<Report>> futureAlbum = getReports();
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -39,7 +37,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Center(
           child: FutureBuilder<List<Report>>(
-            future: futureAlbum,
+            future: getReports,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Text(snapshot.data![0].id);
