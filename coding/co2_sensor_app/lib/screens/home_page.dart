@@ -3,6 +3,8 @@ import 'package:co2_sensor_app/app_colors.dart';
 import 'package:co2_sensor_app/send_popup.dart';
 import 'package:flutter/material.dart';
 
+import '../get_report_data.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -12,6 +14,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final environmentSensors = EnvironmentSensors();
+
+  late Future<List<Report>> futureAlbum = getReports();
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +36,21 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: AppColors.teal,
           label: const Text('NEW REPORT'),
           icon: const Icon(Icons.add),
+        ),
+        body: Center(
+          child: FutureBuilder<List<Report>>(
+            future: futureAlbum,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Text(snapshot.data![0].id);
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
+
+              // By default, show a loading spinner.
+              return const CircularProgressIndicator();
+            },
+          ),
         ),
       ),
     );
