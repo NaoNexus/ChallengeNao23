@@ -3,25 +3,44 @@ from helpers.db_helper import DB
 from helpers.logging_helper import logger
 from helpers.pdf_analyzer import PDFAnalyzer
 
+import os
 import utilities
-
 import time
 
 from flask import Flask, request, jsonify, render_template, redirect
 
 app = Flask(__name__)
 
+# Web App calls
+
 
 @app.route('/')
 def index():
-     return redirect("/reports", code=302)
+    return redirect("/reports", code=302)
 
 
 @app.route('/reports')
 def reports_screen():
     reports = db_helper.get_reports()
 
+    logo = os.listdir('static/images')[0]
+
     return render_template('reports.html', reports=reports)
+
+
+@app.route('/report/<id>', methods=['GET', 'POST', 'DELETE'])
+def report_screen(id):
+    if (id != None and id != ''):
+        try:
+            report = db_helper.get_report(id)
+            return render_template('report.html', report=report)
+        except Exception as e:
+            logger.error(str(e))
+            return redirect("/reports", code=500)
+
+    return redirect("/reports", code=404)
+
+# Api calls
 
 
 @app.route('/api/info', methods=['GET'])
@@ -68,13 +87,21 @@ def report(id):
                 return jsonify({'code': 500, 'message': str(e)}), 500
         elif request.method == 'POST':
             try:
-                json = request.json
-                if (json.get('id', '')):
-                    json['id'] = id
-                return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(json)}), 201
+                if request.content_type == 'application/json':
+                    json = request.json
+                else:
+                    json = request.form.to_dict()
+                json['id'] = id
+                if request.content_type == 'application/json':
+                    return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(json)}), 201
+                else:
+                    db_helper.save_report(json)
+                    return redirect("/reports", code=302)
             except Exception as e:
                 logger.error(str(e))
-                return jsonify({'code': 500, 'message': str(e)}), 500
+                if request.content_type == 'application/json':
+                    return jsonify({'code': 500, 'message': str(e)}), 500
+                return redirect("/reports", code=500)
         elif request.method == 'DELETE':
             try:
                 return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.delete_report(id)}), 201

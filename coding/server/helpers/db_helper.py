@@ -38,9 +38,8 @@ class DB:
                     cur.execute('''
                         UPDATE Reports
                         SET date = %s, temperature = %s, co2 = %s, humidity = %s, "nPeople" = %s, "internalLight" = %s, "externalLight" = %s
-                        WHERE id = %s
-                        ORDER BY date;''',
-                                (report['date'], report['temperature'], report['co2'], report['humidity'], report['nPeople'], report['internalLight'], report['externalLight'], report['id']))
+                        WHERE id = %s;''',
+                                (report['date'].split('.')[0], report['temperature'], report['co2'], report['humidity'], report['nPeople'], report['internalLight'], report['externalLight'], report['id']))
 
                 return cur.statusmessage
 

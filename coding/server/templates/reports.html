@@ -120,7 +120,12 @@
     </script>
 </head>
 
-<body class="bg-slate-500">
+<body class="bg-gradient-to-b from-[#1A2B50] to-[#368DB3]">
+    <div class="mx-10 xl:mx-40 mt-4 flex flex-row space-x-2 justify-center items-center">
+        <img class="h-20" src="/static/images/logo.png" alt="NaoNexus logo">
+        <h1 class="text text-white text-4xl">NaoNexus Team</h1>
+    </div>
+
     <div class="mx-10 xl:mx-40 my-10 p-10 rounded-xl bg-slate-50 space-y-4">
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-row space-x-2">
@@ -202,7 +207,8 @@
             <tbody>
                 {% for report in reports %}
                 <tr>
-                    <th class="border-x-2 border-slate-200 text-center">{{report['id']}}</th>
+                    <th class="border-x-2 border-slate-200 text-center"><a class="hover:bg-slate-200 p-2 rounded"
+                            href="/report/{{report['id']}}">{{report['id']}}</a></th>
                     <td class="border-x-2 border-slate-200 text-center">{{report['date']}}</td>
                     <td class="border-x-2 border-slate-200 text-center">{{report['co2']}} PPM</td>
                     <td class="border-x-2 border-slate-200 text-center">{{report['temperature']}} °C</td>
@@ -212,12 +218,8 @@
                     <td class="border-x-2 border-slate-200 text-center">{{report['externalLight']}} lux</td>
                     <td class="flex flex-row justify-center space-x-2">
                         <a onclick="deleteReport('/api/report/{{report['id']}}')"
-                            class="rounded-md py-1 px-2 m-1 bg-slate-100 hover:bg-slate-200 transition-all"><span
+                            class="rounded-md py-1 px-2 m-1 hover:bg-slate-200 transition-all"><span
                                 class="mdi mdi-delete-outline text-red-500"></span></a>
-
-                        <!--<a onclick=""
-                            class="rounded-md py-1 px-2 m-1 bg-slate-100 hover:bg-slate-200 transition-all"><span
-                                class="mdi mdi-pencil-outline text-blue-500"></span></a>-->
                     </td>
                 </tr>
                 {% endfor %}
