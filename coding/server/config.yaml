@@ -8,3 +8,8 @@ database:
   name: "naochallenge23"
   user: "postgres"
   password: "postgres"
+
+weather_api:
+  api_key: ""
+  latitude: ""
+  longitude: ""

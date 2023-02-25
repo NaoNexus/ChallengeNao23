@@ -13,6 +13,10 @@ class Config:
     db_user: str
     db_password: str
 
+    weather_api_key: str
+    weather_latitude: str
+    weather_longitude: str
+
     def __init__(self):
         configuration = utilities.read_yaml('config.yaml')
 
@@ -29,3 +33,7 @@ class Config:
         self.db_name = config['database']['name']
         self.db_user = config['database']['user']
         self.db_password = config['database']['password']
+
+        self.weather_api_key = config['weather_api']['api_key']
+        self.weather_latitude = config['weather_api']['latitude']
+        self.weather_longitude = config['weather_api']['longitude']

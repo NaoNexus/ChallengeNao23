@@ -15,3 +15,6 @@ def getElapsedTime(startTime):
 def read_yaml(file_path):
     with open(file_path, 'r') as f:
         return yaml.safe_load(f)
+
+def solar_intensity_to_lux(solar_intensity):
+    return solar_intensity / 0.0079
