@@ -11,5 +11,9 @@ database:
 
 weather_api:
   api_key: ""
-  latitude: ""
-  longitude: ""
+  latitude: "45.435688"
+  longitude: "10.993322"
+
+domotics_server:
+  ip: ""
+  port: 2340

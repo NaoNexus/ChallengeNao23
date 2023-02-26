@@ -17,6 +17,9 @@ class Config:
     weather_latitude: str
     weather_longitude: str
 
+    domotics_ip: str
+    domotics_port: int
+
     def __init__(self):
         configuration = utilities.read_yaml('config.yaml')
 
@@ -37,3 +40,6 @@ class Config:
         self.weather_api_key = config['weather_api']['api_key']
         self.weather_latitude = config['weather_api']['latitude']
         self.weather_longitude = config['weather_api']['longitude']
+
+        self.domotics_ip = config['domotics_server']['ip']
+        self.domotics_port = config['domotics_server']['port']

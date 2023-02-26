@@ -21,8 +21,6 @@ class DB:
                         internalLight NUMERIC(4) DEFAULT 0,
                         externalLight NUMERIC(4) DEFAULT 0);''')
 
-                print('DB initialized:', cur.statusmessage)
-
     def save_report(self, report):
         with self.connection:
             with self.connection.cursor() as cur:
@@ -78,5 +76,5 @@ class DB:
                     DELETE FROM Reports
                     WHERE id::text = %s;''',
                             (str(id),))
-            
+
                 return id
