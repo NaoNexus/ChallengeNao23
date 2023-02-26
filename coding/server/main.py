@@ -23,9 +23,14 @@ def index():
 def reports_screen():
     reports = db_helper.get_reports()
 
-    logo = os.listdir('static/images')[0]
-
     return render_template('reports.html', reports=reports)
+
+
+@app.route('/new_report')
+def new_report_screen():
+    report = {'id': '', 'date': '', 'co2': 0, 'temperature': 0,
+              'humidity': 0, 'nPeople': 0, 'internalLight': 0, 'externalLight': 0}
+    return render_template('report.html', report=report)
 
 
 @app.route('/report/<id>', methods=['GET', 'POST', 'DELETE'])
@@ -51,10 +56,18 @@ def info():
 @app.route('/api/report', methods=['POST'])
 def save_report():
     try:
-        return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(request.json)}), 201
+        if request.content_type == 'application/json':
+            json = request.json
+            return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(json)}), 201
+        else:
+            json = request.form.to_dict()
+            db_helper.save_report(json)
+            return redirect("/reports", code=302)
     except Exception as e:
         logger.error(str(e))
-        return jsonify({'code': 500, 'message': str(e)}), 500
+        if request.content_type == 'application/json':
+            return jsonify({'code': 500, 'message': str(e)}), 500
+        return redirect("/reports", code=500)
 
 
 @app.route('/api/pdf_report', methods=['POST'])

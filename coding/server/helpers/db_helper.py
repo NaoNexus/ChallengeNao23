@@ -1,12 +1,17 @@
 import psycopg2
 import helpers.config_helper as config_helper
+from helpers.logging_helper import logger
+
 from datetime import datetime
 
 
 class DB:
     def __init__(self, config: config_helper.Config):
-        self.connection = psycopg2.connect(host=config.db_host, database=config.db_name,
-                                           user=config.db_user, password=config.db_password)
+        try:
+            self.connection = psycopg2.connect(host=config.db_host, database=config.db_name,
+                                               user=config.db_user, password=config.db_password)
+        except Exception as e:
+            logger.error(str(e))
 
         with self.connection:
             with self.connection.cursor() as cur:
@@ -61,7 +66,7 @@ class DB:
                 data = []
                 cur.execute('''
                     SELECT * FROM Reports
-                    ORDER BY date;''')
+                    ORDER BY date DESC;''')
 
                 for tupla in cur:
                     data.append(

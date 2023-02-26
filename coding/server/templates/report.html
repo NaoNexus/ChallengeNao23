@@ -21,7 +21,7 @@
                 }
             });
 
-            window.location.reload();
+            window.location.href = '/reports';
         }
     </script>
     <style>
@@ -56,18 +56,28 @@
         </div>
 
         <div class="mx-10 xl:mx-40 my-10 p-10 rounded-xl bg-slate-50 space-y-4">
-            <div class="flex flex-row space-x-2">
-                <span class="px-2 pt-1 rounded-full mdi mdi-information-outline text-white bg-sky-500"></span>
-                <h1 class="text-2xl font-medium text-slate-800">REPORT DATA</h1>
+            <div class="flex flex-row justify-between">
+                <div class="flex flex-row space-x-2">
+                    <span class="px-2 py-1 h-fit rounded-full mdi mdi-information-outline text-white bg-sky-500"></span>
+                    <h1 class="text-2xl font-medium text-slate-800">REPORT DATA</h1>
+                </div>
+                <button onclick="deleteReport('/api/report{% if report['id'] != '' %}/{{report['id']}}{% endif %}')"
+                    class="rounded px-4 py-2 bg-red-500 text-white hover:bg-red-600 transition-all flex flex-row h-fit">
+                    <span class="mdi mdi-delete-outline"></span>
+                    DELETE
+                </button>
             </div>
-            <form action="/api/report/{{report['id']}}" method="POST" class="flex flex-col items-center space-y-4">
+            <form action="/api/report{% if report['id'] != '' %}/{{report['id']}}{% endif %}" method="POST"
+                class="flex flex-col items-center space-y-4">
                 <div class="grid grid-cols-3 gap-4 gap-x-10 justify-center">
                     <div class="flex flex-col space-y-2 col-span-2">
                         <label for="id" class="font-medium text-slate-800">
                             <span class="px-1 rounded-full mdi mdi-calendar-outline text-white bg-sky-400"></span>
                             ID</label>
                         <div class="flex flex-row space-x-2 items-center">
-                            <input id="id" type="text" value="{{report['id']}}" disabled
+                            <input id="id" type="text"
+                                value="{% if report['id'] != '' %}{{report['id']}}{% else %}NEW REPORT{% endif %}"
+                                disabled
                                 class="w-[450px] rounded outline-none border-2 border-slate-200 focus:border-sky-500 focus:invalid:border-red-500 invalid:border-red-500 disabled:bg-slate-100" />
                         </div>
                     </div>
@@ -76,7 +86,7 @@
                             <span class="px-1 rounded-full mdi mdi-calendar-outline text-white bg-sky-400"></span>
                             DATE</label>
                         <div class="flex flex-row space-x-2 items-center">
-                            <input id="date" name="date" type="datetime-local" value="{{report['date']}}"
+                            <input id="date" name="date" type="datetime-local" value="{{report['date']}}" required
                                 class="rounded outline-none border-2 border-slate-200 focus:border-sky-500 focus:invalid:border-red-500 invalid:border-red-500 disabled:bg-slate-100" />
                         </div>
                     </div>
