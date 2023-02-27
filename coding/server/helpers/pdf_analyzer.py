@@ -40,7 +40,7 @@ class PDFAnalyzer:
 
         co2_start = page_content.index("AverageCO2:") + 11
         self.co2 = page_content[co2_start:co2_start+4]
-        logger.info(f'C=2 extracted: {self.co2} PPM')
+        logger.info(f'CO2 extracted: {self.co2} PPM')
 
         temp_start = page_content.index("AverageTemp:") + 12
         self.temperature = page_content[temp_start:temp_start+5]

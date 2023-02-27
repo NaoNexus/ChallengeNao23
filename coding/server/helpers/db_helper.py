@@ -22,9 +22,9 @@ class DB:
                         temperature NUMERIC(5, 2) NOT NULL,
                         co2 NUMERIC(6),
                         humidity NUMERIC(3),
-                        nPeople NUMERIC(4) DEFAULT 0,
-                        internalLight NUMERIC(4) DEFAULT 0,
-                        externalLight NUMERIC(4) DEFAULT 0);''')
+                        "nPeople" NUMERIC(4) DEFAULT 0,
+                        "internalLight" NUMERIC(4) DEFAULT 0,
+                        "externalLight" NUMERIC(4) DEFAULT 0);''')
 
     def save_report(self, report):
         with self.connection:

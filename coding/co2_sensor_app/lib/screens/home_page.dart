@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Center(
           child: FutureBuilder<List<Report>>(
-            future: getReports,
+            future: getReports(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Text(snapshot.data![0].id);
