@@ -1,0 +1,19 @@
+server:
+  debug: true
+  host: "0.0.0.0" # Current machine ip
+  port: 5000
+
+database:
+  host: "localhost"
+  name: "naochallenge23"
+  user: "postgres"
+  password: "postgres"
+
+weather_api:
+  api_key: ""
+  latitude: "45.435688"
+  longitude: "10.993322"
+
+domotics_server:
+  ip: ""
+  port: 2340
