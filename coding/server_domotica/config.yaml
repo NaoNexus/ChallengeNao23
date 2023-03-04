@@ -10,7 +10,6 @@ database:
   password: "postgres"
 
 weather_api:
-  api_key: ""
   latitude: "45.435688"
   longitude: "10.993322"
 

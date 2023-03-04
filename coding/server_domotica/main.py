@@ -2,8 +2,8 @@ from helpers.config_helper import Config
 from helpers.db_helper import DB
 from helpers.logging_helper import logger
 from helpers.pdf_analyzer import PDFAnalyzer
+from helpers.weather_api_helper import WeatherApi
 
-import os
 import utilities
 import time
 
@@ -33,7 +33,7 @@ def new_report_screen():
     return render_template('report.html', report=report)
 
 
-@app.route('/report/<id>', methods=['GET', 'POST', 'DELETE'])
+@app.route('/report/<id>', methods=['GET'])
 def report_screen(id):
     if (id != None and id != ''):
         try:
@@ -58,9 +58,15 @@ def save_report():
     try:
         if request.content_type == 'application/json':
             json = request.json
+            if int(json.get('externalLight', 0)) == 0:
+                json['externalLight'] = weather_api_helper.get_currrent_light(
+                    json['date'])
             return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(json)}), 201
         else:
             json = request.form.to_dict()
+            if int(json.get('externalLight', 0)) == 0:
+                json['externalLight'] = weather_api_helper.get_currrent_light(
+                    json['date'])
             db_helper.save_report(json)
             return redirect("/reports", code=302)
     except Exception as e:
@@ -77,8 +83,8 @@ def save_pdf_report():
         if (uploaded_file.filename != ''):
             uploaded_file.save(f'report_pdfs/{uploaded_file.filename}')
 
-            analyzed_pdf = PDFAnalyzer(
-                f'report_pdfs/{uploaded_file.filename}', request.form['internalLight'], request.form['nPeople'])
+            analyzed_pdf = PDFAnalyzer(weather_api_helper,
+                                       f'report_pdfs/{uploaded_file.filename}', request.form['nPeople'], request.form['internalLight'])
 
             return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(analyzed_pdf.report)}), 201
         else:
@@ -105,6 +111,9 @@ def report(id):
                 else:
                     json = request.form.to_dict()
                 json['id'] = id
+                if int(json.get('externalLight', 0)) == 0:
+                    json['externalLight'] = str(weather_api_helper.get_currrent_light(
+                        json['date']))
                 if request.content_type == 'application/json':
                     return jsonify({'code': 201, 'message': 'OK', 'data': db_helper.save_report(json)}), 201
                 else:
@@ -138,6 +147,8 @@ def reports():
 if __name__ == '__main__':
     config_helper = Config()
     db_helper = DB(config_helper)
+    weather_api_helper = WeatherApi(config_helper)
+
     startTime = time.time()
 
     app.run(host=config_helper.srv_host, port=config_helper.srv_port,
