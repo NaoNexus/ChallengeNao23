@@ -19,8 +19,8 @@ def info():
     return jsonify({'code': 200, 'status': 'online', 'elapsed time': utilities.getElapsedTime(startTime)}), 200
 
 
-@app.route('/api/input', methods=['GET'])
-def recording_input():
+@app.route('/api/input/<input>', methods=['GET'])
+def recording_input(input):
     try:
         uploaded_file = request.files['file']
         if (uploaded_file.filename != ''):
