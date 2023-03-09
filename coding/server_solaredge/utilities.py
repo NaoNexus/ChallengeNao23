@@ -15,3 +15,26 @@ def getElapsedTime(startTime):
 def read_yaml(file_path):
     with open(file_path, 'r') as f:
         return yaml.safe_load(f)
+
+inputs = ['new_project',
+          'info_section',
+          'modelling_section',
+          'positioning_section',
+          'storage_section',
+          'electrical_section',
+          'financial_section',
+          'summary_section',
+          'project_type',
+          'project_name',
+          'country',
+          'street',
+          'city',
+          'zip',
+          'consumption',
+          'consumption_period',
+          'electrical_grid',
+          'power_factor',
+          'name',
+          'surname',
+          'company',
+          'notes',]

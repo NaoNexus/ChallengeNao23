@@ -4,6 +4,7 @@ from helpers.logging_helper import logger
 from helpers.speech_recognition_helper import SpeechRecognition
 
 from datetime import datetime
+
 import utilities
 import time
 
@@ -27,14 +28,14 @@ def recording_input(input):
         try:
             uploaded_file = request.files['file']
             if (uploaded_file.filename != ''):
-                uploaded_file.save(
-                    f'recordings/{datetime.now().isoformat()}.wav')
+                path = f'recordings/{datetime.now().isoformat()}.wav'
+                uploaded_file.save(path)
+                speech_recognition = SpeechRecognition(path)
 
-                match Input[input]:
-                    case Input.ZIP:
-                        pass
-                    
-                return jsonify({'code': 201, 'message': 'OK', 'data': 'OK'}), 201
+                if (input in utilities.inputs):
+                    speech_recognition.result
+                else:
+                    return jsonify({'code': 500, 'message': 'Invalid input selected'}), 500
             else:
                 logger.error('No file passed')
                 return jsonify({'code': 500, 'message': 'No file was passed'}), 500
@@ -55,30 +56,3 @@ if __name__ == '__main__':
 
     # app.run(host=config_helper.srv_host, port=config_helper.srv_port,
     #        debug=config_helper.srv_debug)
-
-
-class Input(Enum):
-    NEW_PROJECT = 'new_project'
-
-    INFO_SECTION = 'info_section'
-    MODELLING_SECTION = 'modelling_section'
-    POSITIONING_SECTION = 'positioning_section'
-    STORAGE_SECTION = 'storage_section'
-    ELECTRICAL_SECTION = 'electrical_section'
-    FINANCIAL_SECTION = 'financial_section'
-    SUMMARY_SECTION = 'summary_section'
-
-    PROJECT_TYPE = 'project_type'
-    PROJECT_NAME = 'project_name'
-    COUNTRY = 'country'
-    STREET = 'street'
-    CITY = 'city'
-    ZIP = 'zip'
-    CONSUMPTION = 'consumption'
-    CONSUMPTION_PERIOD = 'consumption_period'
-    ELECTRICAL_GRID = 'electrical_grid'
-    POWER_FACTOR = 'power_factor'
-    NAME = 'name'
-    SURNAME = 'surname'
-    COMPANY = 'company'
-    NOTES = 'notes'
