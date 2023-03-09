@@ -16,7 +16,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return redirect("/reports", code=302)
+    reports = db_helper.get_reports()
+    
+    return render_template('index.html', reports=reports)
 
 
 @app.route('/reports')

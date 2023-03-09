@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Reports</title>
+    <title>Report</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,7 @@
         integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" />
+    <link rel="icon" href="/static/images/logo.png">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         async function deleteReport(url) {
@@ -55,7 +56,7 @@
             <h1 class="text text-white text-4xl">NaoNexus Team</h1>
         </div>
 
-        <div class="mx-10 xl:mx-40 my-10 p-10 rounded-xl bg-slate-50 space-y-4">
+        <div class="mx-10 xl:mx-40 my-20 p-10 rounded-xl bg-slate-50 space-y-4">
             <div class="flex flex-row justify-between">
                 <div class="flex flex-row space-x-2">
                     <span class="px-2 py-1 h-fit rounded-full mdi mdi-information-outline text-white bg-sky-500"></span>
@@ -63,7 +64,7 @@
                 </div>
                 <button onclick="deleteReport('/api/report{% if report['id'] != '' %}/{{report['id']}}{% endif %}')"
                     class="rounded px-4 py-2 bg-red-500 text-white hover:bg-red-600 transition-all flex flex-row h-fit">
-                    <span class="mdi mdi-delete-outline"></span>
+                    <span class="mdi mdi-delete-outline mr-1"></span>
                     DELETE
                 </button>
             </div>
@@ -72,7 +73,7 @@
                 <div class="grid grid-cols-3 gap-4 gap-x-10 justify-center">
                     <div class="flex flex-col space-y-2 col-span-2">
                         <label for="id" class="font-medium text-slate-800">
-                            <span class="px-1 rounded-full mdi mdi-calendar-outline text-white bg-sky-400"></span>
+                            <span class="px-0.5 rounded-full mdi mdi-calendar-outline text-white bg-sky-400"></span>
                             ID</label>
                         <div class="flex flex-row space-x-2 items-center">
                             <input id="id" type="text"
@@ -83,7 +84,7 @@
                     </div>
                     <div class="flex flex-col space-y-2 ">
                         <label for="date" class="font-medium text-slate-800">
-                            <span class="px-1 rounded-full mdi mdi-calendar-outline text-white bg-sky-400"></span>
+                            <span class="px-0.5 rounded-full mdi mdi-calendar-outline text-white bg-sky-400"></span>
                             DATE</label>
                         <div class="flex flex-row space-x-2 items-center">
                             <input id="date" name="date" type="datetime-local" value="{{report['date']}}" required
@@ -92,7 +93,7 @@
                     </div>
                     <div class="flex flex-col space-y-2 ">
                         <label for="co2" class="font-medium text-slate-800">
-                            <span class="px-1 rounded-full mdi mdi-molecule-co2 text-white bg-sky-400"></span>
+                            <span class="px-0.5 rounded-full mdi mdi-molecule-co2 text-white bg-sky-400"></span>
                             CO2</label>
                         <div class="flex flex-row space-x-2 items-center">
                             <input id="co2" name="co2" type="text" value="{{report['co2']}}" maxlength="5"
@@ -104,7 +105,7 @@
 
                     <div class="flex flex-col space-y-2 ">
                         <label for="temperature" class="font-medium text-slate-800">
-                            <span class="px-1 rounded-full mdi mdi-thermometer text-white bg-sky-400"></span>
+                            <span class="px-0.5 rounded-full mdi mdi-thermometer text-white bg-sky-400"></span>
                             TEMPERATURE</label>
                         <div class="flex flex-row space-x-2 items-center">
                             <input id="temperature" name="temperature" type="text" value="{{report['temperature']}}"
@@ -116,7 +117,7 @@
 
                     <div class="flex flex-col space-y-2 ">
                         <label for="humidity" class="font-medium text-slate-800">
-                            <span class="px-1 rounded-full mdi mdi-water-outline text-white bg-sky-400"></span>
+                            <span class="px-0.5 rounded-full mdi mdi-water-outline text-white bg-sky-400"></span>
                             HUMIDITY</label>
                         <div class="flex flex-row space-x-2 items-center">
                             <input id="humidity" name="humidity" type="text" value="{{report['humidity']}}"
@@ -129,7 +130,7 @@
                     <div class="flex flex-col space-y-2 ">
                         <label for="nPeople" class="font-medium text-slate-800">
                             <span
-                                class="px-1 rounded-full mdi mdi-account-group-outline text-white bg-green-400"></span>
+                                class="px-0.5 rounded-full mdi mdi-account-group-outline text-white bg-green-400"></span>
                             N° OF PEOPLE</label>
                         <div class="flex flex-row space-x-2 items-center">
                             <input id="nPeople" name="nPeople" type="text" value="{{report['nPeople']}}" maxlength="3"
@@ -141,7 +142,7 @@
 
                     <div class="flex flex-col space-y-2 ">
                         <label for="internalLight" class="font-medium text-slate-800">
-                            <span class="px-1 rounded-full mdi mdi-lightbulb-outline text-white bg-yellow-400"></span>
+                            <span class="px-0.5 rounded-full mdi mdi-lightbulb-outline text-white bg-yellow-400"></span>
                             INTERNAL LIGHT</label>
                         <div class="flex flex-row space-x-2 items-center">
                             <input id="internalLight" name="internalLight" type="text"
@@ -153,7 +154,7 @@
 
                     <div class="flex flex-col space-y-2 ">
                         <label for="externalLight" class="font-medium text-slate-800">
-                            <span class="px-1 rounded-full mdi mdi-weather-sunny text-white bg-yellow-400"></span>
+                            <span class="px-0.5 rounded-full mdi mdi-weather-sunny text-white bg-yellow-400"></span>
                             EXTERNAL LIGHT</label>
                         <div class="flex flex-row space-x-2 items-center">
                             <input id="externalLight" name="externalLight" type="text"
@@ -164,7 +165,7 @@
                     </div>
                 </div>
                 <button class="rounded px-4 py-2 bg-sky-500 text-white hover:bg-sky-600 transition-all" type="submit">
-                    <span class="mdi mdi-content-save-outline"></span>
+                    <span class="mdi mdi-content-save-outline mr-1"></span>
                     SAVE
                 </button>
             </form>
