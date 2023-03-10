@@ -22,17 +22,23 @@ def info():
     return jsonify({'code': 200, 'status': 'online', 'elapsed time': utilities.getElapsedTime(startTime)}), 200
 
 
-@app.route('/api/input/<input>', methods=['POST'])
-def recording_input(input):
-    if input != '' and input != None and input in utilities.inputs:
+@app.route('/api/input/<string:Input>', methods=['POST'])
+def recording_input(Input):
+    if Input != '' and Input != None and Input in utilities.inputs:
         try:
-            uploaded_file = request.files['file']
-            if (uploaded_file.filename != ''):
-                path = f'recordings/{datetime.now().isoformat()}.wav'
-                uploaded_file.save(path)
-                speech_recognition = SpeechRecognition(path)
+            uploaded_file = None
+            if (Input not in utilities.inputs_without_file):
+                uploaded_file = request.files['file']
 
-                solar_edge.input(input, speech_recognition.result)
+            if (Input in utilities.inputs_without_file or (uploaded_file and uploaded_file.filename != '')):
+                if ((uploaded_file and uploaded_file.filename != '')):
+                    path = f'recordings/recording.wav'
+                    uploaded_file.save(path)
+                    speech_recognition = SpeechRecognition(path)
+
+                    solar_edge.input(Input, speech_recognition.result)
+
+                solar_edge.input(Input, '')
             else:
                 logger.error('No file passed')
                 return jsonify({'code': 500, 'message': 'No file was passed'}), 500

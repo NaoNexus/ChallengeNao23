@@ -15,7 +15,7 @@
       <BehaviorLayer name="behavior_layer1">
         <BehaviorKeyframe name="keyframe1" index="1">
           <Diagram>
-            <Box name="Custom Record Sound" id="2" localization="8" tooltip='Record a sound on the robot. You can choose to record only with one&#x0A;microphone (the front head microphone) in ogg format, or with four microphones&#x0A;(front, sides and rear head microphones) in wav format.&#x0A;&#x0A;If &quot;Temporary storage&quot; isn&apos;t checked, the output sound file is located in &quot;~/recordings/microphones/&lt;File name&gt;&quot;.&#x0A;Else, it is located in a temporary directory&#x0A;&#x0A;The onStopped output is stimulated at the end of the recording and contains the absolute path to the output sound file&#x0A;&#x0A;V1.1.0&#x0A;' x="405" y="116">
+            <Box name="Custom Record Sound" id="2" localization="8" tooltip='Record a sound on the robot. You can choose to record only with one&#x0A;microphone (the front head microphone) in ogg format, or with four microphones&#x0A;(front, sides and rear head microphones) in wav format.&#x0A;&#x0A;If &quot;Temporary storage&quot; isn&apos;t checked, the output sound file is located in &quot;~/recordings/microphones/&lt;File name&gt;&quot;.&#x0A;Else, it is located in a temporary directory&#x0A;&#x0A;The onStopped output is stimulated at the end of the recording and contains the absolute path to the output sound file&#x0A;&#x0A;V1.1.0&#x0A;' x="633" y="388">
               <bitmap>media/images/box/interaction/rec_sound.png</bitmap>
               <script language="4">
                 <content>
@@ -28,7 +28,7 @@
               <Output name="onStopped" type="3" type_size="1" nature="1" inner="0" tooltip="Returns the absolute path of the output sound file at the end of the recording" id="4" />
               <Parameter name="File name" inherits_from_parent="0" content_type="3" value="recording" default_value="recording" custom_choice="0" tooltip="Name of the destination file without its extension." id="5" />
               <Parameter name="Temporary storage" inherits_from_parent="0" content_type="0" value="0" default_value="1" tooltip="Choose if the file should be stored as a temporary file so it is removed as soon&#x0A;as the behavior is unloaded.&#x0A;&#x0A;When this option is disabled the file is stored in ~/recordings/microphones. You can&#x0A;then get it on your computer using the menu Connection/File transfer.&#x0A;&#x0A;When this option is enabled the file is stored in the temporary folder of the behavior." id="6" />
-              <Parameter name="Timeout (s)" inherits_from_parent="0" content_type="2" value="10" default_value="5" min="0.1" max="60" tooltip="Duration of the recording in seconds." id="7" />
+              <Parameter name="Timeout (s)" inherits_from_parent="0" content_type="2" value="5" default_value="5" min="0.1" max="60" tooltip="Duration of the recording in seconds." id="7" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="project_name" default_value="" custom_choice="0" tooltip="" id="8" />
               <Timeline enable="0">
                 <BehaviorLayer name="behavior_layer1">
@@ -140,7 +140,7 @@ class MyClass(GeneratedClass):
         if( self.bIsRunning ):
             self.onUnload()
             if ( self.ad ):
-                self.onStopped(self.getParameter('Server input path') + ';' + self.filepath + ".wav")]]>
+                self.onStopped(self.getParameter('Server input path') + ';' + self.filepath)]]>
                           </content>
                         </script>
                         <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
@@ -159,7 +159,7 @@ class MyClass(GeneratedClass):
               </Timeline>
               <Resource name="Audio recorder" type="Lock" timeout="0" />
             </Box>
-            <Box name="Send data to server" id="1" localization="8" tooltip="" x="746" y="128">
+            <Box name="Send data to server" id="1" localization="8" tooltip="" x="810" y="391">
               <bitmap>media/images/box/box-python-script.png</bitmap>
               <script language="4">
                 <content>
@@ -184,7 +184,7 @@ class MyClass(GeneratedClass):
         file = input[1]
 
         try:
-            url = 'http://192.168.0.150:5000/api/input/' + server
+            url = 'http://192.168.0.110:5000/api/input/' + server
             file_path = file
 
             with open(file_path) as f:
@@ -193,16 +193,14 @@ class MyClass(GeneratedClass):
             if response.status_code == 200:
                 self.logger.info("File inviato")
             else:
-                self.logger.error("Errore invio file" + response.json())
-
-        self.onStopped(response.json()['message'])
+                self.logger.error("Errore invio file" + str(response.json()))
 
         except Exception as e:
             self.logger.error(e)
 
     def onInput_onStop(self):
         self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
-        self.onStopped("") #activate the output of the box]]>
+        self.onStopped('') #activate the output of the box]]>
                 </content>
               </script>
               <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
