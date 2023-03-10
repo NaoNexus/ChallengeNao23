@@ -16,6 +16,7 @@ def read_yaml(file_path):
     with open(file_path, 'r') as f:
         return yaml.safe_load(f)
 
+
 inputs = ['new_project',
           'info_section',
           'modelling_section',

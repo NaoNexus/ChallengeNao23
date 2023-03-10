@@ -14,5 +14,5 @@ weather_api:
   longitude: "10.993322"
 
 domotics_server:
-  ip: ""
-  port: 2340
+  ip: "192.168.5.10"
+  port: 20000
