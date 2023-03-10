@@ -29,7 +29,7 @@ inputs = ['new_project',
           'country',
           'street',
           'city',
-          'zip',
+          # 'zip', DEPRECATED: not used anymore
           'consumption',
           'consumption_period',
           'electrical_grid',
