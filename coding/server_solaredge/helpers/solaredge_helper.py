@@ -100,6 +100,8 @@ class SolarEdge():
         self.input_keys_element(ElementsIds.password_id, self.password)
         self.click_element(ElementsIds.login_button_tag_name, By.TAG_NAME)
         time.sleep(10)
+        if (self.driver.find_elements(By.XPATH, ElementsIds.tips_close_button_xpath)):
+            self.click_element(ElementsIds.tips_close_button_xpath, By.XPATH)
 
     def click_element(self, input_selector, by: By = By.ID):
         self.driver.find_element(by, input_selector).click()
@@ -109,6 +111,8 @@ class SolarEdge():
 
 
 class ElementsIds:
+    tips_close_button_xpath = "//*[@data-testid='dialog-action-3']"
+
     username_id = 'username'
     password_id = 'password'
     login_button_tag_name = 'button'
