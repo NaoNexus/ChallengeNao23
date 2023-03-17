@@ -38,13 +38,14 @@ class SolarEdge():
             'electrical_section': lambda _: 0,
             'financial_section': lambda _: 0,
             'summary_section': lambda _: 0,
-            'project_type': lambda value: self.click_element(ElementsIds.residential_xpath) if value == 'residential' else self.click_element(ElementsIds.commercial_xpath, By.XPATH),
+            'project_type': lambda value: self.click_element(ElementsIds.residential_xpath, By.XPATH) if ('residential' in value or 'residenziale' in value) else self.click_element(ElementsIds.commercial_xpath, By.XPATH),
             'project_name': lambda name: self.input_keys_element(ElementsIds.project_name_id, name),
+            'create_project': lambda _: self.click_element(ElementsIds.create_button_xpath, By.XPATH),
             'country': lambda country: self.input_address('country', country),
             'street': lambda street: self.input_address('street', street),
             'city': lambda city: self.input_address('city', city),
             # 'zip': lambda: 0, DEPRECATED: not used anymore
-            'consumption': lambda consumption: self.input_keys_element(ElementsIds.consumption_xpath, consumption, By.XPATH),
+            'consumption': lambda consumption: self.input_consumption(consumption),
             'consumption_period': lambda period: self.click_consumption_period(period),
             'electrical_grid': lambda electrical_grid: self.click_electrical_grid(electrical_grid),
             'power_factor': lambda _: 0,
@@ -67,6 +68,12 @@ class SolarEdge():
             self.input_keys_element(
                 ElementsIds.address_id, f'{self.street}, {self.city}, {self.country}\n')
 
+    def input_consumption(self, consumption):
+        self.input_keys_element(
+            ElementsIds.consumption_xpath, consumption, By.XPATH)
+
+        self.click_electrical_grid('230')
+
     def click_consumption_period(self, period):
         self.click_element(ElementsIds.consumption_period_dropdown_id)
         time.sleep(1)
@@ -76,7 +83,8 @@ class SolarEdge():
             self.click_element(ElementsIds.consumption_monthly_xpath, By.XPATH)
 
     def click_electrical_grid(self, period):
-        self.click_element(ElementsIds.electrical_grid_dropdown_xpath)
+        self.click_element(
+            ElementsIds.electrical_grid_dropdown_xpath, By.XPATH)
         time.sleep(1)
         if (period.lower().replace(' ', '') in ['230', '230volts' '1', 'primo', 'uno']):
             self.click_element(ElementsIds.electrical_grid_1_xpath, By.XPATH)
@@ -119,8 +127,9 @@ class ElementsIds:
 
     new_project_xpath = "//a[@href='/sites/create']"
 
-    residential_xpath = "//*[@id='app']/div[3]/div/div/div/div[1]/div[2]/div/div[1]/div/fieldset/div/div[1]/div/div/div/div[2]/div[2]/div[1]/div/button[1]"
-    commercial_xpath = "//*[@id='app']/div[3]/div/div/div/div[1]/div[2]/div/div[1]/div/fieldset/div/div[1]/div/div/div/div[2]/div[2]/div[1]/div/button[2]"
+    residential_xpath = "/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div/div[1]/div/fieldset/div/div[1]/div/div/div/div[2]/div[2]/div[1]/div/button[1]"
+    commercial_xpath = "/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div/div[1]/div/fieldset/div/div[1]/div/div/div/div[2]/div[2]/div[1]/div/button[2]"
+
     project_name_id = 'project-name'
     address_id = 'autocomplete1'
 

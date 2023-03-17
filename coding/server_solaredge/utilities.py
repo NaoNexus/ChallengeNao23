@@ -27,13 +27,14 @@ inputs = ['new_project',
           'summary_section',
           'project_type',
           'project_name',
+          'create_project',
           'country',
           'street',
           'city',
           # 'zip', DEPRECATED: not used anymore
           'consumption',
           'consumption_period',
-          'electrical_grid',
+          # 'electrical_grid', DEPRECATED: automatically selected when consumption is inserted
           'power_factor',
           'name',
           'surname',
@@ -41,4 +42,4 @@ inputs = ['new_project',
           'notes',]
 
 inputs_without_file = ['new_project', 'info_section', 'modelling_section', 'positioning_section',
-                       'storage_section', 'electrical_section', 'financial_section', 'summary_section']
+                       'storage_section', 'electrical_section', 'financial_section', 'summary_section', 'create_project']

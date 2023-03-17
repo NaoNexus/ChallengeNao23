@@ -14,6 +14,7 @@ from flask import Flask, request, jsonify
 from enum import Enum
 
 app = Flask(__name__)
+solar_edge = None
 
 # Api calls
 
@@ -55,6 +56,25 @@ def recording_input(Input):
         return jsonify({'code': 500, 'message': 'Input is invalid'}), 500
 
 
+@app.route('/api/recognise', methods=['POST'])
+def recording():
+    try:
+        uploaded_file = request.files['file']
+
+        if (uploaded_file and uploaded_file.filename != ''):
+            path = f'recordings/recording.wav'
+            uploaded_file.save(path)
+            speech_recognition = SpeechRecognition(path)
+
+            return jsonify({'code': 200, 'message': 'OK', 'result': speech_recognition.result}), 200
+        else:
+            logger.error('No file passed')
+            return jsonify({'code': 500, 'message': 'No file was passed'}), 500
+    except Exception as e:
+        logger.error(str(e))
+        return jsonify({'code': 500, 'message': str(e)}), 500
+
+
 def init_solar_edge():
     solar_edge = SolarEdge(config_helper)
     return solar_edge
@@ -69,5 +89,5 @@ if __name__ == '__main__':
     config_helper = Config()
     startTime = time.time()
 
-    solar_edge = Thread(target=init_solar_edge).start()
-    Thread(target=init_server).start()
+    solar_edge = init_solar_edge()
+    init_server()

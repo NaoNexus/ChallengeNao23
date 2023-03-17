@@ -1,5 +1,7 @@
 import speech_recognition as sr
 
+from helpers.logging_helper import logger
+
 
 class SpeechRecognition:
     r: sr.Recognizer
@@ -20,3 +22,4 @@ class SpeechRecognition:
             audio = self.r.record(source)
 
             self.result = self.r.recognize_google(audio, language="it_IT")
+            logger.info(self.result)
