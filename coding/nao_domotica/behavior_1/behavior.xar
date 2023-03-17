@@ -125,6 +125,7 @@ class MyClass(GeneratedClass):
         A = Data.split(";")
         self.logger.info(A)
 
+
         ID = A[0]
         Data = A[1]
         CO2 = A[2]
@@ -134,79 +135,92 @@ class MyClass(GeneratedClass):
         IntLight = A[6]
         ExtLight = A[7]
 
-        TempHigh = ("Questa temperatura di " + Temp + "gradi mi fa sudare gli hardware, se si arruggini-scono è un problema! È meglio aprire le finestre spegnere laria condizionata." )
+        #finestre di dialogo
 
-        TempLow = ("Ma voi umani non sentite il freddo? Ci sono" + Temp + "gradi, accendo il riscalda-mento che se no ci congeliamo tutti.")
+        TempHigh = ("Questa temperatura di " + Temp + " gradi mi fa sudare gli hardware, se si arruggini-scono è un problema! È meglio aprire le finestre spegnere laria condizionata." )
+
+        TempLow = ("Ma voi umani non sentite il freddo? Ci sono" + Temp + " gradi, accendo il riscalda-mento che se no ci congeliamo tutti.")
 
         CO2s = ("Cè troppa CO2," + CO2 + " parti per milione non fanno ossigenare abbastanza il cervello di voi umani. Vi apro le finestre.")
 
-        UmiHigh = ("Cè tanta umidità in questa stanza. È sopra il" + Umi + "percento. Meglio aprire le fi-nestre, se no si potrebbero rovinare le pareti con muffe o macchie.")
+        UmiHigh = ("Cè tanta umidità in questa stanza. È sopra il " + Umi + " percento. Meglio aprire le fi-nestre, se no si potrebbero rovinare le pareti con muffe o macchie.")
 
-        UmiLow = ("Sapete che sotto il 40 pecento di umidità in una stanza si parla di ambiente secco? Ora cè unumidita del" + Umi + "percento, meglio aprire le finestre!")
+        UmiLow = ("Sapete che sotto il 40 pecento di umidità in una stanza si parla di ambiente secco? Ora cè unumidita del" + Umi + " percento, meglio aprire le finestre!")
 
         HighLight = ("Con questa luminosità si può spegnere la luce, non sarà un problema vedere anche con i vostri occhi umani")
 
         LowLight = ("Cè poca luce qua dentro, si possono tirare su le tapparelle oppure accendere le luci. Ci penso io, se con questo buio riesco a vedere linterruttore.")
 
-
+        #creazione stringa di output
         output = ""
+        OldTemp = ""
+        OldTemp1 = ""
+        OldCO2 = ""
+        OldUmi = ""
+        OldUmi1 = ""
+        OldExtLight = ""
+        OldIntLight = ""
+        Extlight = ""
+        IntLight1 = ""
+        OldExtLight1 = ""
+        OldIntLight1 = ""
 
-        if Temp > 20:
+
+        if int(Temp) > 20:
             output = output + TempHigh
 
-            Temp = OldTemp
-            if OldTemp > 20 and Temp > 20:
+            OldTemp = int(Temp)
+            if int(OldTemp) > 20 and int(Temp) > 20:
                 output = output
 
-        if Temp <= 10:
+        if int(Temp) <= 10:
             output = output + TempLow
 
-            Temp = OldTemp1
-            if OldTemp1 <= 10 and Temp <= 10:
+            OldTemp1 = int(Temp)
+            if int(OldTemp1) <= 10 and int(Temp) <= 10:
                 output = output
 
-        if CO2 > 5000:
+        if int(CO2) > 5000:
             output = output + CO2s
 
-            CO2 = OldCO2
-            if OldCO2 <= 10 and CO2 <= 10:
+            OldCO2 = int(CO2)
+            if int(OldCO2) <= 10 and int(CO2) <= 10:
                 output = output
 
-        if Umi > 60:
+        if int(Umi) > 60:
             output = output + UmiHigh
 
-            Umi = OldUmi
-            if OldUmi > 60 and Umi > 10:
+            OldUmi = int(Umi)
+            if int(OldUmi) > 60 and int(Umi) > 10:
                 output = output
 
-        if Umi < 40:
+        if int(Umi) < 40:
             output = output + UmiLow
 
-            Umi = OldUmi1
-            if OldUmi1 < 40 and Umi < 40:
+            OldUmi1 = int(Umi)
+            if int(OldUmi1) < 40 and int(Umi) < 40:
                 output = output
 
-        if ExtLight > 15 and IntLight > ExtLight:
+        if int(ExtLight) > 15 and int(IntLight) > int(ExtLight):
             output = output + HighLight
 
-            ExtLight = OldExtLight
-            IntLight = OldIntLight
+            OldExtLight = int(ExtLight)
+            OldIntLight = int(IntLight)
 
-            if OldExtLight > 15 and Extlight > 15 and OldIntLight > 15 and IntLightLight > 15:
+            if int(OldExtLight) > 15 and int(Extlight) > 15 and int(OldIntLight) > 15 and int(IntLight1) > 15:
                 output = output
 
-        if ExtLight < 15 and IntLight < ExtLight:
-           output = output + LowLight
+        if int(ExtLight) < 15 and int(IntLight) < int(ExtLight):
+            output = output + LowLight
 
-           ExtLight = OldExtLight
-           IntLight = OldIntLight
+            OldExtLight1 = int(ExtLight)
+            OldIntLight1 = int(IntLight)
 
-           if OldExtLight < 15 and Extlight < 15 and OldIntLight < 15 and IntLightLight < 15:
-               output = output
+            if int(OldExtLight) < 15 and int(Extlight) < 15 and int(OldIntLight) < 15 and int(IntLight1) < 15:
+                output = output
 
 
         Stringa = output
-
         self.Text(Stringa)]]>
                 </content>
               </script>
