@@ -30,14 +30,14 @@ class SolarEdge():
 
     def input(self, input, value):
         {
-            'new_project': lambda: self.click_element(ElementsIds.new_project_xpath, By.XPATH),
-            'info_section': lambda: self.click_element(ElementsIds.new_project_xpath, By.XPATH),
-            'modelling_section': lambda: self.click_element(ElementsIds.modelling_section_xpath, By.XPATH),
-            'positioning_section': lambda: self.click_element(ElementsIds.positioning_section_xpath, By.XPATH),
-            'storage_section': lambda: 0,  # TODO: find xpath and add click methods
-            'electrical_section': lambda: 0,
-            'financial_section': lambda: 0,
-            'summary_section': lambda: 0,
+            'new_project': lambda _: self.click_element(ElementsIds.new_project_xpath, By.XPATH),
+            'info_section': lambda _: self.click_element(ElementsIds.new_project_xpath, By.XPATH),
+            'modelling_section': lambda _: self.click_element(ElementsIds.modelling_section_xpath, By.XPATH),
+            'positioning_section': lambda _: self.click_element(ElementsIds.positioning_section_xpath, By.XPATH),
+            'storage_section': lambda _: 0,  # TODO: find xpath and add click methods
+            'electrical_section': lambda _: 0,
+            'financial_section': lambda _: 0,
+            'summary_section': lambda _: 0,
             'project_type': lambda value: self.click_element(ElementsIds.residential_xpath) if value == 'residential' else self.click_element(ElementsIds.commercial_xpath, By.XPATH),
             'project_name': lambda name: self.input_keys_element(ElementsIds.project_name_id, name),
             'country': lambda country: self.input_address('country', country),
@@ -47,7 +47,7 @@ class SolarEdge():
             'consumption': lambda consumption: self.input_keys_element(ElementsIds.consumption_xpath, consumption, By.XPATH),
             'consumption_period': lambda period: self.click_consumption_period(period),
             'electrical_grid': lambda electrical_grid: self.click_electrical_grid(electrical_grid),
-            'power_factor': lambda: 0,
+            'power_factor': lambda _: 0,
             'name': lambda name: self.input_keys_element(ElementsIds.name_id, name),
             'surname': lambda surname: self.input_keys_element(ElementsIds.surname_id, surname),
             'company': lambda company: self.input_keys_element(ElementsIds.company_id, company),
@@ -100,6 +100,8 @@ class SolarEdge():
         self.input_keys_element(ElementsIds.password_id, self.password)
         self.click_element(ElementsIds.login_button_tag_name, By.TAG_NAME)
         time.sleep(10)
+        if (self.driver.find_elements(By.XPATH, ElementsIds.tips_close_button_xpath)):
+            self.click_element(ElementsIds.tips_close_button_xpath, By.XPATH)
 
     def click_element(self, input_selector, by: By = By.ID):
         self.driver.find_element(by, input_selector).click()
@@ -109,6 +111,8 @@ class SolarEdge():
 
 
 class ElementsIds:
+    tips_close_button_xpath = "//*[@data-testid='dialog-action-3']"
+
     username_id = 'username'
     password_id = 'password'
     login_button_tag_name = 'button'

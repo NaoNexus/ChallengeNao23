@@ -1,8 +1,8 @@
 server:
-  debug: true
+  debug: false
   host: "0.0.0.0" # Current machine ip
   port: 5000
 
 solaredge:
-  username: ""
-  password: ""
+  username: "socialnaonexus@gmail.com"
+  password: "NNexus00!"

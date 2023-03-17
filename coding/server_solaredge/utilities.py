@@ -39,3 +39,6 @@ inputs = ['new_project',
           'surname',
           'company',
           'notes',]
+
+inputs_without_file = ['new_project', 'info_section', 'modelling_section', 'positioning_section',
+                       'storage_section', 'electrical_section', 'financial_section', 'summary_section']

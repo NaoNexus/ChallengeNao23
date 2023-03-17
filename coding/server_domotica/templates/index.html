@@ -14,13 +14,7 @@
     <link rel="icon" href="/static/images/logo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" />
     <style>
-        html {
-            height: 100%;
-        }
-
         body {
-            height: 100%;
-            margin: 0;
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
@@ -284,6 +278,15 @@
         <div class="flex flex-row space-x-2">
             <span class="px-2 py-1 h-fit rounded-full mdi mdi-lightbulb-group-outline text-white bg-sky-500"></span>
             <h1 class="text-2xl font-medium text-slate-800">DOMOTICS</h1>
+            <div class="flex-1"></div>
+            <label for="rooms" class="font-medium text-slate-800 align-middle my-auto ml-auto">ROOM</label>
+            <select name="rooms" id="rooms"
+                class="rounded outline-none border-2 border-slate-200 focus:border-sky-500 focus:invalid:border-red-500 invalid:border-red-500 disabled:bg-slate-100">
+                <option value="infoLab">COMPUTER LAB</option>
+                <option value="4ssa">4 SSA</option>
+                <option value="5ssa">5 SSA</option>
+                <option value="languageLab">LANGUAGES LAB</option>
+            </select>
         </div>
 
         <div class="grid grid-cols-4 gap-2 mt-2 space-x-2">

@@ -1,3 +1,4 @@
+from threading import Thread
 from helpers.config_helper import Config
 from helpers.logging_helper import logger
 from helpers.solaredge_helper import SolarEdge
@@ -22,17 +23,27 @@ def info():
     return jsonify({'code': 200, 'status': 'online', 'elapsed time': utilities.getElapsedTime(startTime)}), 200
 
 
-@app.route('/api/input/<input>', methods=['POST'])
-def recording_input(input):
-    if input != '' and input != None and input in utilities.inputs:
+@app.route('/api/input/<string:Input>', methods=['POST'])
+def recording_input(Input):
+    if Input != '' and Input != None and Input in utilities.inputs:
         try:
-            uploaded_file = request.files['file']
-            if (uploaded_file.filename != ''):
-                path = f'recordings/{datetime.now().isoformat()}.wav'
-                uploaded_file.save(path)
-                speech_recognition = SpeechRecognition(path)
+            uploaded_file = None
+            if (Input not in utilities.inputs_without_file):
+                uploaded_file = request.files['file']
 
-                solar_edge.input(input, speech_recognition.result)
+            if (Input in utilities.inputs_without_file or (uploaded_file and uploaded_file.filename != '')):
+                if ((uploaded_file and uploaded_file.filename != '')):
+                    path = f'recordings/recording.wav'
+                    uploaded_file.save(path)
+                    speech_recognition = SpeechRecognition(path)
+
+                    solar_edge.input(Input, speech_recognition.result)
+
+                    return jsonify({'code': 200, 'message': 'OK', 'result': speech_recognition.result}), 200
+
+                solar_edge.input(Input, '')
+
+                return jsonify({'code': 200, 'message': 'OK'}), 200
             else:
                 logger.error('No file passed')
                 return jsonify({'code': 500, 'message': 'No file was passed'}), 500
@@ -44,11 +55,19 @@ def recording_input(input):
         return jsonify({'code': 500, 'message': 'Input is invalid'}), 500
 
 
+def init_solar_edge():
+    solar_edge = SolarEdge(config_helper)
+    return solar_edge
+
+
+def init_server():
+    app.run(host=config_helper.srv_host, port=config_helper.srv_port,
+            debug=config_helper.srv_debug)
+
+
 if __name__ == '__main__':
     config_helper = Config()
     startTime = time.time()
 
-    solar_edge = SolarEdge(config_helper)
-
-    app.run(host=config_helper.srv_host, port=config_helper.srv_port,
-            debug=config_helper.srv_debug)
+    solar_edge = Thread(target=init_solar_edge).start()
+    Thread(target=init_server).start()
