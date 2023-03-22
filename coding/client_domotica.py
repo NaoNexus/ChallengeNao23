@@ -1,25 +1,35 @@
-import socket
+from telnetlib import Telnet
 
-def prog_client(comando):
-   print(comando)
+def telnet_client(cmd):
+   print(cmd)
    
-   host = "192.168.5.10"
+   host = '192.168.5.6'
    port = 3001
-   
-   client_socket = socket.socket(socket.AF_INET , socket.SOCK_STREAM)
-   client_socket.connect((host,port))
-   
-   client_socket.send(comando)
-   data = client_socket.recv(1024)
-   
-   client_socket.close()
-   print("comando inviato"), repr(data)
+
+   with Telnet(host, port) as tn:
+      tn.write(cmd.encode() + '\n'.encode())
 
 
-if __name__ == "__main__":
-    cmd = "*1*1*311##"    
-    prog_client(cmd)
+if __name__ == '__main__':
+   cmd = 'BTN 16072'   
+   telnet_client(cmd)
     
+#AULA ELETTRONICA
+#luce accensione  1 : LOAD 15990 100
+#luce spegnimento 1 : LOAD 15990 0
+#luce accensione 2  : LOAD 15991 100
+#luce spegnimento 2 : LOAD 15991 0
+#apertura tapparelle: BTN 16072
+#chiusura tapparelle: BTN 16076
+#luce LIM           : LOAD 19604 100
+#luce LIM           : LOAD 19604 0
 
-#dispositivo luce A= 2(Area 2), PL= 4(Punto luce 4) -->where="24"
-#dispositivo luminoso A= 03, PL= 11su bus locale 01-->where="0311#4#01"
+#AULA INFORMATICA
+#luce accensione  1 : LOAD 15992 100
+#luce spegnimento 1 : LOAD 15992 0
+#luce accensione 2  : LOAD 15993 100
+#luce spegnimento 2 : LOAD 15993 0
+#apertura tapparelle: BTN 16082
+#chiusura tapparelle: BTN 16086
+#luce LIM           : LOAD 19605 100
+#luce LIM           : LOAD 19605 0
