@@ -33,3 +33,13 @@ if __name__ == '__main__':
 #chiusura tapparelle: BTN 16086
 #luce LIM           : LOAD 19605 100
 #luce LIM           : LOAD 19605 0
+
+#AULA 108
+#luce accensione  1 : LOAD 15986 100
+#luce spegnimento 1 : LOAD 15986 0
+#luce accensione 2  : LOAD 15987 100
+#luce spegnimento 2 : LOAD 15987 0
+#apertura tapparelle: BTN 16052
+#chiusura tapparelle: BTN 16056
+#luce LIM           : LOAD 19602 100
+#luce LIM           : LOAD 19602 0
