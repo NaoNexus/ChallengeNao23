@@ -11,7 +11,7 @@ def telnet_client(cmd):
 
 
 if __name__ == '__main__':
-   cmd = 'BTN 16072'   
+   cmd = 'LOAD 15990 100'   
    telnet_client(cmd)
     
 #AULA ELETTRONICA
@@ -23,6 +23,8 @@ if __name__ == '__main__':
 #chiusura tapparelle: BTN 16076
 #luce LIM           : LOAD 19604 100
 #luce LIM           : LOAD 19604 0
+#lettura temperatura ambiente                             : GETTHERMTEMP 16237 INDOOR
+#accensione temporizzata del riscaldamento/condizionamento: BTNPRESS 16074
 
 #AULA INFORMATICA
 #luce accensione  1 : LOAD 15992 100

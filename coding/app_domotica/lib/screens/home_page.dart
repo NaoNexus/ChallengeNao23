@@ -40,7 +40,76 @@ class _HomePageState extends State<HomePage> {
             future: getReports(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data![0].id);
+                return ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  children: snapshot.data!
+                      .map(
+                        (report) => Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.grey.shade50,
+                          ),
+                          child: Column(
+                            children: [
+                              ListBody(
+                                children: [
+                                  Text(
+                                    'CO2: ${report.co2} ppm',
+                                    style: const TextStyle(
+                                      color: AppColors.teal,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Temperature: ${report.temperature} °C',
+                                    style: const TextStyle(
+                                      color: AppColors.teal,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Humidity: ${report.humidity} %',
+                                    style: const TextStyle(
+                                      color: AppColors.teal,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Date: ${report.date}',
+                                    style: const TextStyle(
+                                      color: AppColors.teal,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Internal Light: ${report.internalLight} lux',
+                                    style: const TextStyle(
+                                      color: AppColors.teal,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'External Light: ${report.externalLight} lux',
+                                    style: const TextStyle(
+                                      color: AppColors.teal,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Number of People: ${report.nPeople}',
+                                    style: const TextStyle(
+                                      color: AppColors.teal,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                      .toList(),
+                );
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
