@@ -3,13 +3,13 @@ import 'package:http/http.dart' as http;
 
 Future<List<Report>> getReports() async {
   final response =
-      await http.get(Uri.parse('http://192.168.0.150:5000/api/reports/'));
+      await http.get(Uri.parse('http://192.168.0.150:5000/api/reports'));
 
   if (response.statusCode == 200) {
     List<Report> reports = [];
 
     for (Map<String, dynamic> report in jsonDecode(response.body)['data']) {
-      reports.add(Report.fromJson(jsonDecode(response.body)));
+      reports.add(Report.fromJson(report));
     }
 
     return reports;
@@ -22,7 +22,7 @@ class Report {
   final String id;
   final int co2;
   final double temperature;
-  final String humidity;
+  final int humidity;
   final DateTime date;
   final int internalLight;
   final int externalLight;
@@ -41,14 +41,14 @@ class Report {
 
   factory Report.fromJson(Map<String, dynamic> json) {
     return Report(
-      id: json['id'],
-      co2: json['co2'],
-      temperature: json['temperature'],
-      humidity: json['humidity'],
-      date: DateTime.parse(json['date']),
-      internalLight: json['internalLight'],
-      externalLight: json['externalLight'],
-      nPeople: json['nPeople'],
+      id: json['id'] ?? '',
+      co2: json['co2'] ?? 0,
+      temperature: json['temperature'] ?? 0,
+      humidity: json['humidity'] ?? 0,
+      date: DateTime.tryParse(json['date'] ?? '') ?? DateTime.now(),
+      internalLight: json['internalLight'] ?? 0,
+      externalLight: json['externalLight'] ?? 0,
+      nPeople: json['nPeople'] ?? 0,
     );
   }
 }
