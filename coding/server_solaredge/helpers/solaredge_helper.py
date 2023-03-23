@@ -3,6 +3,7 @@ import helpers.config_helper as config_helper
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import NoSuchElementException
 
 import time
 
@@ -29,15 +30,16 @@ class SolarEdge():
         self.login()
 
     def input(self, input, value):
-        {
+        return {
             'new_project': lambda _: self.click_element(ElementsIds.new_project_xpath, By.XPATH),
-            'info_section': lambda _: self.click_element(ElementsIds.new_project_xpath, By.XPATH),
+            'info_section': lambda _: self.click_element(ElementsIds.info_section_xpath, By.XPATH),
             'modelling_section': lambda _: self.click_element(ElementsIds.modelling_section_xpath, By.XPATH),
-            'positioning_section': lambda _: self.click_element(ElementsIds.positioning_section_xpath, By.XPATH),
-            'storage_section': lambda _: 0,  # TODO: find xpath and add click methods
-            'electrical_section': lambda _: 0,
-            'financial_section': lambda _: 0,
-            'summary_section': lambda _: 0,
+            'positioning_section': lambda _: self.input_positioning(),
+            'apply_positioning': lambda _: self.click_element(ElementsIds.apply_positioning_xpath, By.XPATH),
+            'storage_section': lambda _: self.input_storage(),
+            'electrical_section': lambda _: self.click_element(ElementsIds.electrical_section_xpath, By.XPATH),
+            'financial_section': lambda _: self.click_element(ElementsIds.financial_section_xpath, By.XPATH),
+            'summary_section': lambda _: self.get_report(),
             'project_type': lambda value: self.click_element(ElementsIds.residential_xpath, By.XPATH) if ('residential' in value or 'residenziale' in value) else self.click_element(ElementsIds.commercial_xpath, By.XPATH),
             'project_name': lambda name: self.input_keys_element(ElementsIds.project_name_id, name),
             'create_project': lambda _: self.click_element(ElementsIds.create_button_xpath, By.XPATH),
@@ -74,6 +76,44 @@ class SolarEdge():
 
         self.click_electrical_grid('230')
 
+    def input_positioning(self):
+        self.click_element(ElementsIds.positioning_section_xpath, By.XPATH)
+        time.sleep(5)
+        self.click_element(ElementsIds.apply_panels_xpath, By.XPATH)
+        time.sleep(5)
+        self.click_element(ElementsIds.autocomplete_panels_xpath, By.XPATH)
+
+    def input_storage(self):
+        self.click_element(ElementsIds.storage_section_xpath, By.XPATH)
+        time.sleep(5)
+        min_usage = self.driver.find_element(
+            By.XPATH, ElementsIds.min_self_usage_xpath).get_attribute("value")
+        min_usage_capacity = self.driver.find_element(
+            By.XPATH, ElementsIds.min_self_usage_capacity_xpath).get_attribute("value")
+        if min_usage != 0 and min_usage_capacity != 0:
+            self.input_keys_element(
+                ElementsIds.min_self_usage_xpath, '50', By.XPATH)
+            self.input_keys_element(
+                ElementsIds.min_self_usage_capacity_xpath, '50', By.XPATH)
+        self.click_element(ElementsIds.apply_battery_xpath, By.XPATH)
+        try:
+            self.driver.find_element(
+                By.XPATH, ElementsIds.automatic_cabling_xpath).click()
+            time.sleep(2)
+            self.driver.find_element(
+                By.XPATH, ElementsIds.generate_report_xpath).click()
+        except NoSuchElementException:
+            pass
+
+    def get_report(self):
+        self.click_element(ElementsIds.report_section_xpath, By.XPATH)
+        time.sleep(10)
+        report = self.driver.find_elements(
+            By.CLASS_NAME, ElementsIds.report_data_class_name)
+        for i in range(0, len(report)):
+            report[i] = report[i].text
+        return report
+
     def click_consumption_period(self, period):
         self.click_element(ElementsIds.consumption_period_dropdown_id)
         time.sleep(1)
@@ -81,6 +121,10 @@ class SolarEdge():
             self.click_element(ElementsIds.consumption_yearly_xpath, By.XPATH)
         elif (period.lower().replace(' ', '') in ['mensile', '2', 'secondo', 'due']):
             self.click_element(ElementsIds.consumption_monthly_xpath, By.XPATH)
+        self.click_element(ElementsIds.usage_profile_xpath, By.XPATH)
+        time.sleep(5)
+        self.click_element(ElementsIds.usage_profile_cost_xpath, By.XPATH)
+        self.click_element(ElementsIds.apply_usage_profile_xpath, By.XPATH)
 
     def click_electrical_grid(self, period):
         self.click_element(
@@ -153,6 +197,29 @@ class ElementsIds:
 
     create_button_xpath = '/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div/div[2]/div/button[2]'
 
-    modelling_section_xpath = "//a[@href='#info_e012791b534c939d290d5e015de5f701']"
+    usage_profile_xpath = "/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div/div[1]/div/fieldset/div/div[2]/div/div/div/div[2]/div[2]/div/div[2]/div[1]/div/div/div/div"
+    usage_profile_cost_xpath = "/html/body/div[3]/div[3]/div/div[1]/div[1]/div/div/div/div[3]"
+    apply_usage_profile_xpath = "/html/body/div[3]/div[3]/div/div[2]/button[2]"
 
-    positioning_section_xpath = "//a[href='#modules_d671e572a4041096baf7ac4ba6b279a']"
+    apply_panels_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div/button'
+    autocomplete_panels_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[1]/div[2]/div/div/div/div/div[3]/span/div/span[1]/span[1]/input'
+    apply_positioning_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/button[2]'
+
+    min_self_usage_xpath = '/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div[1]/div[2]/div/div/div[1]/div/div/div/div/input'
+    min_self_usage_capacity_xpath = '/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div[2]/div[2]/div/div/div[1]/div/div/div/div/input'
+
+    apply_battery_xpath = '/html/body/div[1]/div[3]/div/div/div/div[2]/div[3]/button'
+
+    automatic_cabling_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[1]/div[2]/div[1]/div[2]/div/div[1]/fieldset/div/fieldset/div[1]/div[6]/div/div/div/div/div/div[1]/div/span[1]/span[1]/input'
+
+    generate_report_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[1]/div[2]/div[1]/div[2]/div/div[2]/div/button[2]'
+
+    report_data_class_name = 'simulation-result-unit-module__simulationResultsValue___tJsDO'
+
+    info_section_xpath = "//div[@data-testid='project-info-tab']"
+    modelling_section_xpath = "//div[@data-testid='modeling-tab']"
+    positioning_section_xpath = "//div[@data-testid='pv-placement-tab']"
+    storage_section_xpath = "//div[@data-testid='storage-tab']"
+    electrical_section_xpath = "//div[@data-testid='electrical-design-tab']"
+    financial_section_xpath = "//div[@data-testid='financial-tab']"
+    report_section_xpath = "//div[@data-testid='reports-tab']"
