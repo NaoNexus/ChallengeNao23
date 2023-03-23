@@ -39,7 +39,7 @@ class SolarEdge():
             'storage_section': lambda _: self.input_storage(),
             'electrical_section': lambda _: self.click_element(ElementsIds.electrical_section_xpath, By.XPATH),
             'financial_section': lambda _: self.click_element(ElementsIds.financial_section_xpath, By.XPATH),
-            'summary_section': lambda _: self.get_report(),
+            'report_section': lambda _: self.get_report(),
             'project_type': lambda value: self.click_element(ElementsIds.residential_xpath, By.XPATH) if ('residential' in value or 'residenziale' in value) else self.click_element(ElementsIds.commercial_xpath, By.XPATH),
             'project_name': lambda name: self.input_keys_element(ElementsIds.project_name_id, name),
             'create_project': lambda _: self.click_element(ElementsIds.create_button_xpath, By.XPATH),

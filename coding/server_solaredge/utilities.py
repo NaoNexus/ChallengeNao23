@@ -25,7 +25,7 @@ inputs = ['new_project',
           'storage_section',
           'electrical_section',
           'financial_section',
-          'summary_section',
+          'report_section',
           'project_type',
           'project_name',
           'create_project',
@@ -43,4 +43,4 @@ inputs = ['new_project',
           'notes',]
 
 inputs_without_file = ['new_project', 'info_section', 'modelling_section', 'positioning_section', 'apply_positioning',
-                       'storage_section', 'electrical_section', 'financial_section', 'summary_section', 'create_project']
+                       'storage_section', 'electrical_section', 'financial_section', 'report_section', 'create_project']
