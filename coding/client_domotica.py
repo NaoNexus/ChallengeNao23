@@ -11,7 +11,7 @@ def telnet_client(cmd):
 
 
 if __name__ == '__main__':
-   cmd = 'LOAD 15990 100'   
+   cmd = 'BTN 16074'   
    telnet_client(cmd)
     
 #AULA ELETTRONICA
