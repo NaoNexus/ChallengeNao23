@@ -53,7 +53,7 @@ class SolarEdge():
             'power_factor': lambda _: 0,
             'name': lambda name: self.input_keys_element(ElementsIds.name_id, name),
             'surname': lambda surname: self.input_keys_element(ElementsIds.surname_id, surname),
-            'company': lambda company: self.input_keys_element(ElementsIds.company_id, company),
+            'company': lambda company: self.input_keys_element(ElementsIds.company_id, 5),
             'notes': lambda notes: self.input_keys_element(ElementsIds.notes_id, notes),
         }[input](value)
 

@@ -4,14 +4,10 @@ from helpers.logging_helper import logger
 from helpers.solaredge_helper import SolarEdge
 from helpers.speech_recognition_helper import SpeechRecognition
 
-from datetime import datetime
-
 import utilities
 import time
 
 from flask import Flask, request, jsonify
-
-from enum import Enum
 
 app = Flask(__name__)
 solar_edge = None
