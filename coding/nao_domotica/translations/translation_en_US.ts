@@ -104,10 +104,15 @@
     <context>
         <name>behavior_1/behavior.xar:/Riscaldamento</name>
         <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
             <source>Ci penso io</source>
             <comment>Text</comment>
-            <translation type="unfinished">Ci penso io</translation>
+            <translation type="obsolete">Ci penso io</translation>
+        </message>
+        <message>
+            <location filename="behavior_1/behavior.xar" line="0"/>
+            <source>ci penso io</source>
+            <comment>Text</comment>
+            <translation type="unfinished">ci penso io</translation>
         </message>
     </context>
     <context>
