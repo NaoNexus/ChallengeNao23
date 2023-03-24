@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheProject xmlns="http://www.ald.softbankrobotics.com/schema/choregraphe/project.xsd" xar_version="3">
+  <Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0">
+    <bitmap>media/images/box/root.png</bitmap>
+    <script language="4">
+      <content>
+        <![CDATA[]]>
+      </content>
+    </script>
+    <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+    <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+    <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+    <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+    <Timeline enable="0">
+      <BehaviorLayer name="behavior_layer1">
+        <BehaviorKeyframe name="keyframe1" index="1">
+          <Diagram>
+            <Box name="Text Edit" id="1" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="198" y="309">
+              <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
+              <script language="4">
+                <content>
+                  <![CDATA[# /!\ Generated content. Do not edit!
+class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self)
+
+	def onInput_onStart(self):
+		self.onStopped("Ciao a tutti ragazzi, oggi parliamo di un argomento molto importante per la città di Verona. \nA causa del peggioramento della qualità dell\'aria nella giornata di ieri e oggi venerdì 24 febbraio, dalle 8.30 alle 18.30, è stata vietata la circolazione di ciclomotori fino a Euro 1, veicoli a benzina fino a Euro 2 e diesel fino a Euro 5. \nPer i Diesel Euro 5 commerciali, lo stop è dalle 8.30 alle 12.30. \n  \n  \nIl comune incinta i cittadini ad usare mezzi pubblici e ridurre gli orari di funzionamento degli impianti di riscaldamento per abbassare il livello di PM10, ovvero particelle atmosferiche sospese in aria di diametro inferiore o uguale a 10 micrometri. \nIl particolato può essere prodotto da eruzioni vulcaniche, incendi o il traffico veicolare e una delle sue caratteristiche è quella di permeare nell’atmosfera a lungo. \n  \nVia libera hanno invece i veicoli bifuel, cioè con impianti gpl o metano, le auto a metano, gpl, elettriche, ibride, veicoli di portatori di disabilità e quelli usati per compiti di soccorso. \nC’è tuttavia la possibilità di circolazione su tangenziali e autostrade e i percorsi che da esse raggiungono  zona Fiera, Stadio e Palazzetto dello Sport. \n  \nPer oggi è tutto, rispettate i divieti e Nao (starnuto) out! ")]]>
+                </content>
+              </script>
+              <pluginContent>
+                <text>
+                  <![CDATA[Ciao a tutti ragazzi, oggi parliamo di un argomento molto importante per la città di Verona. 
+A causa del peggioramento della qualità dell'aria nella giornata di ieri e oggi venerdì 24 febbraio, dalle 8.30 alle 18.30, è stata vietata la circolazione di ciclomotori fino a Euro 1, veicoli a benzina fino a Euro 2 e diesel fino a Euro 5. 
+Per i Diesel Euro 5 commerciali, lo stop è dalle 8.30 alle 12.30. 
+  
+  
+Il comune incinta i cittadini ad usare mezzi pubblici e ridurre gli orari di funzionamento degli impianti di riscaldamento per abbassare il livello di PM10, ovvero particelle atmosferiche sospese in aria di diametro inferiore o uguale a 10 micrometri. 
+Il particolato può essere prodotto da eruzioni vulcaniche, incendi o il traffico veicolare e una delle sue caratteristiche è quella di permeare nell’atmosfera a lungo. 
+  
+Via libera hanno invece i veicoli bifuel, cioè con impianti gpl o metano, le auto a metano, gpl, elettriche, ibride, veicoli di portatori di disabilità e quelli usati per compiti di soccorso. 
+C’è tuttavia la possibilità di circolazione su tangenziali e autostrade e i percorsi che da esse raggiungono  zona Fiera, Stadio e Palazzetto dello Sport. 
+  
+Per oggi è tutto, rispettate i divieti e Nao (starnuto) out! ]]>
+                </text>
+              </pluginContent>
+              <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+              <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" />
+              <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" />
+            </Box>
+            <Box name="Animated Say Text" id="2" localization="8" tooltip="Say the text received on its input and move during its speech.&#x0A;" x="711" y="326">
+              <bitmap>media/images/box/interaction/say.png</bitmap>
+              <script language="4">
+                <content>
+                  <![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.tts = self.session().service('ALAnimatedSpeech')
+        self.ttsStop = self.session().service('ALAnimatedSpeech') #Create another service as wait is blocking if audioout is remote
+        self.bIsRunning = False
+        self.ids = []
+
+    def onUnload(self):
+        for id in self.ids:
+            try:
+                self.ttsStop.stop(id)
+            except:
+                pass
+        while( self.bIsRunning ):
+            time.sleep( 0.2 )
+
+    def onInput_onStart(self, p):
+        self.bIsRunning = True
+        try:
+            movement = self.getParameter("Speaking movement mode")
+            sentence = "\RSPD="+ str( self.getParameter("Speed (%)") ) + "\ "
+            sentence += "\VCT="+ str( self.getParameter("Voice shaping (%)") ) + "\ "
+            sentence += str(p)
+            sentence +=  "\RST\ "
+            id = self.tts.pCall("say",str(sentence), {"speakingMovementMode":movement})
+            self.ids.append(id)
+            self.tts.wait(id)
+        finally:
+            try:
+                self.ids.remove(id)
+            except:
+                pass
+            if( self.ids == [] ):
+                self.onStopped() # activate output of the box
+                self.bIsRunning = False
+
+    def onInput_onStop(self):
+        self.onUnload()]]>
+                </content>
+              </script>
+              <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+              <Input name="onStart" type="3" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this Input." id="2" />
+              <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this Input." id="3" />
+              <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when Box behavior is finished." id="4" />
+              <Parameter name="Voice shaping (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="150" tooltip='Used to modify at runtime the voice feature (tone, speed). In a slighty&#x0A;different way than pitch and speed, it gives a kind of &quot;gender or age&#x0A;modification&quot; effect.&#x0A;&#x0A;For instance, a quite good male derivation of female voice can be&#x0A;obtained setting this parameter to 78%.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the&#x0A;speed parameter. For example, if you want to decrease by 20% the voice&#x0A;shaping, you will have to increase by 20% the speed to keep a constant&#x0A;average speed.' id="5" />
+              <Parameter name="Speed (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="200" tooltip="Changes the speed of the voice.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the voice&#x0A;shaping parameter. For example, if you want to increase by 20% the speed, you&#x0A;will have to decrease by 20% the voice shaping to keep a constant average&#x0A;speed." id="6" />
+              <Parameter name="Speaking movement mode" inherits_from_parent="0" content_type="3" value="contextual" default_value="contextual" custom_choice="0" tooltip="Change the body language mode during the speech.&#x0A;disabled: The robot will only play the animations given by the user through the animation parameter.&#x0A;random: During time the robot has no animation to play, he will launch random neutral animations.&#x0A;contextual: During time the robot has no animation to play, he will try to launch a new one accordingly to the saying text. Every time the robot can&apos;t find a contextual animation he will launch a random neutral animation." id="7">
+                <Choice value="disabled" />
+                <Choice value="random" />
+                <Choice value="contextual" />
+              </Parameter>
+              <Resource name="Speech" type="Lock" timeout="0" />
+            </Box>
+            <Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="2" />
+            <Link inputowner="2" indexofinput="2" outputowner="1" indexofoutput="3" />
+            <Link inputowner="0" indexofinput="4" outputowner="2" indexofoutput="4" />
+          </Diagram>
+        </BehaviorKeyframe>
+      </BehaviorLayer>
+    </Timeline>
+  </Box>
+</ChoregrapheProject>
