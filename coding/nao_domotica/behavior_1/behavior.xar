@@ -1013,7 +1013,7 @@ class MyClass(GeneratedClass):
               <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" />
               <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" />
             </Box>
-            <Box name="Text Edit Riscaldamento" id="17" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="1004" y="508">
+            <Box name="Text Edit Riscaldamento" id="17" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="945" y="494">
               <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
               <script language="4">
                 <content>
