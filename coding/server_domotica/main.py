@@ -3,6 +3,7 @@ from helpers.db_helper import DB
 from helpers.logging_helper import logger
 from helpers.pdf_analyzer import PDFAnalyzer
 from helpers.weather_api_helper import WeatherApi
+from helpers.domotics_server_helper import Room, DomoticsServer
 
 import utilities
 import time
@@ -17,7 +18,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     reports = db_helper.get_reports()
-    
+
     return render_template('index.html', reports=reports)
 
 
@@ -146,10 +147,54 @@ def reports():
         return jsonify({'code': 500, 'message': str(e)}), 500
 
 
+@app.route('/api/domotics/lights/<room>', methods=['POST'])
+def domotics_lights(room):
+    if (room in [room.name for room in Room]):
+        try:
+            domotics_server_helper.switch_lights(Room[room])
+            return jsonify({'code': 200, 'message': 'OK'}), 200
+        except Exception as e:
+            logger.error(str(e))
+            return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('Room value not valid')
+        return jsonify({'code': 500, 'message': 'Room value not valid'}), 500
+
+@app.route('/api/domotics/lim/<room>', methods=['POST'])
+def domotics_lim(room):
+    if (room in [room.name for room in Room]):
+        try:
+            domotics_server_helper.switch_lim(Room[room])
+            return jsonify({'code': 200, 'message': 'OK'}), 200
+        except Exception as e:
+            logger.error(str(e))
+            return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('Room value not valid')
+        return jsonify({'code': 500, 'message': 'Room value not valid'}), 500
+
+@app.route('/api/domotics/blinds/<room>', methods=['POST'])
+def domotics_blinds(room):
+    if (room in [room.name for room in Room]):
+        try:
+            if (request.args['action'] == 'open'):
+                domotics_server_helper.open_blinds(Room[room])
+            elif (request.args['action'] == 'close'):
+                domotics_server_helper.close_blinds(Room[room])
+            return jsonify({'code': 200, 'message': 'OK'}), 200
+        except Exception as e:
+            logger.error(str(e))
+            return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('Room value not valid')
+        return jsonify({'code': 500, 'message': 'Room value not valid'}), 500
+
+
 if __name__ == '__main__':
     config_helper = Config()
     db_helper = DB(config_helper)
     weather_api_helper = WeatherApi(config_helper)
+    domotics_server_helper = DomoticsServer(config_helper)
 
     startTime = time.time()
 

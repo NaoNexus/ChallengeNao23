@@ -86,16 +86,12 @@ class SolarEdge():
     def input_storage(self):
         self.click_element(ElementsIds.storage_section_xpath, By.XPATH)
         time.sleep(5)
-        min_usage = self.driver.find_element(
-            By.XPATH, ElementsIds.min_self_usage_xpath).get_attribute("value")
-        min_usage_capacity = self.driver.find_element(
-            By.XPATH, ElementsIds.min_self_usage_capacity_xpath).get_attribute("value")
-        if min_usage != 0 and min_usage_capacity != 0:
-            self.input_keys_element(
-                ElementsIds.min_self_usage_xpath, '50', By.XPATH)
-            self.input_keys_element(
-                ElementsIds.min_self_usage_capacity_xpath, '50', By.XPATH)
+        self.input_keys_element(
+            ElementsIds.min_self_usage_xpath, '50', By.XPATH)
+        self.input_keys_element(
+            ElementsIds.min_self_usage_capacity_xpath, '50', By.XPATH)
         self.click_element(ElementsIds.apply_battery_xpath, By.XPATH)
+        time.sleep(5)
         try:
             self.driver.find_element(
                 By.XPATH, ElementsIds.automatic_cabling_xpath).click()
@@ -205,16 +201,16 @@ class ElementsIds:
     autocomplete_panels_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[1]/div[2]/div/div/div/div/div[3]/span/div/span[1]/span[1]/input'
     apply_positioning_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/button[2]'
 
-    min_self_usage_xpath = '/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div[1]/div[2]/div/div/div[1]/div/div/div/div/input'
-    min_self_usage_capacity_xpath = '/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div[2]/div[2]/div/div/div[1]/div/div/div/div/input'
+    min_self_usage_xpath = "//input[@data-testid='min-self-consumption-slider-input']"
+    min_self_usage_capacity_xpath = "//input[@data-testid='min-storage-capacity-slider-input']"
 
-    apply_battery_xpath = '/html/body/div[1]/div[3]/div/div/div/div[2]/div[3]/button'
+    apply_battery_xpath = '/html/body/div[1]/div[3]/div/div/div/div[3]/div[3]/button'
 
     automatic_cabling_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[1]/div[2]/div[1]/div[2]/div/div[1]/fieldset/div/fieldset/div[1]/div[6]/div/div/div/div/div/div[1]/div/span[1]/span[1]/input'
 
     generate_report_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[1]/div[2]/div[1]/div[2]/div/div[2]/div/button[2]'
 
-    report_data_class_name = 'simulation-result-unit-module__simulationResultsValue___tJsDO'
+    report_data_class_name = 'storage-info-item-module__container___yiRLw'
 
     info_section_xpath = "//div[@data-testid='project-info-tab']"
     modelling_section_xpath = "//div[@data-testid='modeling-tab']"
