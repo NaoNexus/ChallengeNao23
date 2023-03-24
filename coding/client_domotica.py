@@ -1,4 +1,5 @@
 from telnetlib import Telnet
+import string
 
 def telnet_client(cmd):
    print(cmd)
@@ -10,8 +11,24 @@ def telnet_client(cmd):
       tn.write(cmd.encode() + '\n'.encode())
 
 
+def telnet_client_status(cmd):
+   print(cmd)
+   
+   host = '192.168.5.6'
+   port = 3001
+
+   with Telnet(host, port) as tn:
+      tn.write(cmd.encode() + '\n'.encode())
+      r = tn.read_some().decode()
+      r = r[r.rfind(' ')+1:r.rfind('\n')]
+      print(r)
+
+
 if __name__ == '__main__':
-   cmd = 'BTN 16074'   
+   cmd = 'GETLOAD 15990'
+   telnet_client_status(cmd)
+
+   cmd = 'LOAD 15990 0'   
    telnet_client(cmd)
     
 #AULA ELETTRONICA
