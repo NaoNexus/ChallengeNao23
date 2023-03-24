@@ -40,7 +40,7 @@ class _SendPopupState extends State<SendPopup> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.cardbgcolor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
@@ -70,11 +70,29 @@ class _SendPopupState extends State<SendPopup> {
                       }
                       return null;
                     },
+                    cursorColor: AppColors.textcolor,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(
+                            color: AppColors.textcolor, width: 1),
                       ),
-                      label: const Text('Number of people in the room'),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(
+                            color: AppColors.textcolor, width: 1),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(
+                            color: AppColors.textcolor, width: 1),
+                      ),
+                      label: const Text(
+                        'Number of people in the room',
+                        style: TextStyle(
+                          color: AppColors.textcolor,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -91,7 +109,7 @@ class _SendPopupState extends State<SendPopup> {
                   const SizedBox(height: 16),
                   TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: AppColors.red.withLightness(0.85),
+                      backgroundColor: AppColors.red,
                       padding: const EdgeInsets.all(16.0),
                       textStyle: const TextStyle(fontSize: 20),
                       shape: RoundedRectangleBorder(
@@ -126,7 +144,7 @@ class _SendPopupState extends State<SendPopup> {
                           showSnackBar(
                             context: context,
                             text: e.toString(),
-                            color: Colors.red,
+                            color: AppColors.red,
                             icon: Icons.error_outline,
                           );
                         }
@@ -134,22 +152,22 @@ class _SendPopupState extends State<SendPopup> {
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Text(
                           'SUBMIT',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.red,
+                            color: AppColors.red.withLightness(0.85),
                             letterSpacing: 1.5,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 8,
                         ),
                         Icon(
                           Icons.cloud_upload_outlined,
-                          color: AppColors.red,
+                          color: AppColors.red.withLightness(0.85),
                         ),
                       ],
                     ),
