@@ -57,6 +57,24 @@
         </message>
     </context>
     <context>
+        <name>behavior_1/behavior.xar:/ApriTapparelle</name>
+        <message>
+            <location filename="behavior_1/behavior.xar" line="0"/>
+            <source>Eseguo subito</source>
+            <comment>Text</comment>
+            <translation type="unfinished">Eseguo subito</translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/ChiudiTapparelle</name>
+        <message>
+            <location filename="behavior_1/behavior.xar" line="0"/>
+            <source>Ci penso io</source>
+            <comment>Text</comment>
+            <translation type="unfinished">Ci penso io</translation>
+        </message>
+    </context>
+    <context>
         <name>behavior_1/behavior.xar:/Lim</name>
         <message>
             <location filename="behavior_1/behavior.xar" line="0"/>
@@ -95,19 +113,17 @@
     <context>
         <name>behavior_1/behavior.xar:/Tapparelle1</name>
         <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
             <source>Eseguo subito</source>
             <comment>Text</comment>
-            <translation type="unfinished">Eseguo subito</translation>
+            <translation type="obsolete">Eseguo subito</translation>
         </message>
     </context>
     <context>
         <name>behavior_1/behavior.xar:/Tapparelle2</name>
         <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
             <source>Ci penso io</source>
             <comment>Text</comment>
-            <translation type="unfinished">Ci penso io</translation>
+            <translation type="obsolete">Ci penso io</translation>
         </message>
     </context>
 </TS>
