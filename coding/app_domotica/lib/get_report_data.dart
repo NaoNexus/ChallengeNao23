@@ -22,7 +22,7 @@ class Report {
   final String id;
   final int co2;
   final double temperature;
-  final int humidity;
+  final double humidity;
   final DateTime date;
   final int internalLight;
   final int externalLight;

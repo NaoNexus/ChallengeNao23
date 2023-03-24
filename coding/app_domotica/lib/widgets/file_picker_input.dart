@@ -42,7 +42,7 @@ class _FilePickerInputState extends State<FilePickerInput> {
                   margin: EdgeInsets.zero,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: AppColors.blue.withLightness(0.85),
+                      color: AppColors.blue,
                     ),
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -53,7 +53,7 @@ class _FilePickerInputState extends State<FilePickerInput> {
                     children: [
                       TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: AppColors.blue.withLightness(0.85),
+                          backgroundColor: AppColors.blue,
                           padding: const EdgeInsets.all(12.0),
                           textStyle: const TextStyle(fontSize: 20),
                         ),
@@ -82,12 +82,12 @@ class _FilePickerInputState extends State<FilePickerInput> {
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             Icon(
                               Icons.insert_drive_file_outlined,
-                              color: AppColors.blue,
+                              color: AppColors.blue.withLightness(0.85),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 8,
                             ),
                             Text(
@@ -95,7 +95,7 @@ class _FilePickerInputState extends State<FilePickerInput> {
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: AppColors.blue,
+                                color: AppColors.blue.withLightness(0.85),
                                 letterSpacing: 1.5,
                               ),
                             ),
@@ -108,17 +108,17 @@ class _FilePickerInputState extends State<FilePickerInput> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.insert_drive_file_outlined,
-                                color: AppColors.blue,
+                                color: AppColors.blue.withLightness(0.85),
                               ),
                               const SizedBox(width: 8),
                               Flexible(
                                 child: Text(
                                   path.basename(state.value!.path),
                                   overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    color: AppColors.blue,
+                                  style: TextStyle(
+                                    color: AppColors.blue.withLightness(0.85),
                                   ),
                                 ),
                               ),
