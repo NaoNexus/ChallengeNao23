@@ -4,14 +4,10 @@ from helpers.logging_helper import logger
 from helpers.solaredge_helper import SolarEdge
 from helpers.speech_recognition_helper import SpeechRecognition
 
-from datetime import datetime
-
 import utilities
 import time
 
 from flask import Flask, request, jsonify
-
-from enum import Enum
 
 app = Flask(__name__)
 solar_edge = None
@@ -42,9 +38,19 @@ def recording_input(Input):
 
                     return jsonify({'code': 200, 'message': 'OK', 'result': speech_recognition.result}), 200
 
-                solar_edge.input(Input, '')
+                result = solar_edge.input(Input, '')
 
-                return jsonify({'code': 200, 'message': 'OK'}), 200
+                json = {'code': 200, 'message': 'OK'}
+
+                if (result != None and result != []):
+                    json['result'] = {
+                        'self_usage': result[0],
+                        'self_usage_batteries': result[1],
+                        'total_capacity': result[2],
+                        'total_power': result[3]
+                    }
+
+                return jsonify(json), 200
             else:
                 logger.error('No file passed')
                 return jsonify({'code': 500, 'message': 'No file was passed'}), 500

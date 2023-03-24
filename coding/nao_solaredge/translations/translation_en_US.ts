@@ -63,6 +63,55 @@
         </message>
     </context>
     <context>
+        <name>behavior_1/behavior.xar:/Animated Say (4)</name>
+        <message>
+            <location filename="behavior_1/behavior.xar" line="0"/>
+            <source>Vuoi aggiungere una societa al progetto?</source>
+            <comment>Text</comment>
+            <translation type="unfinished">Vuoi aggiungere una societa al progetto?</translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/Animated Say (5)</name>
+        <message>
+            <location filename="behavior_1/behavior.xar" line="0"/>
+            <source>In questa schermata disegna la sagoma del tetto su cui installare i pannelli fotovoltaici, avvisami dicendo ho finito quando hai finito</source>
+            <comment>Text</comment>
+            <translation type="unfinished">In questa schermata disegna la sagoma del tetto su cui installare i pannelli fotovoltaici, avvisami dicendo ho finito quando hai finito</translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/Animated Say (6)</name>
+        <message>
+            <location filename="behavior_1/behavior.xar" line="0"/>
+            <source>In questa schermata scelgo e posiziono i pannelli fotovoltaici piu adatti a te. Se il bottone conferma è disabilitato cambia l'orientamento dei pannelli per ottimizzare il loro posizionamento, avvisami quando hai finito</source>
+            <comment>Text</comment>
+            <translation type="unfinished">In questa schermata scelgo e posiziono i pannelli fotovoltaici piu adatti a te. Se il bottone conferma è disabilitato cambia l'orientamento dei pannelli per ottimizzare il loro posizionamento, avvisami quando hai finito</translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/Animated Say (7)</name>
+        <message>
+            <location filename="behavior_1/behavior.xar" line="0"/>
+            <source>In questa sezione selezionerò i parametri di immagazinamento dell'energia piu adatti a te</source>
+            <comment>Text</comment>
+            <translation type="unfinished">In questa sezione selezionerò i parametri di immagazinamento dell'energia piu adatti a te</translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/Animated Say (8)</name>
+        <message>
+            <source>In questa sezione selezionerò i parametri di immagazinamento dell'energia piu adatti a te</source>
+            <comment>Text</comment>
+            <translation type="obsolete">In questa sezione selezionerò i parametri di immagazinamento dell'energia piu adatti a te</translation>
+        </message>
+        <message>
+            <source>Hello</source>
+            <comment>Text</comment>
+            <translation type="vanished">Hello</translation>
+        </message>
+    </context>
+    <context>
         <name>behavior_1/behavior.xar:/NAO question and user answer (1)/Animated Say</name>
         <message>
             <location filename="behavior_1/behavior.xar" line="0"/>
@@ -74,7 +123,25 @@
     <context>
         <name>behavior_1/behavior.xar:/NAO question and user answer (1)/Animated Say (2)</name>
         <message>
-            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
+            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
+            <source></source>
+            <comment>Question text</comment>
+            <translation></translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/NAO question and user answer (10)/Animated Say</name>
+        <message>
+            <location filename="behavior_1/behavior.xar" line="0"/>
+            <source>e stato salvato</source>
+            <comment>Text</comment>
+            <translation type="unfinished">e stato salvato</translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/NAO question and user answer (10)/Animated Say (2)</name>
+        <message>
+            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
             <source></source>
             <comment>Question text</comment>
             <translation></translation>
@@ -92,7 +159,7 @@
     <context>
         <name>behavior_1/behavior.xar:/NAO question and user answer (2)/Animated Say (2)</name>
         <message>
-            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
+            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
             <source></source>
             <comment>Question text</comment>
             <translation></translation>
@@ -110,7 +177,7 @@
     <context>
         <name>behavior_1/behavior.xar:/NAO question and user answer (3)/Animated Say (2)</name>
         <message>
-            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
+            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
             <source></source>
             <comment>Question text</comment>
             <translation></translation>
@@ -128,7 +195,7 @@
     <context>
         <name>behavior_1/behavior.xar:/NAO question and user answer (4)/Animated Say (2)</name>
         <message>
-            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
+            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
             <source></source>
             <comment>Question text</comment>
             <translation></translation>
@@ -146,7 +213,7 @@
     <context>
         <name>behavior_1/behavior.xar:/NAO question and user answer (5)/Animated Say (2)</name>
         <message>
-            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
+            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
             <source></source>
             <comment>Question text</comment>
             <translation></translation>
@@ -164,7 +231,7 @@
     <context>
         <name>behavior_1/behavior.xar:/NAO question and user answer (6)/Animated Say (2)</name>
         <message>
-            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
+            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
             <source></source>
             <comment>Question text</comment>
             <translation></translation>
@@ -182,7 +249,7 @@
     <context>
         <name>behavior_1/behavior.xar:/NAO question and user answer (7)/Animated Say (2)</name>
         <message>
-            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
+            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
             <source></source>
             <comment>Question text</comment>
             <translation></translation>
@@ -200,7 +267,7 @@
     <context>
         <name>behavior_1/behavior.xar:/NAO question and user answer (8)/Animated Say (2)</name>
         <message>
-            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
+            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
             <source></source>
             <comment>Question text</comment>
             <translation></translation>
@@ -218,7 +285,7 @@
     <context>
         <name>behavior_1/behavior.xar:/NAO question and user answer (9)/Animated Say (2)</name>
         <message>
-            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
+            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
             <source></source>
             <comment>Question text</comment>
             <translation></translation>
@@ -246,7 +313,7 @@
             <translation type="obsolete">Hello</translation>
         </message>
         <message>
-            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
+            <location filename="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../Program Files (x86)/Softbank Robotics/Choregraphe Suite 2.8/translations/behavior_1/behavior.xar" line="0"/>
             <source></source>
             <comment>Question text</comment>
             <translation></translation>
@@ -258,33 +325,6 @@
             <source>Hello</source>
             <comment>Text</comment>
             <translation type="vanished">Hello</translation>
-        </message>
-    </context>
-    <context>
-        <name>behavior_1/behavior.xar:/Animated Say (4)</name>
-        <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
-            <source>Vuoi aggiungere una societa al progetto?</source>
-            <comment>Text</comment>
-            <translation type="unfinished">Vuoi aggiungere una societa al progetto?</translation>
-        </message>
-    </context>
-    <context>
-        <name>behavior_1/behavior.xar:/NAO question and user answer (10)/Animated Say (2)</name>
-        <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
-            <source></source>
-            <comment>Question text</comment>
-            <translation type="unfinished"></translation>
-        </message>
-    </context>
-    <context>
-        <name>behavior_1/behavior.xar:/NAO question and user answer (10)/Animated Say</name>
-        <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
-            <source>e stato salvato</source>
-            <comment>Text</comment>
-            <translation type="unfinished">e stato salvato</translation>
         </message>
     </context>
 </TS>
