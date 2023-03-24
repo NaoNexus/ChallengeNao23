@@ -232,7 +232,7 @@ class MyClass(GeneratedClass):
             mese = "dicembre"
 
 
-        output = " è arrivato un nuovo report per i dati ambientali della stanza alle" + ora + "e" + min + "minuti del" + giorno + "di" + mese + "del" + anno +" I dati rilevano una temperatura di " + Temp + " gradi, CO2 pari a " + CO2 + " parti per milione, e un umidità pari al " + Umi + " per cento"
+        output = " è arrivato un nuovo report per i dati ambientali della stanza alle" + ora + "e" + min + "minuti del" + giorno + "di" + mese + "del" + anno +". I dati rilevano una temperatura di " + Temp + " gradi, CO2 pari a " + CO2 + " parti per milione, e un umidità pari al " + Umi + " per cento."
 
         #finestre di dialogo
 
@@ -240,7 +240,7 @@ class MyClass(GeneratedClass):
 
         TempLow = (" Ma voi umani non sentite il freddo? Ci sono" + Temp + " gradi, accendo il riscalda-mento che se no ci congeliamo tutti.")
 
-        CO2s = (" Cè troppa CO2," + CO2 + " parti per milione non fanno ossigenare abbastanza il cervello di voi umani. Vi apro le tapparelle, aprite le finsetre.")
+        CO2s = (" Cè troppa CO2," + CO2 + " parti per milione non fanno ossigenare abbastanza il cervello di voi umani. Vi apro le tapparelle, aprite le finestre.")
 
         UmiHigh = (" Cè tanta umidità in questa stanza. È sopra il " + Umi + " percento. Meglio aprire le finestre, se no si potrebbero rovinare le pareti con muffe o macchie.")
 
@@ -299,7 +299,7 @@ class MyClass(GeneratedClass):
         else:
             self.onBlindsOpen()
 
-        if int(ExtLight) < 2500 and int(IntLight) < int(ExtLight):
+        if int(ExtLight) < 2500 and int(IntLight) < 300:
             output = output + LowLight
             self.onBlindsClose()
             self.onLights()
@@ -464,7 +464,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Enable word spotting" inherits_from_parent="0" content_type="0" value="0" default_value="0" tooltip="If this option is not activated the robot will only understand exact expressions. If it is, he will spot the exact expressions even in the middle of a sentence.&#x0A;&#x0A;!!Warning!! This option is only available with the speech recognition module using Nuance (ie in Atom version of the robot)." id="9" />
               <Resource name="Speech recognition" type="Lock" timeout="0" />
             </Box>
-            <Box name="Switch Case" id="6" localization="8" tooltip="Test input value and stimulate the output matching to this value. If there is no&#x0A;matching output, the default output (onDefault) is stimulated.&#x0A;&#x0A;You can edit a case by left double-clicking on the line. You can add a&#x0A;case by right clicking on a line and selecting &apos;Insert a row&apos;. You can delete&#x0A;a case by right clicking on a line and selecting &apos;Remove a row&apos;." plugin="dispatcher_plugin" x="340" y="361">
+            <Box name="Switch Case" id="6" localization="8" tooltip="Test input value and stimulate the output matching to this value. If there is no&#x0A;matching output, the default output (onDefault) is stimulated.&#x0A;&#x0A;You can edit a case by left double-clicking on the line. You can add a&#x0A;case by right clicking on a line and selecting &apos;Insert a row&apos;. You can delete&#x0A;a case by right clicking on a line and selecting &apos;Remove a row&apos;." plugin="dispatcher_plugin" x="323" y="351">
               <bitmap>media/images/box/interaction/choice.png</bitmap>
               <script language="4">
                 <content>
@@ -1186,7 +1186,6 @@ class MyClass(GeneratedClass):
               <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" />
               <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" />
             </Box>
-            <Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="2" />
             <Link inputowner="3" indexofinput="2" outputowner="1" indexofoutput="5" />
             <Link inputowner="4" indexofinput="2" outputowner="3" indexofoutput="4" />
             <Link inputowner="6" indexofinput="2" outputowner="5" indexofoutput="5" />
@@ -1219,6 +1218,8 @@ class MyClass(GeneratedClass):
             <Link inputowner="5" indexofinput="2" outputowner="6" indexofoutput="13" />
             <Link inputowner="5" indexofinput="2" outputowner="6" indexofoutput="14" />
             <Link inputowner="1" indexofinput="2" outputowner="4" indexofoutput="4" />
+            <Link inputowner="5" indexofinput="2" outputowner="2" indexofoutput="5" />
+            <Link inputowner="5" indexofinput="2" outputowner="0" indexofoutput="2" />
           </Diagram>
         </BehaviorKeyframe>
       </BehaviorLayer>
