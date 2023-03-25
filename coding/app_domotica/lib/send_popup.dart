@@ -9,19 +9,18 @@ import 'dart:io';
 import 'package:co2_sensor_app/api.dart';
 
 class SendPopup extends StatefulWidget {
-  const SendPopup({super.key});
+  const SendPopup({super.key, required this.api});
+
+  final Api api;
 
   @override
   State<SendPopup> createState() => _SendPopupState();
 }
 
 class _SendPopupState extends State<SendPopup> {
-  final String _ip = '192.168.0.150';
-  final int _port = 5000;
-
   File? _pdf;
 
-  final environmentSensors = EnvironmentSensors();
+  final _environmentSensors = EnvironmentSensors();
 
   final TextEditingController _nPeopleController = TextEditingController();
 
@@ -118,16 +117,15 @@ class _SendPopupState extends State<SendPopup> {
                     ),
                     onPressed: () async {
                       double light = 0;
-                      if (await environmentSensors
+                      if (await _environmentSensors
                           .getSensorAvailable(SensorType.Light)) {
-                        light = await environmentSensors.light.first;
+                        light = await _environmentSensors.light.first;
                       }
                       if (context.mounted) {
                         if (!_formKey.currentState!.validate()) return;
-                        Api appApi = Api(ip: _ip, port: _port);
 
                         try {
-                          appApi.postFile(
+                          widget.api.postFile(
                               context,
                               _pdf!.path,
                               int.parse(_nPeopleController.text),
@@ -135,7 +133,7 @@ class _SendPopupState extends State<SendPopup> {
                           showSnackBar(
                             context: context,
                             text:
-                                'Sent to ip: $_ip on port: $_port  light $light',
+                                'Sent to ip: ${widget.api.ip} on port: ${widget.api.port}  light $light',
                             color: Colors.green,
                             icon: Icons.check,
                           );

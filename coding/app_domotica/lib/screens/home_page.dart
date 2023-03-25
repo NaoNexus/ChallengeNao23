@@ -1,12 +1,14 @@
+import 'package:co2_sensor_app/api.dart';
+import 'package:co2_sensor_app/report.dart';
 import 'package:environment_sensors/environment_sensors.dart';
 import 'package:co2_sensor_app/app_colors.dart';
 import 'package:co2_sensor_app/send_popup.dart';
 import 'package:flutter/material.dart';
 
-import '../get_report_data.dart';
-
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.api});
+
+  final Api api;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -30,7 +32,9 @@ class _HomePageState extends State<HomePage> {
             showDialog(
               context: context,
               barrierDismissible: true,
-              builder: (context) => const SendPopup(),
+              builder: (context) => SendPopup(
+                api: widget.api,
+              ),
             );
           },
           backgroundColor: AppColors.orange,
@@ -39,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Center(
           child: FutureBuilder<List<Report>>(
-            future: getReports(),
+            future: widget.api.getReports(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListView(
