@@ -57,6 +57,16 @@ class DomoticsServer:
         for light in lights:
             self.send_light_command(f'{light} {command}')
 
+    def get_lights_status(self, room: Room):
+        if (room == Room.robotics):
+            lights = ['15990', '15991']
+        elif (room == Room.it):
+            lights = ['15992', '15993']
+        elif (room == Room.quinta_ssa):
+            lights = ['15986', '15987']
+
+        return 'ON' if float(self.get_status(lights[0])) != 0 else 'OFF'
+
     def switch_lim(self, room: Room):
         if (room == Room.robotics):
             lim = '19604'
@@ -71,6 +81,16 @@ class DomoticsServer:
             command = '0'
 
         self.send_light_command(f'{lim} {command}')
+
+    def get_lights_status(self, room: Room):
+        if (room == Room.robotics):
+            lim = '19604'
+        elif (room == Room.it):
+            lim = '19605'
+        elif (room == Room.quinta_ssa):
+            lim = '19602'
+
+        return 'ON' if float(self.get_status(lim)) != 0 else 'OFF'
 
     def open_blinds(self, room: Room):
         if (room == Room.robotics):
