@@ -34,7 +34,7 @@ class DomoticsServer:
             logger.info(f'Telnet response: {response}')
             return response
 
-    def send_blind_command(self, command):
+    def send_button_command(self, command):
         with Telnet(self.ip, self.port) as tn:
             tn.write((f'BTN {command}\n').encode())
             response = tn.read_some().decode()
@@ -100,7 +100,7 @@ class DomoticsServer:
         elif (room == Room.quinta_ssa):
             blind = '16052'
 
-        self.send_blind_command(blind)
+        self.send_button_command(blind)
 
     def close_blinds(self, room: Room):
         if (room == Room.robotics):
@@ -110,4 +110,14 @@ class DomoticsServer:
         elif (room == Room.quinta_ssa):
             blind = '16056'
 
-        self.send_blind_command(blind)
+        self.send_button_command(blind)
+
+    def switch_temp(self, room: Room):
+        if (room == Room.robotics):
+            blind = '16074'
+        elif (room == Room.it):
+            blind = '16084'
+        elif (room == Room.quinta_ssa):
+            blind = '16054'
+
+        self.send_button_command(blind)
