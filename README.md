@@ -8,14 +8,6 @@ Ogni anno il tema della NaoChallenge viene cambiato, tuttavia esso ha come scopo
 
 Il team NaoNexus si è particolarmente concentrato sui temi dell'energia pulita e accessibile e l'agire per il clima. 
 
-### Requisiti
-
-- Video descrittivo del progetto (durata max 5 min)
-- Logo e brand identity
-- Sito web
-- Report scientifico-tecnico
-- Software utilizzato per la realizzazione del progetto
-
 ### Progetto
 
 Il team NaoNexus si è impegnato per creare un progetto innovativo collaborando con l'azienda Amperia, la quale usa tecnologie in grado di rendere le infrastrutture ecosostenibili. 
