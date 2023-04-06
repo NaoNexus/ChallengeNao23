@@ -51,6 +51,7 @@ def report_screen(id):
 # Api calls
 # Reports calls
 
+
 @app.route('/api/info', methods=['GET'])
 def info():
     return jsonify({'code': 200, 'status': 'online', 'elapsed time': utilities.getElapsedTime(startTime)}), 200
@@ -148,37 +149,39 @@ def reports():
 
 # Domotics calls
 
+
 @app.route('/api/domotics/lights/<room>', methods=['POST', 'GET'])
 def domotics_lights(room):
-        if (room in [room.name for room in Room]):
-            if (request.method == 'GET'):
-                try:
-                    status = domotics_server_helper.get_lights_status(Room[room])
-                    return jsonify({'code': 200, 'message': 'OK', 'status': status}), 200
-                except Exception as e:
-                    logger.error(str(e))
-                    return jsonify({'code': 500, 'message': str(e)}), 500
-            else:
-                try:
-                    domotics_server_helper.switch_lights(Room[room])
-                    return jsonify({'code': 200, 'message': 'OK'}), 200
-                except Exception as e:
-                    logger.error(str(e))
-                    return jsonify({'code': 500, 'message': str(e)}), 500
+    if (room in [room.name for room in Room]):
+        if (request.method == 'GET'):
+            try:
+                status = domotics_server_helper.get_lights_status(Room[room])
+                return jsonify({'code': 200, 'message': 'OK', 'status': status}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
         else:
-            logger.error('Room value not valid')
-            return jsonify({'code': 500, 'message': 'Room value not valid'}), 500
+            try:
+                domotics_server_helper.switch_lights(Room[room])
+                return jsonify({'code': 200, 'message': 'OK'}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('Room value not valid')
+        return jsonify({'code': 500, 'message': 'Room value not valid'}), 500
+
 
 @app.route('/api/domotics/lim/<room>', methods=['GET', 'POST'])
 def domotics_lim(room):
     if (room in [room.name for room in Room]):
         if (request.method == 'GET'):
-                try:
-                    status = domotics_server_helper.get_lim_status(Room[room])
-                    return jsonify({'code': 200, 'message': 'OK', 'status': status}), 200
-                except Exception as e:
-                    logger.error(str(e))
-                    return jsonify({'code': 500, 'message': str(e)}), 500
+            try:
+                status = domotics_server_helper.get_lim_status(Room[room])
+                return jsonify({'code': 200, 'message': 'OK', 'status': status}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
         else:
             try:
                 domotics_server_helper.switch_lim(Room[room])
@@ -190,6 +193,7 @@ def domotics_lim(room):
         logger.error('Room value not valid')
         return jsonify({'code': 500, 'message': 'Room value not valid'}), 500
 
+
 @app.route('/api/domotics/blinds/<room>', methods=['POST'])
 def domotics_blinds(room):
     if (room in [room.name for room in Room]):
@@ -198,6 +202,20 @@ def domotics_blinds(room):
                 domotics_server_helper.open_blinds(Room[room])
             elif (request.args['action'] == 'close'):
                 domotics_server_helper.close_blinds(Room[room])
+            return jsonify({'code': 200, 'message': 'OK'}), 200
+        except Exception as e:
+            logger.error(str(e))
+            return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('Room value not valid')
+        return jsonify({'code': 500, 'message': 'Room value not valid'}), 500
+
+
+@app.route('/api/domotics/thermo/<room>', methods=['POST'])
+def domotics_thermostat(room):
+    if (room in [room.name for room in Room]):
+        try:
+            domotics_server_helper.switch_temp(Room[room])
             return jsonify({'code': 200, 'message': 'OK'}), 200
         except Exception as e:
             logger.error(str(e))

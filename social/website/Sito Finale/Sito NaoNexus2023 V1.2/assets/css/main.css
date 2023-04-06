@@ -2054,6 +2054,18 @@ input, select, textarea {
 				border-top: solid 2px #e5e5e5;
 			}
 
+
+
+		.center {
+			margin: 0;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			-ms-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+		  }
+
+
 /* Button */
 
 	input[type="button"],
@@ -2078,7 +2090,7 @@ input, select, textarea {
 		-webkit-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
 		-ms-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
 		transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
-	}
+		}
 
 		input[type="button"]:hover,
 		input[type="submit"]:hover,
