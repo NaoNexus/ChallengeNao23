@@ -4,60 +4,57 @@
 
 ## NAO Challenge 2023
 
-Ogni anno il tema della NaoChallenge viene cambiato, tuttavia esso ha come scopo usare la robotica come mezzo per risolvere problematiche attuali. Questa edizione si fonda sulla sostenibilità e in particolare sui punti descritti dall'Agenda 2030 per lo Sviluppo Sostenibile. 
+Every year the theme of the NaoChallenge is changed, however its goal is to use robotics as a means to solve current issues. This edition is based on sustainability and in particular on the points described in the 2030 Agenda for Sustainable Development.
 
-Il team NaoNexus si è particolarmente concentrato sui temi dell'energia pulita e accessibile e l'agire per il clima. 
+The NaoNexus team has focused particularly on the themes of clean and accessible energy and acting for the climate.
 
-### Progetto
+### Project
 
-Il team NaoNexus si è impegnato per creare un progetto innovativo collaborando con l'azienda Amperia, la quale usa tecnologie in grado di rendere le infrastrutture ecosostenibili. 
+The NaoNexus team committed to creating an innovative project by collaborating with the company Amperia, which uses technologies capable of making infrastructures eco-friendly. The synergy between the team and the company led to the creation of a system that can measure CO2 levels, humidity, temperature, and light through a sensor, which are then sent to NAO. Connected to the environment's home automation, the robot can act on systems such as shutters, lights, and thermostats, ensuring ideal living conditions continuously.
 
-La sinergia tra il team e l'azienda ha permesso di creare un sistema in grado di misurare attraverso un sensore i livelli di CO2, umidità, temperatura e luce i quali vengono poi inviati all'umanoide NAO. Essendo collegato alla domotica dell'ambiente analizzato, il robot è in grado di agire su sistemi come tapparelle, luci e termostato, garantendo condizioni di vita ideali continuamente.
-
-Inoltre NAO è in grado di fungere da consulente ambientale tramita l'utlizzo della piattaforma Solaredge, mostrando all'utente i cambiamenti da apportare all'infrastuttura per abbassare l'impatto ambientale, piantando per esempio alberi o installando pannelli solari. 
+Moreover, NAO can act as an environmental consultant through the use of the Solaredge platform, showing the user changes to make to the infrastructure in order to reduce its environmental impact, such as planting trees or installing solar panels.
 
 
-## Cartelle progetto - coding
+## Project folder - coding
 
-### Cartella app_domotica
+### Folder app_domotica
 
-La cartella [app_domotica](https://github.com/NaoNexus/ChallengeNao23/tree/main/coding/app_domotica) contiene il codice che ha permesso la creazione dell'app di domotica, attraverso la quale l'utente visualizza i livelli di umidità, luminosità, CO2 e temperatura di un determinato ambiente, tenendolo sempre sotto conctrollo.  
+The folder [app_domotica](https://github.com/NaoNexus/ChallengeNao23/tree/main/coding/app_domotica) contains the code of the domotics app, through which the user can view the humidity, luminosity, CO2 and temperature levels of a specific environment, keeping it constantly controlled. 
 
-### Cartella nao_domotica
+### Folder nao_domotica
 
-La cartella [nao_domotica](https://github.com/NaoNexus/ChallengeNao23/tree/main/coding/nao_domotica) presenta al suo interno i possibili dialoghi, comportamenti e interazioni che NAO è tenuto a effettuare durante l'interazione con l'utente per la regolazione dei parametri precedentemente esposti all'interno di una stanza o infrastruttura.
+The folder [nao_domotica](https://github.com/NaoNexus/ChallengeNao23/tree/main/coding/nao_domotica) contains the possible dialogues and behaviors that NAO is required to perform during an interaction with the user in order to regulate the parameters previously mentioned within a room or infrastructure.
 
-### Cartella server_domotica
+### Folder server_domotica
 
-La cartella [server_domotica](https://github.com/NaoNexus/ChallengeNao23/tree/main/coding/server_domotica) ha al suo interno l'algoritmo che permette di connettersi al server della domotica della scuola per effettuare richieste riguardanti le azioni da compiere in base ai valori raccolti tramite il sensore usato ed elaborati con l'umanoide.
+The folder [server_domotica](https://github.com/NaoNexus/ChallengeNao23/tree/main/coding/server_domotica) contains the algorithm that allows the connection to the school's domotics server to make requests regarding actions to be taken, which are based on the values collected through the sensor and then processed by the humanoid.
+### Folder nao_solaredge
 
-### Cartella nao_solaredge
+The folder [nao_solaredge](https://github.com/NaoNexus/ChallengeNao23/tree/main/coding/nao_solaredge) contains the dialogues and actions that NAO elaborates based on the requests of the user who wants to interact with the Solaredge platform, which is used for environmental consultancy.
 
-La cartella [nao_solaredge](https://github.com/NaoNexus/ChallengeNao23/tree/main/coding/nao_solaredge) contiene i dialoghi e azioni che NAO effettua in base alle richieste dell'utente che si vuole interfacciare con la piattaforma Solaredge, usata per una consulenza ambientale.
+### Folder server_solaredge
 
-### Cartella server_solaredge
+The folder [server_solaredge](https://github.com/NaoNexus/ChallengeNao23/tree/main/coding/server_solaredge) contains the code that allows the connection to the Solaredge platform through which is possible to make several requests, it will then return as a result the possible modifications and installations that can be made to the selected environment.
 
-La cartella [server_solaredge](https://github.com/NaoNexus/ChallengeNao23/tree/main/coding/server_solaredge) contiene il codice attraverso il quale ci si può connettere alla piattaforma Solaredge e inviare eventuali richieste, essa restituirà poi come risultato le possibili modifiche e installazioni apportabili all'ambiente selezionato.
+## Folder Social
 
-## Cartella Social
+### Folder green_nao
 
-### Cartella green_nao
+The folder [green_nao](https://github.com/NaoNexus/ChallengeNao23/tree/main/social/green_nao) contains the texts and behaviors that NAO adopts to present the episodes of the GreenNao section. Its aim is to highlight the major eco-sustainable infrastructures and organizations in the Verona territory in a fun and innovative way.
 
-La cartella [green_nao](https://github.com/NaoNexus/ChallengeNao23/tree/main/social/green_nao) presenta al suo interno i testi e i comportamenti che NAO assume per l'esposizione degli episodi della rubrica GreenNao. Essa ha lo scopo di evidenziare quelle che sono le maggiori infrastruttre e organizzazioni eco-sostenibili dell'ambiente veronese in maniera divertente ed innovativa.
+### Folder website
 
-### Cartella website
+The folder [website](https://github.com/NaoNexus/ChallengeNao23/tree/main/social/website/Sito%20Finale/Sito%20NaoNexus2023%20V1.2) contains the code of the NaoNexus team website, which presents the project and the team in a complete, simple and intuitive way.
 
-La cartella [website](https://github.com/NaoNexus/ChallengeNao23/tree/main/social/website/Sito%20Finale/Sito%20NaoNexus2023%20V1.2) contiene il codice necessarrio alla realizzazione del sito del NaoNexus team, il quale presenta il progetto e la squadra in modo completo, semplice ed intuitivo.
-
-## Video
+## Videos
 
 * [Presentazione team]().
 * [Presentazione progetto]().
 
 
-## Autori
+## Authors
 
-Per critiche o nuove idee contattare liberamente:
+Suggest us new ideas at:
 
 * socialnaonexus@gmail.com (NAONEXUS)
 
@@ -67,6 +64,6 @@ Per critiche o nuove idee contattare liberamente:
 * [YouTube](https://www.youtube.com/channel/UCGr9x7Fr44V628GJXwMe4Pg/videos)
 * [GitHub](https://github.com/NaoNexus/ChallengeNao22)
 
-## Licenza
+## License
 
 [GNU](https://www.gnu.org/licenses/gpl-3.0.html)
