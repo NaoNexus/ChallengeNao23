@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Libre+Franklin&family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Montserrat&display=swap');
 @import url("fontawesome-all.min.css");
 
 
@@ -224,6 +224,27 @@ input, select, textarea {
 		font-size: 0.8em;
 	}
 
+/* Work Item */
+
+	.work-item {
+		margin: 0 0 2em 0;
+	}
+
+		.work-item .image {
+			margin: 0 0 1.5em 0;
+		}
+
+		.work-item h3 {
+			font-size: 1em;
+			margin: 0 0 0.5em 0;
+		}
+
+		.work-item p {
+			font-size: 0.8em;
+			line-height: 1.5em;
+			margin: 0;
+		}
+
 /* Container */
 
 	.container {
@@ -271,15 +292,6 @@ input, select, textarea {
 			}
 
 		}
-
-
-	.centered {
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		text-align: center;
-  	}
 
 /* Row */
 
@@ -1810,6 +1822,7 @@ input, select, textarea {
 			margin: 0 0 4em 0;
 		}
 
+
 		.image.left {
 			float: left;
 			margin: 0 2em 2em 0;
@@ -1823,6 +1836,93 @@ input, select, textarea {
 			.image.centered img {
 				margin: 0 auto;
 				width: auto;
+			}
+/* Image */
+
+	.image {
+		border-radius: 0.35em;
+		border: 0;
+		display: inline-block;
+		position: relative;
+	}
+
+	.image:before {
+			-moz-transition: opacity 0.2s ease-in-out;
+			-webkit-transition: opacity 0.2s ease-in-out;
+			-ms-transition: opacity 0.2s ease-in-out;
+			transition: opacity 0.2s ease-in-out;
+			background: url("images/overlay.png");
+			border-radius: 0.35em;
+			content: '';
+			display: block;
+			height: 100%;
+			left: 0;
+			opacity: 0.5;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
+
+		.image.thumb {
+			text-align: center;
+		}
+		
+
+			.image.thumb:hover:after {
+				opacity: 1.0;
+			}
+
+			.image.thumb:hover:before {
+				background: url("images/overlay.png"), url("images/overlay.png");
+				opacity: 1.0;
+			}
+
+		.image img {
+			border-radius: 0.35em;
+			display: block;
+		}
+
+		.image.left {
+			float: left;
+			margin: 0 1.5em 1em 0;
+			top: 0.25em;
+		}
+
+		.image.right {
+			float: right;
+			margin: 0 0 1em 1.5em;
+			top: 0.25em;
+		}
+
+		.image.left, .image.right {
+			max-width: 40%;
+		}
+
+			.image.left img, .image.right img {
+				width: 100%;
+			}
+
+		.image.fit {
+			display: block;
+			margin: 0 0 2em 0;
+			width: 100%;
+		}
+
+			.image.fit img {
+				width: 100%;
+			}
+
+		.image.avatar {
+			border-radius: 100%;
+		}
+
+			.image.avatar:before {
+				display: none;
+			}
+
+			.image.avatar img {
+				border-radius: 100%;
+				width: 100%;
 			}
 
 /* List */
@@ -2054,18 +2154,6 @@ input, select, textarea {
 				border-top: solid 2px #e5e5e5;
 			}
 
-
-
-		.center {
-			margin: 0;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			-ms-transform: translate(-50%, -50%);
-			transform: translate(-50%, -50%);
-		  }
-
-
 /* Button */
 
 	input[type="button"],
@@ -2084,13 +2172,12 @@ input, select, textarea {
 		border: 0;
 		cursor: pointer;
 		outline: 0;
-		font-family: "Libre Franklin", sans-serif;
-		font-weight: 700;
+		font-weight: 300;
 		-moz-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
 		-webkit-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
 		-ms-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
 		transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
-		}
+	}
 
 		input[type="button"]:hover,
 		input[type="submit"]:hover,
@@ -2192,6 +2279,28 @@ input, select, textarea {
 		.wrapper.style2 {
 			padding-top: 0;
 		}
+
+/* Work Item */
+
+	.work-item {
+		margin: 0 0 2em 0;
+	}
+
+		.work-item .image {
+			margin: 0 0 1.5em 0;
+		}
+
+		.work-item h3 {
+			font-size: 1em;
+			margin: 0 0 0.5em 0;
+		}
+
+		.work-item p {
+			font-size: 0.8em;
+			line-height: 1.5em;
+			margin: 0;
+		}
+
 
 /* Header */
 
@@ -2642,6 +2751,28 @@ input, select, textarea {
 			.carousel article p {
 				text-align: center;
 			}
+
+/* Touch */
+
+	body.is-touch .image.thumb:before {
+		opacity: 0.5 !important;
+	}
+
+	body.is-touch .image.thumb:after {
+		display: none !important;
+	}
+
+	body.is-touch #header {
+		background-attachment: scroll;
+		background-size: auto, cover;
+	}
+
+	body.is-touch .poptrox-popup .nav-next,
+	body.is-touch .poptrox-popup .nav-previous,
+	body.is-touch .poptrox-popup .closer {
+		opacity: 1.0 !important;
+	}
+
 
 /* Wide */
 
