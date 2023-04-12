@@ -7,13 +7,6 @@
 \usepackage{float}
 \usepackage{hyperref}
 
-% --TODO--
-% - Review all document
-% - Fit the text into 7 pages
-% - Add links between sections (eg. when writing of the server in NAO sections)
-% - Check impagination and vspaces
-% - Bibliography, authors and team members
-
 \begin{document}
 
 \title{ \begin{huge}
@@ -24,10 +17,14 @@
 
 \noindent
 \textbf{FOR MORE INFO:} \\
-\\ \textit{Visit our} \address{\hyperref[https://www.naonexus.altervista.org/naochallenge2023/index.html]{website}}
-\\\noindent \textit{View our} \address{\hyperref[https://github.com/NaoNexus/ChallengeNao23]{repository}}
-\noindent
-\textit{Write an email at: }\email{socialnaonexus@gmail.com}
+
+\noindent\textit{Visit our} \href{https://www.naonexus.altervista.org/naochallenge2023/index.html}{website}
+
+
+
+\noindent \textit{View our} \href{https://github.com/NaoNexus/ChallengeNao23}{repository}
+
+\noindent\textit{Write an email at: }\email{socialnaonexus@gmail.com}
 
 \bigskip
 
@@ -123,7 +120,7 @@ NAO is the central point of the project. It is connected to the \hyperref[sec:do
 The central point where all the data of the project is managed, this is a complex part written in Python that \hyperref[sec:domotics_pdf_analysis]{analyses PDFs}, adds missing information, hosts a \hyperref[sec:domotics_web_app]{Web App} that views and manage data and hosts a \hyperref[sec:domotics_rest_api]{Rest API} to connect all the clients like the \hyperref[sec:domotics_app]{mobile app} and \hyperref[sec:domotics_nao]{NAO}. The initial idea was to run this server on NAO but the latest software versions removed the ability to \emph{root} the robot and install Python packages, it was later decided to run this server on a \emph{Raspberry PI} with a \emph{fixed IP} to make it accessible to every client on the network.
 
 \subsubsection{Web App}\label{sec:domotics_web_app}
-An important part of the server is the web app that it hosts: the HTML pages are populated with \hyperref[https://jinja.palletsprojects.com/en/3.1.x/]{Jinja} and are sent using \hyperref[https://flask.palletsprojects.com/en/2.2.x/]{Flask}. This library is responsible of running the \hyperref[sec:domotics_rest_api]{Rest server} that provides data in \emph{JSON} format. In this web app the data of the reports is viewable with a \emph{graph} or as a \emph{list}, every report is \emph{editable} and \emph{deletable} and it is possible to \emph{add new reports}. 
+An important part of the server is the web app that it hosts: the HTML pages are populated with \href{https://jinja.palletsprojects.com/en/3.1.x/}{Jinja} and are sent using \href{https://flask.palletsprojects.com/en/2.2.x/}{Flask}. This library is responsible of running the \hyperref[sec:domotics_rest_api]{Rest server} that provides data in \emph{JSON} format. In this web app the data of the reports is viewable with a \emph{graph} or as a \emph{list}, every report is \emph{editable} and \emph{deletable} and it is possible to \emph{add new reports}. 
 
 \begin{figure}[H]
     \centering
@@ -134,8 +131,8 @@ An important part of the server is the web app that it hosts: the HTML pages are
 
 \vspace{8pt}
 \subsubsection{Rest API}\label{sec:domotics_rest_api}
-\textit{The documentation for the API can be found \hyperref[https://naonexus.notion.site/Domotics-server-22721767d69a43a6badeafcaf546b3d2]{here}.}\\
-\\The Rest API facilitates the exchange of data between all the connected clients, which are then sent via \emph{JSON} using \emph{HTTP} and are accessible through multiple endpoints. This rest server is written in \hyperref[https://flask.palletsprojects.com/en/2.2.x/]{Flask} as the \hyperref[sec:domotics_web_app]{App}.
+\textit{The documentation for the API can be found \href{https://naonexus.notion.site/Domotics-server-22721767d69a43a6badeafcaf546b3d2}{here}.}\\
+\\The Rest API facilitates the exchange of data between all the connected clients, which are then sent via \emph{JSON} using \emph{HTTP} and are accessible through multiple endpoints. This rest server is written in \hyperref{https://flask.palletsprojects.com/en/2.2.x/}{Flask} as the \hyperref[sec:domotics_web_app]{App}.
 
 \begin{figure}[H]
     \centering
@@ -146,7 +143,7 @@ An important part of the server is the web app that it hosts: the HTML pages are
 
 \vspace{8pt}
 \subsubsection{PDF Analysis}\label{sec:domotics_pdf_analysis}
-In order to analyse the PDF it was necessary to use the \hyperref[https://pypdf2.readthedocs.io/en/3.0.0/]{pyPDF2} library, which allowed the conversion of the file created by the \hyperref[sec:domotics_sensor]{CO2 sensor} into a string. The parameters were difficult to individuate but after removing \emph{spaces} and \emph{line breaks} the program was able to find useful values by searching for \emph{keywords} allocated in specific points of the PDF. In this way it is possible to extract various data from the PDF like: date of the measurement, CO2, temperature and humidity.
+In order to analyse the PDF it was necessary to use the \href{https://pypdf2.readthedocs.io/en/3.0.0/}{pyPDF2} library, which allowed the conversion of the file created by the \hyperref[sec:domotics_sensor]{CO2 sensor} into a string. The parameters were difficult to individuate but after removing \emph{spaces} and \emph{line breaks} the program was able to find useful values by searching for \emph{keywords} allocated in specific points of the PDF. In this way it is possible to extract various data from the PDF like: date of the measurement, CO2, temperature and humidity.
 
 \vspace{8pt}
 \subsubsection{Domotics control}\label{sec:domotics_domotics_server}
@@ -154,7 +151,7 @@ To control the lights the server was connected via \emph{Telnet} to the domotics
 
 \vspace{8pt}
 \subsubsection{External light analysis}
-The measurements of the internal light is retrieved from the \hyperref[sec:domotics_sensor]{sensor} but the external sunlight cannot be measured by the app. The first idea was to add an \emph{Arduino} sensor externally, this couldn't be applied to every possible situation and building. The solution was to call an external API (\hyperref[https://open-meteo.com/]{Open meteo}), this API returns solar irradiance in $\frac{W}{m^2}$ that is then converted in $lux$ by the server. 
+The measurements of the internal light is retrieved from the \hyperref[sec:domotics_sensor]{sensor} but the external sunlight cannot be measured by the app. The first idea was to add an \emph{Arduino} sensor externally, this couldn't be applied to every possible situation and building. The solution was to call an external API (\href{https://open-meteo.com/}{Open meteo}), this API returns solar irradiance in $\frac{W}{m^2}$ that is then converted in $lux$ by the server. 
 
 \bigskip 
 \section{NAO AS A GUIDE TO SOLAREDGE}\label{sec:solaredge_project}
@@ -178,23 +175,23 @@ NAO is an essential part of this project, it handles the interaction with the cu
 
 \vspace{12pt}
 \subsection{HTTP Server}\label{sec:solaedge_server}
-The central point where all the data of the project are stored, this is a complex part written in Python that communicates with NAO receiving voice registration. It then \hyperref[sec:solaredge_voice_recognition]{analyse these registrations} by extracting the transcription that are \hyperref[sec:solaredge_website_control]{inserted in Solaredge website}. It includes various static and dynamic endpoints to manage data and is written using \hyperref[https://flask.palletsprojects.com/en/2.2.x/]{Flask}. Similarly to the other project the \hyperref[sec:solaedge_server]{server} isn't run directly on NAO but on an external PC, this makes the code flexible and helps the user to adjust the inserted data and access the website.
+The central point where all the data of the project are stored, this is a complex part written in Python that communicates with NAO receiving voice registration. It then \hyperref[sec:solaredge_voice_recognition]{analyse these registrations} by extracting the transcription that are \hyperref[sec:solaredge_website_control]{inserted in Solaredge website}. It includes various static and dynamic endpoints to manage data and is written using \href{https://flask.palletsprojects.com/en/2.2.x/}{Flask}. Similarly to the other project the \hyperref[sec:solaedge_server]{server} isn't run directly on NAO but on an external PC, this makes the code flexible and helps the user to adjust the inserted data and access the website.
 
 \vspace{8pt}
 \subsubsection{Rest API}\label{sec:solaredge_rest_api}
-\textit{The documentation for the API can be found \hyperref[https://naonexus.notion.site/Solaredge-server-1bae2ae87b4d407b82f5a50bbfe3d87c]{here}.}\\
+\textit{The documentation for the API can be found \href{https://naonexus.notion.site/Solaredge-server-1bae2ae87b4d407b82f5a50bbfe3d87c}{here}.}\\
 \\This Rest API manages the traffic of data from NAO to the server and the other way round. It includes various endpoints and uses HTTP protocol, furthermore WAV files registered by NAO are parsed and inserted in Solaredge website.
 
 \vspace{8pt}
 \subsubsection{Voice Recognition}\label{sec:solaredge_voice_recognition}
-The transcription of the voice is done using Python's library \hyperref[https://pypi.org/project/SpeechRecognition/]{SpeechRecognition}, it uses \emph{Google}'s models and returns a text from an audio file. It is used to transform NAO's registrations into text to be entered in the website. The audio file given to this library presents two channels that include the \emph{right} and \emph{left} microphones of NAO.
+The transcription of the voice is done using Python's library \href{https://pypi.org/project/SpeechRecognition/}{SpeechRecognition}, it uses \emph{Google}'s models and returns a text from an audio file. It is used to transform NAO's registrations into text to be entered in the website. The audio file given to this library presents two channels that include the \emph{right} and \emph{left} microphones of NAO.
 
 \vspace{8pt}
 \subsubsection{Solaredge website Control}\label{sec:solaredge_website_control}
-\hyperref[https://www.selenium.dev/documentation/]{Selenium} is a Python library containing numerous instructions that allow for a direct interaction with a local browser of choice. This tool can scour through the HTML code of a website and, in doing so, finding, selecting and interacting with specific graphic elements within the code itself (such as textboxes, lists, links etc.). It \emph{automatizes} both the \emph{extraction} and \emph{importation} of the data, optimizing the process and making it more efficient. This library is fundamental in inserting the parsed questions extracted from the dialogue between \hyperref[sec:solaredge_nao]{NAO} and the customer.
+\href{https://www.selenium.dev/documentation/}{Selenium} is a Python library containing numerous instructions that allow for a direct interaction with a local browser of choice. This tool can scour through the HTML code of a website and, in doing so, finding, selecting and interacting with specific graphic elements within the code itself (such as textboxes, lists, links etc.). It \emph{automatizes} both the \emph{extraction} and \emph{importation} of the data, optimizing the process and making it more efficient. This library is fundamental in inserting the parsed questions extracted from the dialogue between \hyperref[sec:solaredge_nao]{NAO} and the customer.
 
 \section{Team and Authors}\label{sec:team_authors}
-The NaoNexus team is divided in two sections: \emph{coding} and \emph{social}. The components who worked on the social part of the project made sure to represent the NaoNexus experience at its best, creating and posting new content everyday in order to highlight the major progresses made by the group during these months. The social sub-team had a key role in presenting the project with videos, pictures, reels and \hyperref[https://www.tiktok.com/@naonexus]{TikToks} to post on our socials and the Naonexus \hyperref[https://www.naonexus.altervista.org]{website}.
+The NaoNexus team is divided in two sections: \emph{coding} and \emph{social}. The components who worked on the social part of the project made sure to represent the NaoNexus experience at its best, creating and posting new content everyday in order to highlight the major progresses made by the group during these months. The social sub-team had a key role in presenting the project with videos, pictures, reels and \href{https://www.tiktok.com/@naonexus}{TikToks} to post on our socials and the Naonexus \href{https://www.naonexus.altervista.org}{website}.
 
 \bigskip
 \noindent
@@ -213,7 +210,7 @@ The coding division took care of the robotics project per se, developing the cod
 \subsection{SOCIAL DIVISION}
 
 \noindent\emph{Alberto Rubini - Team Leader}\\
-\emph{Davide Masini - Mascotte}\\
+\emph{Davide Masini}\\
 \emph{Antonio Galati}\\
 \emph{Arianna Antonelli}\\
 
@@ -221,7 +218,7 @@ The coding division took care of the robotics project per se, developing the cod
 \begin{figure}[b]
     \centering
     \includegraphics[scale=0.04]{figures/logo.png}
-    \label{fig:logo_con_scritta}
+    \label{fig:logo_con_scritta1}
 \end{figure}
 
 
