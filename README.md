@@ -44,7 +44,7 @@ The folder [green_nao](https://github.com/NaoNexus/ChallengeNao23/tree/main/soci
 
 ### Folder website
 
-The folder [website](https://github.com/NaoNexus/ChallengeNao23/tree/main/social/website/Sito%20Finale/Sito%20NaoNexus2023%20V1.2) contains the code of the NaoNexus team website, which presents the project and the team in a complete, simple and intuitive way.
+The folder [website](https://github.com/NaoNexus/ChallengeNao23/tree/main/social/website/site_main_2023) contains the code of the NaoNexus team website, which presents the project and the team in a complete, simple and intuitive way.
 
 ## Videos
 
