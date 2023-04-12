@@ -49,7 +49,8 @@ The folder [website](https://github.com/NaoNexus/ChallengeNao23/tree/main/social
 ## Videos
 
 * [Presentazione team]().
-* [Presentazione progetto]().
+* [NaoNexus Project 2023](https://www.youtube.com/watch?v=0Ca0xjzlff8).
+* [NaoNexus Proof of Concept 2023](https://www.youtube.com/watch?v=cLdwZzqezmg).
 
 
 ## Authors
