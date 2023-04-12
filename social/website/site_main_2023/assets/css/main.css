@@ -2188,9 +2188,72 @@ input, select, textarea {
 			background: #ef8376;
 		}
 
+
+		
+.pdf-button {
+  position: relative;
+		display: inline-block;
+		background: #df7366;
+		color: #fff;
+		text-align: center;
+		border-radius: 0.5em;
+		text-decoration: none;
+		padding: 0.65em 3em 0.65em 3em;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		border: 0;
+		cursor: pointer;
+		outline: 0;
+		font-weight: 300;
+		-moz-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+		-webkit-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+		-ms-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+		transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+	}
+
+		input[type="button"]:hover,
+		input[type="submit"]:hover,
+		input[type="reset"]:hover,
+		button:hover,
+		.button:hover {
+			color: #fff;
+			background: #fff;
+		}
+
+		@media (max-width: 840px) {
+			.pdf-button {
+			  font-size: 24px;
+			  padding: 20px 40px;
+			  display: block;
+			  width: 100%;
+			}
+		  }
+
+
+		
+
+.pdf-button img {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.pdf-button span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.pdf-button:hover {
+  background-color: #ef8376;
+  color: #fff;
+}
+
 		input[type="button"].alt,
 		input[type="submit"].alt,
 		input[type="reset"].alt,
+		
 		button.alt,
 		.button.alt {
 			background: #2B252C;
@@ -2480,7 +2543,7 @@ input, select, textarea {
 
 				#nav > ul > li > a, #nav > ul > li > span {
 					display: block;
-					color: inherit;
+					color: white;
 					text-decoration: none;
 					border: 0;
 					outline: 0;
