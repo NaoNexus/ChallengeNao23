@@ -1,6 +1,5 @@
 import helpers.config_helper as config_helper
 from utilities import solar_intensity_to_lux, extract_date, extract_date_hour, next_day
-from helpers.logging_helper import logger
 
 import requests
 from datetime import datetime
