@@ -3209,6 +3209,7 @@ input, select, textarea {
 					#navPanel .link.depth-0 {
 						color: #fff;
 						font-weight: 600;
+						text-align: center;
 					}
 
 				#navPanel .indent-1 {
