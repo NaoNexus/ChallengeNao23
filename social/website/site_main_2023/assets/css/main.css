@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Libre+Franklin:wght@700&family=Montserrat&display=swap');
 @import url("fontawesome-all.min.css");
 
 
@@ -109,7 +109,7 @@ input, select, textarea {
 		font-weight: 400;
 		color: #483949;
 		line-height: 1.25em;
-		font-family: 'Libre Franklin ExtraBold', sans-serif;
+		font-family: 'Libre Franklin', sans-serif;
 	}
 
 	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
