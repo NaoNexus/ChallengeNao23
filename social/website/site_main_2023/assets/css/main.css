@@ -2216,8 +2216,8 @@ input, select, textarea {
 		input[type="reset"]:hover,
 		button:hover,
 		.button:hover {
-			color: #ef8376;
-			background: #fff;
+			color: #fff;
+			background: #ef8376;
 		}
 
 		@media (max-width: 840px) {
