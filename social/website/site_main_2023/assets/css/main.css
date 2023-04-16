@@ -107,7 +107,7 @@ input, select, textarea {
 
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: 400;
-		color: #368db3;
+		color: #483949;
 		line-height: 1.25em;
 		font-family: 'Libre Franklin', sans-serif;
 	}
@@ -137,7 +137,7 @@ input, select, textarea {
 
 	strong, b {
 		font-weight: 400;
-		color: #368db3;
+		color: #483949;
 	}
 
 	em, i {
@@ -155,7 +155,7 @@ input, select, textarea {
 	}
 
 		a:hover {
-			color: #e0635f;
+			color: #ef8376;
 			border-bottom-color: transparent;
 		}
 
@@ -1789,7 +1789,6 @@ input, select, textarea {
 			margin: 1em 0 2em 0;
 			line-height: 1.5em;
 			text-align: inherit;
-			color: #368db3;
 		}
 
 	footer {
@@ -2045,7 +2044,7 @@ input, select, textarea {
 			}
 
 				ul.icons li a:hover {
-					color: #e0635f;
+					color: #ef8376;
 				}
 
 /* Form */
@@ -2053,7 +2052,7 @@ input, select, textarea {
 	form label {
 		display: block;
 		font-weight: 400;
-		color: #368db3;
+		color: #483949;
 		margin: 0 0 1em 0;
 	}
 
@@ -2081,7 +2080,7 @@ input, select, textarea {
 		form select:focus,
 		form textarea:focus {
 			background: #fff;
-			border-color: #d9413d;
+			border-color: #df7366;
 		}
 
 	form input[type="text"],
@@ -2164,7 +2163,7 @@ input, select, textarea {
 	.button {
 		position: relative;
 		display: inline-block;
-		background: #d9413d;
+		background: #df7366;
 		color: #fff;
 		text-align: center;
 		border-radius: 0.5em;
@@ -2186,7 +2185,7 @@ input, select, textarea {
 		button:hover,
 		.button:hover {
 			color: #fff;
-			background: #e0635f;
+			background: #ef8376;
 		}
 
 
@@ -2194,7 +2193,7 @@ input, select, textarea {
 .pdf-button {
   position: relative;
 		display: inline-block;
-		background: #d9413d;
+		background: #df7366;
 		color: #fff;
 		text-align: center;
 		border-radius: 0.5em;
@@ -2218,7 +2217,7 @@ input, select, textarea {
 		button:hover,
 		.button:hover {
 			color: #fff;
-			background: #e0635f;
+			background: #ef8376;
 		}
 
 		@media (max-width: 840px) {
@@ -2247,7 +2246,7 @@ input, select, textarea {
 }
 
 .pdf-button:hover {
-  background-color: #e0635f;
+  background-color: #ef8376;
   color: #fff;
 }
 
@@ -2578,7 +2577,7 @@ input, select, textarea {
 			}
 
 			.dropotron li:hover {
-				color: #e0635f;
+				color: #ef8376;
 			}
 
 			.dropotron li a, .dropotron li span {
@@ -2662,7 +2661,7 @@ input, select, textarea {
 		position: relative;
 		overflow: hidden;
 		padding: 6em 0 6em 0;
-		background: #1a2b50;
+		background: #2b252c;
 		color: #fff;
 	}
 
