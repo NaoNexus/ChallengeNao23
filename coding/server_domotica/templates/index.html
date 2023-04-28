@@ -112,7 +112,9 @@
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
         chart.draw(view, options);
-        }function init() {
+        }
+
+        function init() {
             let filter = localStorage.getItem('chartFilter');
             if (!filter) {
                 localStorage.setItem('chartFilter', 'co2');
@@ -202,6 +204,44 @@
         chart.draw(view, options);
         }
     </script>
+    <script type="text/javascript">
+        let room = {{ room }}
+
+        function onRoomSelect(select) {
+            room = select.value
+            window.open('/?room=' + select.value, '_self')
+        }
+
+        function limClick() {
+            fetch('/api/domotics/lim/' + room, {
+                method: 'POST',
+            });
+        }
+
+        function lightsClick() {
+            fetch('/api/domotics/lights/' + room, {
+                method: 'POST',
+            });
+        }
+
+        function blindsUpClick() {
+            fetch('/api/domotics/blinds/' + room + '?action=open', {
+                method: 'POST',
+            });
+        }
+
+        function blindsDownClick() {
+            fetch('/api/domotics/blinds/' + room + '?action=close', {
+                method: 'POST',
+            });
+        }
+
+        function heaterClick() {
+            fetch('/api/domotics/thermo/' + room + '?action=open', {
+                method: 'POST',
+            });
+        }
+    </script>
 </head>
 
 <body class="bg-gradient-to-b from-[#1A2B50] to-[#368DB3]">
@@ -280,38 +320,48 @@
             <h1 class="text-2xl font-medium text-slate-800">DOMOTICS</h1>
             <div class="flex-1"></div>
             <label for="rooms" class="font-medium text-slate-800 align-middle my-auto ml-auto">ROOM</label>
-            <select name="rooms" id="rooms"
-                class="rounded outline-none border-2 border-slate-200 focus:border-sky-500 focus:invalid:border-red-500 invalid:border-red-500 disabled:bg-slate-100">
-                <option value="infoLab">COMPUTER LAB</option>
-                <option value="4ssa">4 SSA</option>
-                <option value="5ssa">5 SSA</option>
-                <option value="languageLab">LANGUAGES LAB</option>
+            <select name="rooms" id="rooms" onchange="onRoomSelect(this)"
+                class="rounded-md outline-none border-2 border-slate-300 focus:border-sky-500 focus:invalid:border-red-500 invalid:border-red-500 disabled:bg-slate-100">
+                <option value="it" {%if room=='it' %}selected{% endif %}>COMPUTER LAB</option>
+                <option value="robotics" {%if room=='robotics' %}selected{% endif %}>ROBOTICS LAB</option>
+                <option value="quinta_ssa" {%if room=='quinta_ssa' %}selected{% endif %}>5 SSA</option>
             </select>
         </div>
 
-        <div class="grid grid-cols-4 gap-2 mt-2 space-x-2">
-            <input class="hidden peer/lights" type="checkbox" id="lights" />
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-2 space-x-2">
+            <input class="hidden peer/lights" type="checkbox" id="lights" {% if light_status=='ON' %}checked{% endif %}
+                onclick="lightsClick()" />
             <label
                 class="flex flex-row justify-center py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/lights:bg-yellow-500 peer-checked/lights:text-white peer-checked/lights:border-yellow-500 transition-all"
                 for="lights">
                 <span class="mdi mdi-lightbulb-outline mr-1"></span>
                 <span>LIGHTS</span>
             </label>
-            <input class="hidden peer/temp" type="checkbox" id="blinds" value="blinds" />
+            <div class="flex flex-row space-x-2">
+                <button type="button" title="Open blinds"
+                    class="hover:bg-sky-500 py-1 px-3 text-xl font-medium border-2 border-slate-300 hover:border-sky-500 hover:text-white text-slate-800 rounded-md transition-all"
+                    onclick="blindsUpClick()">
+                    <span class="mdi mdi-arrow-up"></span>
+                </button>
+                <div
+                    class="flex text-slate-800 bg-slate-200 rounded-md flex-1 h-full py-auto justify-center items-center">
+                    <span class="block text-xl font-medium h-fit">BLINDS</span>
+                </div>
+                <button type="button" title="Open blinds"
+                    class="hover:bg-sky-500 py-1 px-3 text-xl font-medium border-2 border-slate-300 hover:border-sky-500 hover:text-white text-slate-800 rounded-md transition-all"
+                    onclick="blindsDownClick()">
+                    <span class="mdi mdi-arrow-down"></span>
+                </button>
+            </div>
+            <input class="hidden peer/hum" type="checkbox" id="heater" value="heater" onclick="heaterClick()" />
             <label
-                class="flex flex-row justify-center py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/temp:bg-sky-500 peer-checked/temp:text-white peer-checked/temp:border-sky-500 transition-all"
-                for="blinds">
-                <span class="mdi mdi-blinds mr-1"></span>
-                <span>BLINDS</span>
-            </label>
-            <input class="hidden peer/hum" type="checkbox" id="heater" value="heater" />
-            <label
-                class="flex flex-row justify-center py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/hum:bg-red-500 peer-checked/hum:text-white peer-checked/hum:border-red-500 transition-all"
+                class="flex flex-row justify-center py-1 px-3 text-xl font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/hum:bg-red-500 peer-checked/hum:text-white peer-checked/hum:border-red-500 transition-all"
                 for="heater">
                 <span class="mdi mdi-fire mr-1"></span>
                 <span>HEATER</span>
             </label>
-            <input class="hidden peer/lim" type="checkbox" id="lim" value="lim" />
+            <input class="hidden peer/lim" type="checkbox" id="lim" value="lim" {% if lim_status=='ON' %}checked{% endif
+                %} onclick="limClick()" />
             <label
                 class="flex flex-row justify-center py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/lim:bg-green-500 peer-checked/lim:text-white peer-checked/lim:border-green-500 transition-all"
                 for="lim">
