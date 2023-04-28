@@ -82,7 +82,7 @@ class DomoticsServer:
 
         self.send_light_command(f'{lim} {command}')
 
-    def get_lights_status(self, room: Room):
+    def get_lim_status(self, room: Room):
         if (room == Room.robotics):
             lim = '19604'
         elif (room == Room.it):
@@ -114,10 +114,10 @@ class DomoticsServer:
 
     def switch_temp(self, room: Room):
         if (room == Room.robotics):
-            blind = '16074'
+            thermo = '16074'
         elif (room == Room.it):
-            blind = '16084'
+            thermo = '16084'
         elif (room == Room.quinta_ssa):
-            blind = '16054'
+            thermo = '16054'
 
-        self.send_button_command(blind)
+        self.send_button_command(thermo)

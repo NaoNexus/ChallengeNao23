@@ -15,21 +15,29 @@ app = Flask(__name__)
 # Web App calls
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
+    if (request.args.get('room', '') == ''):
+        room = Room.it
+    else:
+        room = Room[request.args['room']]
+
+    light_status = 'ON'#domotics_server_helper.get_lights_status(room)
+    lim_status = 'off'#domotics_server_helper.get_lim_status(room)
+
     reports = db_helper.get_reports()
 
-    return render_template('index.html', reports=reports)
+    return render_template('index.html', reports=reports, room=room.name, light_status=light_status, lim_status=lim_status)
 
 
-@app.route('/reports')
+@app.route('/reports', methods=['GET'])
 def reports_screen():
     reports = db_helper.get_reports()
 
     return render_template('reports.html', reports=reports)
 
 
-@app.route('/new_report')
+@app.route('/new_report', methods=['GET'])
 def new_report_screen():
     report = {'id': '', 'date': '', 'co2': 0, 'temperature': 0,
               'humidity': 0, 'nPeople': 0, 'internalLight': 0, 'externalLight': 0}
