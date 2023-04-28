@@ -260,7 +260,7 @@
                 <input class="hidden peer/co2" type="radio" id="co2" name="chart_radio"
                     onclick="graphSelectionClick(this);" value="co2" />
                 <label
-                    class="flex flex-row py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/co2:bg-sky-500 peer-checked/co2:text-white peer-checked/co2:border-sky-500 transition-all"
+                    class="flex flex-row cursor-pointer py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/co2:bg-sky-500 peer-checked/co2:text-white peer-checked/co2:border-sky-500 hover:bg-sky-100 hover:border-sky-100 transition-all"
                     for="co2">
                     <span class="mdi mdi-molecule-co2 mr-1"></span>
                     <span>CO2</span>
@@ -268,7 +268,7 @@
                 <input class="hidden peer/temp" type="radio" id="temperature" name="chart_radio"
                     onclick="graphSelectionClick(this);" value="temperature" />
                 <label
-                    class="flex flex-row py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/temp:bg-sky-500 peer-checked/temp:text-white peer-checked/temp:border-sky-500 transition-all"
+                    class="flex flex-row cursor-pointer py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/temp:bg-sky-500 peer-checked/temp:text-white peer-checked/temp:border-sky-500 hover:bg-sky-100 hover:border-sky-100 transition-all"
                     for="temperature">
                     <span class="mdi mdi-thermometer mr-1"></span>
                     <span>TEMPERATURE</span>
@@ -276,7 +276,7 @@
                 <input class="hidden peer/hum" type="radio" id="humidity" name="chart_radio"
                     onclick="graphSelectionClick(this);" value="humidity" />
                 <label
-                    class="flex flex-row py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/hum:bg-sky-500 peer-checked/hum:text-white peer-checked/hum:border-sky-500 transition-all"
+                    class="flex flex-row cursor-pointer py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/hum:bg-sky-500 peer-checked/hum:text-white peer-checked/hum:border-sky-500 hover:bg-sky-100 hover:border-sky-100 transition-all"
                     for="humidity">
                     <span class="mdi mdi-water-outline mr-1"></span>
                     <span>HUMIDITY</span>
@@ -284,7 +284,7 @@
                 <input class="hidden peer/nPeople" type="radio" id="nPeople" name="chart_radio"
                     onclick="graphSelectionClick(this);" value="nPeople" />
                 <label
-                    class="flex flex-row py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/nPeople:bg-green-500 peer-checked/nPeople:text-white peer-checked/nPeople:border-green-500 transition-all"
+                    class="flex flex-row cursor-pointer py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/nPeople:bg-green-500 peer-checked/nPeople:text-white peer-checked/nPeople:border-green-500 hover:bg-green-100 hover:border-green-100 transition-all"
                     for="nPeople">
                     <span class="mdi mdi-account-group-outline mr-1"></span>
                     <span>N° PEOPLE</span>
@@ -292,7 +292,7 @@
                 <input class="hidden peer/intLight" type="radio" id="internalLight" name="chart_radio"
                     onclick="graphSelectionClick(this);" value="internalLight" />
                 <label
-                    class="flex flex-row py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/intLight:bg-yellow-500 peer-checked/intLight:text-white peer-checked/intLight:border-yellow-500 transition-all"
+                    class="flex flex-row cursor-pointer py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/intLight:bg-yellow-500 peer-checked/intLight:text-white peer-checked/intLight:border-yellow-500 hover:bg-yellow-100 hover:border-yellow-100 transition-all"
                     for="internalLight">
                     <span class="mdi mdi-lightbulb-outline mr-1"></span>
                     <span>INTERNAL LIGHT</span>
@@ -300,7 +300,7 @@
                 <input class="hidden peer/extLight" type="radio" id="externalLight" name="chart_radio"
                     onclick="graphSelectionClick(this);" value="externalLight" />
                 <label
-                    class="flex flex-row py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/extLight:bg-yellow-500 peer-checked/extLight:text-white peer-checked/extLight:border-yellow-500 transition-all"
+                    class="flex flex-row cursor-pointer py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/extLight:bg-yellow-500 peer-checked/extLight:text-white peer-checked/extLight:border-yellow-500 hover:bg-yellow-100 hover:border-yellow-100 transition-all"
                     for="externalLight">
                     <span class="mdi mdi-weather-sunny mr-1"></span>
                     <span>EXTERNAL LIGHT</span>
@@ -308,10 +308,10 @@
             </div>
         </div>
         <div id="curve_chart" class="w-full h-[500px] rounded-lg overflow-hidden bg-transparent"></div>
-        <a class="flex flex-row space-x-2 mt-10 mx-auto px-4 py-2 w-fit rounded-md font-medium text-white tracking-wider bg-sky-500"
+        <a class="flex flex-row cursor-pointer group/more space-x-2 mt-10 mx-auto px-4 py-2 w-fit rounded-md font-medium text-white tracking-wider bg-sky-500"
             href="/reports">
             MORE
-            <span class="mdi mdi-arrow-right ml-1"></span>
+            <span class="mdi mdi-arrow-right ml-1 group-hover/more:translate-x-1 transition-all"></span>
         </a>
     </div>
     <div class="mx-10 xl:mx-40 my-10 p-10 rounded-xl bg-slate-50 space-y-4">
@@ -332,14 +332,14 @@
             <input class="hidden peer/lights" type="checkbox" id="lights" {% if light_status=='ON' %}checked{% endif %}
                 onclick="lightsClick()" />
             <label
-                class="flex flex-row justify-center py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/lights:bg-yellow-500 peer-checked/lights:text-white peer-checked/lights:border-yellow-500 transition-all"
+                class="flex flex-row cursor-pointer justify-center py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/lights:bg-yellow-500 peer-checked/lights:text-white peer-checked/lights:border-yellow-500 hover:bg-yellow-100 hover:border-yellow-100 transition-all"
                 for="lights">
                 <span class="mdi mdi-lightbulb-outline mr-1"></span>
                 <span>LIGHTS</span>
             </label>
             <div class="flex flex-row space-x-2">
                 <button type="button" title="Open blinds"
-                    class="hover:bg-sky-500 py-1 px-3 text-xl font-medium border-2 border-slate-300 hover:border-sky-500 hover:text-white text-slate-800 rounded-md transition-all"
+                    class="hover:bg-sky-100 py-1 px-3 text-xl font-medium border-2 border-slate-300 hover:border-sky-100 text-slate-800 rounded-md transition-all"
                     onclick="blindsUpClick()">
                     <span class="mdi mdi-arrow-up"></span>
                 </button>
@@ -348,14 +348,14 @@
                     <span class="block text-xl font-medium h-fit">BLINDS</span>
                 </div>
                 <button type="button" title="Open blinds"
-                    class="hover:bg-sky-500 py-1 px-3 text-xl font-medium border-2 border-slate-300 hover:border-sky-500 hover:text-white text-slate-800 rounded-md transition-all"
+                    class="hover:bg-sky-100 py-1 px-3 text-xl font-medium border-2 border-slate-300 hover:border-sky-100 text-slate-800 rounded-md transition-all"
                     onclick="blindsDownClick()">
                     <span class="mdi mdi-arrow-down"></span>
                 </button>
             </div>
             <input class="hidden peer/hum" type="checkbox" id="heater" value="heater" onclick="heaterClick()" />
             <label
-                class="flex flex-row justify-center py-1 px-3 text-xl font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/hum:bg-red-500 peer-checked/hum:text-white peer-checked/hum:border-red-500 transition-all"
+                class="flex flex-row cursor-pointer justify-center py-1 px-3 text-xl font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/hum:bg-red-500 peer-checked/hum:text-white peer-checked/hum:border-red-500 hover:bg-red-100 hover:border-red-100 transition-all"
                 for="heater">
                 <span class="mdi mdi-fire mr-1"></span>
                 <span>HEATER</span>
@@ -363,7 +363,7 @@
             <input class="hidden peer/lim" type="checkbox" id="lim" value="lim" {% if lim_status=='ON' %}checked{% endif
                 %} onclick="limClick()" />
             <label
-                class="flex flex-row justify-center py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/lim:bg-green-500 peer-checked/lim:text-white peer-checked/lim:border-green-500 transition-all"
+                class="flex flex-row cursor-pointer justify-center py-1 px-3 text-xl spce-x-2 font-medium text-slate-800 border-2 border-slate-300 rounded-md peer-checked/lim:bg-green-500 peer-checked/lim:text-white peer-checked/lim:border-green-500 hover:bg-green-100 hover:border-green-100 transition-all"
                 for="lim">
                 <span class="mdi mdi-projector-screen-variant-outline mr-1"></span>
                 <span>LIM</span>

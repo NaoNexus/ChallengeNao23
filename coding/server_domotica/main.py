@@ -22,8 +22,11 @@ def index():
     else:
         room = Room[request.args['room']]
 
-    light_status = domotics_server_helper.get_lights_status(room)
-    lim_status = domotics_server_helper.get_lim_status(room)
+    light_status = 'ON'
+    lim_status = 'OFF'
+
+    # light_status = domotics_server_helper.get_lights_status(room)
+    # lim_status = domotics_server_helper.get_lim_status(room)
 
     reports = db_helper.get_reports()
 
