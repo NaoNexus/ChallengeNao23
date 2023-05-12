@@ -277,7 +277,7 @@ class MyClass(GeneratedClass):
               <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
               <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="new_project" default_value="" custom_choice="0" tooltip="" id="5" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="6" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="6" />
             </Box>
             <Box name="Animated Say (1)" id="7" localization="8" tooltip="Say some text with animations. The text can be localized." x="540" y="330">
               <bitmap>media/images/box/interaction/say.png</bitmap>
@@ -429,7 +429,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Enable word spotting" inherits_from_parent="0" content_type="0" value="0" default_value="0" tooltip="If this option is not activated the robot will only understand exact expressions. If it is, he will spot the exact expressions even in the middle of a sentence.&#x0A;&#x0A;!!Warning!! This option is only available with the speech recognition module using Nuance (ie in Atom version of the robot)." id="9" />
               <Resource name="Speech recognition" type="Lock" timeout="0" />
             </Box>
-            <Box name="NAO question and user answer" id="10" localization="8" tooltip="Enter description here" x="1229" y="135">
+            <Box name="NAO question and user answer" id="10" localization="8" tooltip="Enter description here" x="1164" y="176">
               <bitmap>media/images/box/interaction/processing_sound.png</bitmap>
               <script language="4">
                 <content>
@@ -443,7 +443,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Question text" inherits_from_parent="0" content_type="3" value="Ho creato un nuovo progetto! Come vuoi chiamarlo?" default_value="" custom_choice="0" tooltip="" id="5" />
               <Parameter name="Timeout" inherits_from_parent="0" content_type="2" value="5" default_value="5" min="2" max="20" tooltip="" id="6" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="project_name" default_value="" custom_choice="0" tooltip="" id="7" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="8" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="8" />
               <Timeline enable="0">
                 <BehaviorLayer name="behavior_layer1">
                   <BehaviorKeyframe name="keyframe1" index="1">
@@ -905,7 +905,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Question text" inherits_from_parent="0" content_type="3" value="In che paese e situata l&apos;abitazione?" default_value="" custom_choice="0" tooltip="" id="5" />
               <Parameter name="Timeout" inherits_from_parent="0" content_type="2" value="5" default_value="5" min="2" max="20" tooltip="" id="6" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="country" default_value="" custom_choice="0" tooltip="" id="7" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="8" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="8" />
               <Timeline enable="0">
                 <BehaviorLayer name="behavior_layer1">
                   <BehaviorKeyframe name="keyframe1" index="1">
@@ -1367,7 +1367,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Question text" inherits_from_parent="0" content_type="3" value="Qual&apos;e l&apos;indirizzo dell&apos;abitazione?" default_value="" custom_choice="0" tooltip="" id="5" />
               <Parameter name="Timeout" inherits_from_parent="0" content_type="2" value="5" default_value="5" min="2" max="20" tooltip="" id="6" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="street" default_value="" custom_choice="0" tooltip="" id="7" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="8" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="8" />
               <Timeline enable="0">
                 <BehaviorLayer name="behavior_layer1">
                   <BehaviorKeyframe name="keyframe1" index="1">
@@ -1815,7 +1815,7 @@ class MyClass(GeneratedClass):
                 </BehaviorLayer>
               </Timeline>
             </Box>
-            <Box name="NAO question and user answer (3)" id="11" localization="8" tooltip="Enter description here" x="1430" y="141">
+            <Box name="NAO question and user answer (3)" id="11" localization="8" tooltip="Enter description here" x="1349" y="210">
               <bitmap>media/images/box/interaction/processing_sound.png</bitmap>
               <script language="4">
                 <content>
@@ -1829,7 +1829,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Question text" inherits_from_parent="0" content_type="3" value="Il progetto e di tipo residenziale o commerciale?" default_value="" custom_choice="0" tooltip="" id="5" />
               <Parameter name="Timeout" inherits_from_parent="0" content_type="2" value="5" default_value="5" min="2" max="20" tooltip="" id="6" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="project_type" default_value="" custom_choice="0" tooltip="" id="7" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="8" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="8" />
               <Timeline enable="0">
                 <BehaviorLayer name="behavior_layer1">
                   <BehaviorKeyframe name="keyframe1" index="1">
@@ -2291,7 +2291,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Question text" inherits_from_parent="0" content_type="3" value="In che provincia e situata l&apos;abitazione?" default_value="" custom_choice="0" tooltip="" id="5" />
               <Parameter name="Timeout" inherits_from_parent="0" content_type="2" value="5" default_value="5" min="2" max="20" tooltip="" id="6" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="city" default_value="" custom_choice="0" tooltip="" id="7" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="8" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="8" />
               <Timeline enable="0">
                 <BehaviorLayer name="behavior_layer1">
                   <BehaviorKeyframe name="keyframe1" index="1">
@@ -2753,7 +2753,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Question text" inherits_from_parent="0" content_type="3" value="Che consumo elettrico ha l&apos;abitazione in kilowatt ora?" default_value="" custom_choice="0" tooltip="" id="5" />
               <Parameter name="Timeout" inherits_from_parent="0" content_type="2" value="5" default_value="5" min="2" max="20" tooltip="" id="6" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="consumption" default_value="" custom_choice="0" tooltip="" id="7" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="8" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="8" />
               <Timeline enable="0">
                 <BehaviorLayer name="behavior_layer1">
                   <BehaviorKeyframe name="keyframe1" index="1">
@@ -3215,7 +3215,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Question text" inherits_from_parent="0" content_type="3" value="Il consumo e una misura annuale o mensile?" default_value="" custom_choice="0" tooltip="" id="5" />
               <Parameter name="Timeout" inherits_from_parent="0" content_type="2" value="5" default_value="5" min="2" max="20" tooltip="" id="6" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="consumption_period" default_value="" custom_choice="0" tooltip="" id="7" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="8" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="8" />
               <Timeline enable="0">
                 <BehaviorLayer name="behavior_layer1">
                   <BehaviorKeyframe name="keyframe1" index="1">
@@ -3677,7 +3677,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Question text" inherits_from_parent="0" content_type="3" value="Inserisci la nota del progetto" default_value="" custom_choice="0" tooltip="" id="5" />
               <Parameter name="Timeout" inherits_from_parent="0" content_type="2" value="10" default_value="5" min="2" max="20" tooltip="" id="6" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="notes" default_value="" custom_choice="0" tooltip="" id="7" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="8" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="8" />
               <Timeline enable="0">
                 <BehaviorLayer name="behavior_layer1">
                   <BehaviorKeyframe name="keyframe1" index="1">
@@ -4139,7 +4139,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Question text" inherits_from_parent="0" content_type="3" value="Che nome hai?" default_value="" custom_choice="0" tooltip="" id="5" />
               <Parameter name="Timeout" inherits_from_parent="0" content_type="2" value="5" default_value="5" min="2" max="20" tooltip="" id="6" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="name" default_value="" custom_choice="0" tooltip="" id="7" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="8" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="8" />
               <Timeline enable="0">
                 <BehaviorLayer name="behavior_layer1">
                   <BehaviorKeyframe name="keyframe1" index="1">
@@ -4916,7 +4916,7 @@ class MyClass(GeneratedClass):
               <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
               <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="create_project" default_value="" custom_choice="0" tooltip="" id="5" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="6" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="6" />
             </Box>
             <Box name="NAO question and user answer (10)" id="21" localization="8" tooltip="Enter description here" x="1930" y="580">
               <bitmap>media/images/box/interaction/processing_sound.png</bitmap>
@@ -4932,7 +4932,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Question text" inherits_from_parent="0" content_type="3" value="Qual&apos;e il nome della societa?" default_value="" custom_choice="0" tooltip="" id="5" />
               <Parameter name="Timeout" inherits_from_parent="0" content_type="2" value="5" default_value="5" min="2" max="20" tooltip="" id="6" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="consumption_period" default_value="" custom_choice="0" tooltip="" id="7" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="8" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="8" />
               <Timeline enable="0">
                 <BehaviorLayer name="behavior_layer1">
                   <BehaviorKeyframe name="keyframe1" index="1">
@@ -5609,7 +5609,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Question text" inherits_from_parent="0" content_type="3" value="Che cognome hai?" default_value="" custom_choice="0" tooltip="" id="5" />
               <Parameter name="Timeout" inherits_from_parent="0" content_type="2" value="5" default_value="5" min="2" max="20" tooltip="" id="6" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="surname" default_value="" custom_choice="0" tooltip="" id="7" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="8" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="8" />
               <Timeline enable="0">
                 <BehaviorLayer name="behavior_layer1">
                   <BehaviorKeyframe name="keyframe1" index="1">
@@ -6104,7 +6104,7 @@ class MyClass(GeneratedClass):
               <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
               <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="modelling_section" default_value="" custom_choice="0" tooltip="" id="5" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="6" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="6" />
             </Box>
             <Box name="Speech Reco. (4)" id="27" localization="8" tooltip="Recognize a word from a list of words set in the box parameters.&#x0A;&#x0A;V1.1.0&#x0A;" x="1935" y="777">
               <bitmap>media/images/box/interaction/ear.png</bitmap>
@@ -6236,7 +6236,7 @@ class MyClass(GeneratedClass):
               <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
               <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="positioning_section" default_value="" custom_choice="0" tooltip="" id="5" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="6" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="6" />
             </Box>
             <Box name="Animated Say (5)" id="29" localization="8" tooltip="Say some text with animations. The text can be localized." x="1724" y="771">
               <bitmap>media/images/box/interaction/say.png</bitmap>
@@ -6502,7 +6502,7 @@ class MyClass(GeneratedClass):
               <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
               <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
               <Parameter name="Server input path" inherits_from_parent="0" content_type="3" value="apply_positioning" default_value="" custom_choice="0" tooltip="" id="5" />
-              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.151" default_value="" custom_choice="0" tooltip="" id="6" />
+              <Parameter name="Server IP" inherits_from_parent="0" content_type="3" value="192.168.0.105" default_value="" custom_choice="0" tooltip="" id="6" />
             </Box>
             <Box name="Call server (5)" id="33" localization="8" tooltip="" x="255" y="1021">
               <bitmap>media/images/box/interaction/play_sound.png</bitmap>
