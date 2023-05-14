@@ -49,6 +49,9 @@ class MyClass(GeneratedClass):
                 response = requests.get('http://192.168.0.150:5000/api/reports')
                 json_data = response.json()
 
+                if len(json_data) == 0:
+                    continue
+
                 if response.status_code == 200 and old_id == "":
                     old_id = json_data['data'][0]['id']
                 elif response.status_code == 200 and old_id != json_data['data'][0]['id']:
@@ -82,7 +85,7 @@ class MyClass(GeneratedClass):
               <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
               <Output name="result" type="3" type_size="1" nature="2" inner="0" tooltip="" id="5" />
             </Box>
-            <Box name="Send data" id="2" localization="8" tooltip="" x="1258" y="389">
+            <Box name="Send data" id="2" localization="8" tooltip="" x="1236" y="191">
               <bitmap>media/images/box/box-python-script.png</bitmap>
               <script language="4">
                 <content>
@@ -130,7 +133,7 @@ class MyClass(GeneratedClass):
               <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="5" />
               <Output name="result" type="1" type_size="1" nature="2" inner="0" tooltip="" id="6" />
             </Box>
-            <Box name="Output Text" id="3" localization="8" tooltip="" x="574" y="30">
+            <Box name="Output Text" id="3" localization="8" tooltip="" x="603" y="62">
               <bitmap>media/images/box/box-python-script.png</bitmap>
               <script language="4">
                 <content>
@@ -159,12 +162,9 @@ class MyClass(GeneratedClass):
         self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
         self.onStopped() #activate the output of the box
 
-
     def onInput_Data(self, Data):
-
         A = Data.split(";")
         self.logger.info(A)
-
 
         ID = A[0]
         Data = A[1]
@@ -193,7 +193,6 @@ class MyClass(GeneratedClass):
         self.memory.insertData('giorno', giorno)
         self.memory.insertData('ora', ora)
         self.memory.insertData('min', min)
-
 
         if mese == "01":
             mese = "gennaio"
@@ -231,7 +230,6 @@ class MyClass(GeneratedClass):
         elif mese == "12" :
             mese = "dicembre"
 
-
         output = " è arrivato un nuovo report per i dati ambientali della stanza alle" + ora + "e" + min + "minuti del" + giorno + "di" + mese + "del" + anno +". I dati rilevano una temperatura di " + Temp + " gradi, CO2 pari a " + CO2 + " parti per milione, e un umidità pari al " + Umi + " per cento."
 
         #finestre di dialogo
@@ -240,7 +238,7 @@ class MyClass(GeneratedClass):
 
         TempLow = (" Ma voi umani non sentite il freddo? Ci sono" + Temp + " gradi, accendo il riscalda-mento che se no ci congeliamo tutti.")
 
-        CO2s = (" Cè troppa CO2," + CO2 + " parti per milione non fanno ossigenare abbastanza il cervello di voi umani. Vi apro le tapparelle, aprite le finestre.")
+        CO2s = (" Cè troppa Ci o 2," + CO2 + " parti per milione non fanno ossigenare abbastanza il cervello di voi umani. Vi apro le tapparelle, aprite le finestre.")
 
         UmiHigh = (" Cè tanta umidità in questa stanza. È sopra il " + Umi + " percento. Meglio aprire le finestre, se no si potrebbero rovinare le pareti con muffe o macchie.")
 
@@ -264,32 +262,25 @@ class MyClass(GeneratedClass):
         OldExtLight1 = ""
         OldIntLight1 = ""
 
-
         if float(Temp) > 18:
             output = output + TempHigh
             self.onThermo()
-
 
         if float(Temp) <= 10:
             output = output + TempLow
             self.onThermo()
 
-
         if float(CO2) > 1500:
             output = output + CO2s
             self.onBlindsOpen()
-
 
         if float(Umi) > 60:
             output = output + UmiHigh
             self.onBlindsOpen()
 
-
         if float(Umi) < 40:
             output = output + UmiLow
             self.onBlindsOpen()
-
-
 
         if int(ExtLight) > 3000:
             if int(IntLight) > int(ExtLight):
@@ -303,8 +294,6 @@ class MyClass(GeneratedClass):
             output = output + LowLight
             self.onBlindsClose()
             self.onLights()
-
-
 
         Stringa = output
         self.Text(Stringa)]]>
@@ -320,7 +309,7 @@ class MyClass(GeneratedClass):
               <Output name="onLim" type="1" type_size="1" nature="2" inner="0" tooltip="" id="8" />
               <Output name="onThermo" type="1" type_size="1" nature="2" inner="0" tooltip="" id="9" />
             </Box>
-            <Box name="Animated Say Text" id="4" localization="8" tooltip="Say the text received on its input and move during its speech.&#x0A;" x="837" y="31">
+            <Box name="Animated Say Text" id="4" localization="8" tooltip="Say the text received on its input and move during its speech.&#x0A;" x="854" y="28">
               <bitmap>media/images/box/interaction/say.png</bitmap>
               <script language="4">
                 <content>
@@ -382,7 +371,7 @@ class MyClass(GeneratedClass):
               </Parameter>
               <Resource name="Speech" type="Lock" timeout="0" />
             </Box>
-            <Box name="Speech Reco." id="5" localization="8" tooltip="Recognize a word from a list of words set in the box parameters.&#x0A;&#x0A;V1.1.0&#x0A;" x="181" y="164">
+            <Box name="Speech Reco." id="5" localization="8" tooltip="Recognize a word from a list of words set in the box parameters.&#x0A;&#x0A;V1.1.0&#x0A;" x="358" y="181">
               <bitmap>media/images/box/interaction/ear.png</bitmap>
               <script language="4">
                 <content>
@@ -465,7 +454,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Enable word spotting" inherits_from_parent="0" content_type="0" value="0" default_value="0" tooltip="If this option is not activated the robot will only understand exact expressions. If it is, he will spot the exact expressions even in the middle of a sentence.&#x0A;&#x0A;!!Warning!! This option is only available with the speech recognition module using Nuance (ie in Atom version of the robot)." id="9" />
               <Resource name="Speech recognition" type="Lock" timeout="0" />
             </Box>
-            <Box name="Switch Case" id="6" localization="8" tooltip="Test input value and stimulate the output matching to this value. If there is no&#x0A;matching output, the default output (onDefault) is stimulated.&#x0A;&#x0A;You can edit a case by left double-clicking on the line. You can add a&#x0A;case by right clicking on a line and selecting &apos;Insert a row&apos;. You can delete&#x0A;a case by right clicking on a line and selecting &apos;Remove a row&apos;." plugin="dispatcher_plugin" x="323" y="351">
+            <Box name="Switch Case" id="6" localization="8" tooltip="Test input value and stimulate the output matching to this value. If there is no&#x0A;matching output, the default output (onDefault) is stimulated.&#x0A;&#x0A;You can edit a case by left double-clicking on the line. You can add a&#x0A;case by right clicking on a line and selecting &apos;Insert a row&apos;. You can delete&#x0A;a case by right clicking on a line and selecting &apos;Remove a row&apos;." plugin="dispatcher_plugin" x="378" y="360">
               <bitmap>media/images/box/interaction/choice.png</bitmap>
               <script language="4">
                 <content>
@@ -546,7 +535,7 @@ class MyClass(GeneratedClass):
               <Output name="output_10" type="0" type_size="1" nature="2" inner="0" tooltip="This IO has been automatically added by box. Read box tooltip for more information." id="13" />
               <Output name="output_11" type="0" type_size="1" nature="2" inner="0" tooltip="This IO has been automatically added by box. Read box tooltip for more information." id="14" />
             </Box>
-            <Box name="ApriTapparelle" id="8" localization="8" tooltip="Say some text with animations. The text can be localized." x="712" y="236">
+            <Box name="ApriTapparelle" id="8" localization="8" tooltip="Say some text with animations. The text can be localized." x="689" y="248">
               <bitmap>media/images/box/interaction/say.png</bitmap>
               <script language="4">
                 <content>
@@ -613,7 +602,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Animation" inherits_from_parent="0" content_type="3" value="Stand/Gestures/Hey_2" default_value="" custom_choice="0" tooltip="The animation to play" id="9" />
               <Resource name="Speech" type="Lock" timeout="0" />
             </Box>
-            <Box name="ChiudiTapparelle" id="9" localization="8" tooltip="Say some text with animations. The text can be localized." x="717" y="332">
+            <Box name="ChiudiTapparelle" id="9" localization="8" tooltip="Say some text with animations. The text can be localized." x="691" y="343">
               <bitmap>media/images/box/interaction/say.png</bitmap>
               <script language="4">
                 <content>
@@ -680,7 +669,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Animation" inherits_from_parent="0" content_type="3" value="Stand/Gestures/Hey_2" default_value="" custom_choice="0" tooltip="The animation to play" id="9" />
               <Resource name="Speech" type="Lock" timeout="0" />
             </Box>
-            <Box name="Luce" id="10" localization="8" tooltip="Say some text with animations. The text can be localized." x="718" y="424">
+            <Box name="Luce" id="10" localization="8" tooltip="Say some text with animations. The text can be localized." x="693" y="438">
               <bitmap>media/images/box/interaction/say.png</bitmap>
               <script language="4">
                 <content>
@@ -747,7 +736,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Animation" inherits_from_parent="0" content_type="3" value="Stand/Gestures/Hey_2" default_value="" custom_choice="0" tooltip="The animation to play" id="9" />
               <Resource name="Speech" type="Lock" timeout="0" />
             </Box>
-            <Box name="Lim" id="11" localization="8" tooltip="Say some text with animations. The text can be localized." x="712" y="539">
+            <Box name="Lim" id="11" localization="8" tooltip="Say some text with animations. The text can be localized." x="701" y="531">
               <bitmap>media/images/box/interaction/say.png</bitmap>
               <script language="4">
                 <content>
@@ -814,7 +803,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Animation" inherits_from_parent="0" content_type="3" value="Stand/Gestures/Hey_2" default_value="" custom_choice="0" tooltip="The animation to play" id="9" />
               <Resource name="Speech" type="Lock" timeout="0" />
             </Box>
-            <Box name="Riscaldamento" id="12" localization="8" tooltip="Say some text with animations. The text can be localized." x="700" y="641">
+            <Box name="Riscaldamento" id="12" localization="8" tooltip="Say some text with animations. The text can be localized." x="700" y="627">
               <bitmap>media/images/box/interaction/say.png</bitmap>
               <script language="4">
                 <content>
@@ -881,7 +870,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Animation" inherits_from_parent="0" content_type="3" value="Stand/Gestures/Hey_2" default_value="" custom_choice="0" tooltip="The animation to play" id="9" />
               <Resource name="Speech" type="Lock" timeout="0" />
             </Box>
-            <Box name="Progetto" id="13" localization="8" tooltip="Say some text with animations. The text can be localized." x="137" y="373">
+            <Box name="Progetto" id="13" localization="8" tooltip="Say some text with animations. The text can be localized." x="206" y="383">
               <bitmap>media/images/box/interaction/say.png</bitmap>
               <script language="4">
                 <content>
@@ -948,7 +937,7 @@ class MyClass(GeneratedClass):
               <Parameter name="Animation" inherits_from_parent="0" content_type="3" value="Stand/Gestures/Hey_2" default_value="" custom_choice="0" tooltip="The animation to play" id="9" />
               <Resource name="Speech" type="Lock" timeout="0" />
             </Box>
-            <Box name="Text Edit Tapparelle" id="14" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="932" y="229">
+            <Box name="Text Edit Tapparelle" id="14" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="940" y="235">
               <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
               <script language="4">
                 <content>
@@ -958,12 +947,12 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("api/domotics/blinds/robotics?action=close;api/domotics/blinds/it?action=close")]]>
+		self.onStopped("api/domotics/blinds/quinta_ssa?action=close")]]>
                 </content>
               </script>
               <pluginContent>
                 <text>
-                  <![CDATA[api/domotics/blinds/robotics?action=close;api/domotics/blinds/it?action=close]]>
+                  <![CDATA[api/domotics/blinds/quinta_ssa?action=close]]>
                 </text>
               </pluginContent>
               <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
@@ -980,12 +969,12 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("api/domotics/lights/robotics;api/domotics/lights/it")]]>
+		self.onStopped("api/domotics/lights/quinta_ssa")]]>
                 </content>
               </script>
               <pluginContent>
                 <text>
-                  <![CDATA[api/domotics/lights/robotics;api/domotics/lights/it]]>
+                  <![CDATA[api/domotics/lights/quinta_ssa]]>
                 </text>
               </pluginContent>
               <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
@@ -1002,19 +991,19 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("api/domotics/lim/robotics;api/domotics/lim/it")]]>
+		self.onStopped("api/domotics/lim/quinta_ssa")]]>
                 </content>
               </script>
               <pluginContent>
                 <text>
-                  <![CDATA[api/domotics/lim/robotics;api/domotics/lim/it]]>
+                  <![CDATA[api/domotics/lim/quinta_ssa]]>
                 </text>
               </pluginContent>
               <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
               <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" />
               <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" />
             </Box>
-            <Box name="Text Edit Riscaldamento" id="17" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="953" y="506">
+            <Box name="Text Edit Riscaldamento" id="17" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="949" y="493">
               <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
               <script language="4">
                 <content>
@@ -1024,19 +1013,19 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("api/domotics/thermo/robotics;api")]]>
+		self.onStopped("api/domotics/thermo/quinta_ssa")]]>
                 </content>
               </script>
               <pluginContent>
                 <text>
-                  <![CDATA[api/domotics/thermo/robotics;api]]>
+                  <![CDATA[api/domotics/thermo/quinta_ssa]]>
                 </text>
               </pluginContent>
               <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
               <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" />
               <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" />
             </Box>
-            <Box name="Get temp" id="19" localization="8" tooltip="" x="402" y="691">
+            <Box name="Get temp" id="19" localization="8" tooltip="" x="450" y="712">
               <bitmap>media/images/box/box-python-script.png</bitmap>
               <script language="4">
                 <content>
@@ -1079,7 +1068,7 @@ class MyClass(GeneratedClass):
               <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
               <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
             </Box>
-            <Box name="Get umi" id="7" localization="8" tooltip="" x="410" y="794">
+            <Box name="Get umi" id="7" localization="8" tooltip="" x="322" y="714">
               <bitmap>media/images/box/box-python-script.png</bitmap>
               <script language="4">
                 <content>
@@ -1122,7 +1111,7 @@ class MyClass(GeneratedClass):
               <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
               <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
             </Box>
-            <Box name="Get co2" id="20" localization="8" tooltip="" x="412" y="899">
+            <Box name="Get co2" id="20" localization="8" tooltip="" x="198" y="714">
               <bitmap>media/images/box/box-python-script.png</bitmap>
               <script language="4">
                 <content>
@@ -1165,7 +1154,7 @@ class MyClass(GeneratedClass):
               <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
               <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
             </Box>
-            <Box name="Text Edit Tapparelle (1)" id="21" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="932" y="144">
+            <Box name="Text Edit Tapparelle (1)" id="21" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="939" y="149">
               <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
               <script language="4">
                 <content>
@@ -1175,12 +1164,12 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("api/domotics/blinds/robotics?action=open;api/domotics/blinds/it?action=open")]]>
+		self.onStopped("api/domotics/blinds/quinta_ssa?action=open")]]>
                 </content>
               </script>
               <pluginContent>
                 <text>
-                  <![CDATA[api/domotics/blinds/robotics?action=open;api/domotics/blinds/it?action=open]]>
+                  <![CDATA[api/domotics/blinds/quinta_ssa?action=open]]>
                 </text>
               </pluginContent>
               <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
@@ -1195,7 +1184,6 @@ class MyClass(GeneratedClass):
             <Link inputowner="9" indexofinput="2" outputowner="6" indexofoutput="5" />
             <Link inputowner="9" indexofinput="2" outputowner="6" indexofoutput="7" />
             <Link inputowner="10" indexofinput="2" outputowner="6" indexofoutput="8" />
-            <Link inputowner="11" indexofinput="2" outputowner="6" indexofoutput="9" />
             <Link inputowner="12" indexofinput="2" outputowner="6" indexofoutput="10" />
             <Link inputowner="13" indexofinput="2" outputowner="6" indexofoutput="11" />
             <Link inputowner="2" indexofinput="4" outputowner="14" indexofoutput="3" />
@@ -1217,11 +1205,10 @@ class MyClass(GeneratedClass):
             <Link inputowner="5" indexofinput="2" outputowner="6" indexofoutput="12" />
             <Link inputowner="5" indexofinput="2" outputowner="6" indexofoutput="13" />
             <Link inputowner="5" indexofinput="2" outputowner="6" indexofoutput="14" />
-            <Link inputowner="1" indexofinput="2" outputowner="4" indexofoutput="4" />
-            <Link inputowner="5" indexofinput="2" outputowner="2" indexofoutput="5" />
-            <Link inputowner="5" indexofinput="2" outputowner="0" indexofoutput="2" />
             <Link inputowner="17" indexofinput="2" outputowner="12" indexofoutput="4" />
             <Link inputowner="17" indexofinput="2" outputowner="3" indexofoutput="9" />
+            <Link inputowner="1" indexofinput="2" outputowner="4" indexofoutput="4" />
+            <Link inputowner="5" indexofinput="2" outputowner="2" indexofoutput="5" />
           </Diagram>
         </BehaviorKeyframe>
       </BehaviorLayer>
