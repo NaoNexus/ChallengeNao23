@@ -21,6 +21,7 @@ inputs = ['new_project',
           'info_section',
           'modelling_section',
           'positioning_section',
+          'consumption_section',
           'apply_positioning',
           'storage_section',
           'electrical_section',
@@ -40,7 +41,8 @@ inputs = ['new_project',
           'name',
           'surname',
           'company',
-          'notes',]
+          'notes',
+          'consumption_provider',]
 
-inputs_without_file = ['new_project', 'info_section', 'modelling_section', 'positioning_section', 'apply_positioning',
-                       'storage_section', 'electrical_section', 'financial_section', 'report_section', 'create_project']
+inputs_without_file = ['new_project', 'info_section', 'consumption_section', 'modelling_section', 'positioning_section', 'apply_positioning',
+                       'storage_section', 'electrical_section', 'financial_section', 'report_section', 'create_project', 'consumption_provider',]

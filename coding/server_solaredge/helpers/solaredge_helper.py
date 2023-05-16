@@ -4,8 +4,10 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.keys import Keys
 
 import time
+import random
 
 
 class SolarEdge():
@@ -34,6 +36,7 @@ class SolarEdge():
             'new_project': lambda _: self.click_element(ElementsIds.new_project_xpath, By.XPATH),
             'info_section': lambda _: self.click_element(ElementsIds.info_section_xpath, By.XPATH),
             'modelling_section': lambda _: self.click_element(ElementsIds.modelling_section_xpath, By.XPATH),
+            'consumption_section': lambda _: self.click_element(ElementsIds.consumption_section_xpath, By.XPATH),
             'positioning_section': lambda _: self.input_positioning(),
             'apply_positioning': lambda _: self.click_element(ElementsIds.apply_positioning_xpath, By.XPATH),
             'storage_section': lambda _: self.input_storage(),
@@ -43,6 +46,7 @@ class SolarEdge():
             'project_type': lambda value: self.click_element(ElementsIds.residential_xpath, By.XPATH) if ('residential' in value or 'residenziale' in value) else self.click_element(ElementsIds.commercial_xpath, By.XPATH),
             'project_name': lambda name: self.input_keys_element(ElementsIds.project_name_id, name),
             'create_project': lambda _: self.click_element(ElementsIds.create_button_xpath, By.XPATH),
+            'consumption_provider': lambda _: self.input_consumption_provider(),
             'country': lambda country: self.input_address('country', country),
             'street': lambda street: self.input_address('street', street),
             'city': lambda city: self.input_address('city', city),
@@ -53,7 +57,7 @@ class SolarEdge():
             'power_factor': lambda _: 0,
             'name': lambda name: self.input_keys_element(ElementsIds.name_id, name),
             'surname': lambda surname: self.input_keys_element(ElementsIds.surname_id, surname),
-            'company': lambda company: self.input_keys_element(ElementsIds.company_id, 5),
+            'company': lambda company: self.input_keys_element(ElementsIds.company_id, company),
             'notes': lambda notes: self.input_keys_element(ElementsIds.notes_id, notes),
         }[input](value)
 
@@ -74,7 +78,26 @@ class SolarEdge():
         self.input_keys_element(
             ElementsIds.consumption_xpath, consumption, By.XPATH)
 
-        self.click_electrical_grid('230')
+    def input_consumption_provider(self):
+        self.input_keys_element(
+            ElementsIds.utility_provider_xpath, 'Enel C&I' + Keys.DOWN + '\n', By.XPATH)
+        time.sleep(0.5)
+        self.input_keys_element(
+            ElementsIds.utility_rate_xpath, 'Enel C&I' + Keys.DOWN + '\n', By.XPATH)
+        time.sleep(0.5)
+        self.input_keys_element(
+            ElementsIds.export_rate_xpath, 'T' + Keys.DOWN + '\n', By.XPATH)
+        time.sleep(2)
+        self.input_keys_element(
+            ElementsIds.export_rate_name_xpath, f'ariffa{random.randrange(0, 1000)}', By.XPATH)
+        self.input_keys_element(
+            ElementsIds.export_rate_price_xpath, '1,2', By.XPATH)
+        self.input_keys_element(
+            ElementsIds.export_rate_start_date_xpath, 12062023, By.XPATH)
+        self.input_keys_element(
+            ElementsIds.export_rate_end_date_xpath, 16052024, By.XPATH)
+        self.click_element(ElementsIds.export_rate_save_button_xpath, By.XPATH)
+        time.sleep(5)
 
     def input_positioning(self):
         self.click_element(ElementsIds.positioning_section_xpath, By.XPATH)
@@ -155,7 +178,11 @@ class SolarEdge():
         self.driver.find_element(by, input_selector).click()
 
     def input_keys_element(self, input_selector, input, by: By = By.ID):
-        self.driver.find_element(by, input_selector).send_keys(input)
+        element = self.driver.find_element(
+            by, input_selector)
+
+        element.clear()
+        element.send_keys(input)
 
 
 class ElementsIds:
@@ -173,13 +200,23 @@ class ElementsIds:
     project_name_id = 'project-name'
     address_id = 'autocomplete1'
 
-    consumption_xpath = '/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div/div[1]/div/fieldset/div/div[2]/div/div/div/div[2]/div[2]/div/div[1]/div[1]/div[1]/div/div/div/div/input'
+    consumption_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[1]/div/div/div/div/input'
 
     consumption_period_dropdown_id = 'Periodo'
-    consumption_yearly_xpath = "/html/body/div[3]/div[3]/ul/li[@data-value='ANNUALLY']"
-    consumption_monthly_xpath = "/html/body/div[3]/div[3]/ul/li[@data-value='MONTHLY']"
+    consumption_yearly_xpath = "//li[@data-value='ANNUALLY']"
+    consumption_monthly_xpath = "//li[@data-value='MONTHLY']"
 
-    electrical_grid_dropdown_xpath = '/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div/div[1]/div/fieldset/div/div[3]/div/div/div/div[2]/div[2]/div[1]/div/div/div'
+    utility_provider_xpath = "//input[@data-testid='utility-provider-autocomplete-input']"
+    utility_rate_xpath = "//input[@data-testid='utility-rate-autocomplete-input']"
+    export_rate_xpath = "//input[@data-testid='export-rate-autocomplete-input']"
+    export_rate_name_xpath = "//input[@data-testid='export-rate-name-input']"
+    export_rate_price_xpath = "//input[@data-testid='export-rate-sell-price-input']"
+    export_rate_start_date_xpath = "/html/body/div[3]/div[3]/div/div[1]/div[3]/div[1]/div/div/div/div/input"
+    export_rate_end_date_xpath = "/html/body/div[3]/div[3]/div/div[1]/div[3]/div[2]/div/div/div/div/input"
+
+    export_rate_save_button_xpath = "//button[@data-testid='dialog-action-1']"
+
+    electrical_grid_dropdown_id = 'mui-52'
     electrical_grid_1_xpath = "/html/body/div[3]/div[3]/ul/li[@data-value='230']"
     electrical_grid_2_xpath = "/html/body/div[3]/div[3]/ul/li[@data-value='230V (230/400V)']"
     electrical_grid_3_xpath = "/html/body/div[3]/div[3]/ul/li[@data-value='MV']"
@@ -193,7 +230,7 @@ class ElementsIds:
 
     create_button_xpath = '/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div/div[2]/div/button[2]'
 
-    usage_profile_xpath = "/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div/div[1]/div/fieldset/div/div[2]/div/div/div/div[2]/div[2]/div/div[2]/div[1]/div/div/div/div"
+    usage_profile_xpath = "/html/body/div[1]/div[3]/div/div/div/div/div/div[2]/div[2]/div/div[1]/div[2]/div[1]/div/div/div/div"
     usage_profile_cost_xpath = "/html/body/div[3]/div[3]/div/div[1]/div[1]/div/div/div/div[3]"
     apply_usage_profile_xpath = "/html/body/div[3]/div[3]/div/div[2]/button[2]"
 
@@ -213,7 +250,9 @@ class ElementsIds:
     report_data_class_name = 'storage-info-item-module__container___yiRLw'
 
     info_section_xpath = "//div[@data-testid='project-info-tab']"
+
     modelling_section_xpath = "//div[@data-testid='modeling-tab']"
+    consumption_section_xpath = "//div[@data-testid='consumption-tab']"
     positioning_section_xpath = "//div[@data-testid='pv-placement-tab']"
     storage_section_xpath = "//div[@data-testid='storage-tab']"
     electrical_section_xpath = "//div[@data-testid='electrical-design-tab']"
