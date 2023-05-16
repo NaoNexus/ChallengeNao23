@@ -244,5 +244,7 @@ if __name__ == '__main__':
 
     startTime = time.time()
 
-    app.run(host=config_helper.srv_host, port=config_helper.srv_port,
-            debug=config_helper.srv_debug)
+    pdf = PDFAnalyzer(weather_api_helper, './report_pdfs/20230324-175444.pdf', 5, 2000)
+
+    # app.run(host=config_helper.srv_host, port=config_helper.srv_port,
+    #        debug=config_helper.srv_debug)

@@ -39,6 +39,8 @@ class PDFAnalyzer:
         page_content = page_content.replace(" ", "")
         page_content = page_content.replace("\n", "")
 
+        print(page_content)
+
         date_end = page_content.index("Summary") + 43
         date = page_content[date_end:date_end+18]
         self.date = datetime.strptime(date, '%m/%d/%Y%H:%M:%S')

@@ -194,8 +194,8 @@ class ElementsIds:
 
     new_project_xpath = "//a[@href='/sites/create']"
 
-    residential_xpath = "/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div/div[1]/div/fieldset/div/div[1]/div/div/div/div[2]/div[2]/div[1]/div/button[1]"
-    commercial_xpath = "/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div/div[1]/div/fieldset/div/div[1]/div/div/div/div[2]/div[2]/div[1]/div/button[2]"
+    residential_xpath = "//button[@value='residential']"
+    commercial_xpath = "//button[@value='commercial']"
 
     project_name_id = 'project-name'
     address_id = 'autocomplete1'
@@ -228,7 +228,7 @@ class ElementsIds:
     company_id = 'company'
     notes_id = 'notes'
 
-    create_button_xpath = '/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div/div[2]/div/button[2]'
+    create_button_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div[1]/div/div[2]/div/div[2]/div/button[2]'
 
     usage_profile_xpath = "/html/body/div[1]/div[3]/div/div/div/div/div/div[2]/div[2]/div/div[1]/div[2]/div[1]/div/div/div/div"
     usage_profile_cost_xpath = "/html/body/div[3]/div[3]/div/div[1]/div[1]/div/div/div/div[3]"
