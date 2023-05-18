@@ -29,7 +29,7 @@ def recording_input(Input):
                 uploaded_file = request.files['file']
 
             if (Input in utilities.inputs_without_file or (uploaded_file and uploaded_file.filename != '')):
-                if ((uploaded_file and uploaded_file.filename != '')):
+                if (uploaded_file and uploaded_file.filename != ''):
                     path = f'recordings/recording.wav'
                     uploaded_file.save(path)
                     speech_recognition = SpeechRecognition(path)
@@ -60,7 +60,43 @@ def recording_input(Input):
     else:
         logger.error('No input was specified')
         return jsonify({'code': 500, 'message': 'Input is invalid'}), 500
+    
+@app.route('/api/input_text/<string:Input>', methods=['POST'])
+def text_input(Input):
+    if Input != '' and Input != None and Input in utilities.inputs:
+        try:
+            value = None
+            if (Input not in utilities.inputs_without_file):
+                value = request.form.get('value', '')
 
+            if (Input in utilities.inputs_without_file or (value != None and value != '')):
+                if (value != None and value != ''):
+                    solar_edge.input(Input, value)
+
+                    return jsonify({'code': 200, 'message': 'OK', 'result': value}), 200
+
+                result = solar_edge.input(Input, '')
+
+                json = {'code': 200, 'message': 'OK'}
+
+                if (result != None and result != []):
+                    json['result'] = {
+                        'self_usage': result[0],
+                        'self_usage_batteries': result[1],
+                        'total_capacity': result[2],
+                        'total_power': result[3]
+                    }
+
+                return jsonify(json), 200
+            else:
+                logger.error('No value passed')
+                return jsonify({'code': 500, 'message': 'No value was passed'}), 500
+        except Exception as e:
+            logger.error(str(e))
+            return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('No input was specified')
+        return jsonify({'code': 500, 'message': 'Input is invalid'}), 500
 
 @app.route('/api/recognise', methods=['POST'])
 def recording():

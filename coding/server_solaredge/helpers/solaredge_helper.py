@@ -228,7 +228,7 @@ class ElementsIds:
     company_id = 'company'
     notes_id = 'notes'
 
-    create_button_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div[1]/div/div[2]/div/div[2]/div/button[2]'
+    create_button_xpath = "//button[contains(text(), 'Crea')]"
 
     usage_profile_xpath = "/html/body/div[1]/div[3]/div/div/div/div/div/div[2]/div[2]/div/div[1]/div[2]/div[1]/div/div/div/div"
     usage_profile_cost_xpath = "/html/body/div[3]/div[3]/div/div[1]/div[1]/div/div/div/div[3]"
