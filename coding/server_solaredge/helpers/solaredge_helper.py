@@ -39,7 +39,7 @@ class SolarEdge():
             'consumption_section': lambda _: self.click_element(ElementsIds.consumption_section_xpath, By.XPATH),
             'positioning_section': lambda _: self.input_positioning(),
             'apply_positioning': lambda _: self.click_element(ElementsIds.apply_positioning_xpath, By.XPATH),
-            'storage_section': lambda _: self.input_storage(),
+            'storage_section': lambda _: self.click_element(ElementsIds.storage_section_xpath, By.XPATH),
             'electrical_section': lambda _: self.click_element(ElementsIds.electrical_section_xpath, By.XPATH),
             'financial_section': lambda _: self.click_element(ElementsIds.financial_section_xpath, By.XPATH),
             'report_section': lambda _: self.get_report(),
@@ -51,6 +51,8 @@ class SolarEdge():
             'street': lambda street: self.input_address('street', street),
             'city': lambda city: self.input_address('city', city),
             # 'zip': lambda: 0, DEPRECATED: not used anymore
+            'self_usage': lambda _: self.input_storage(),
+            'system_type': lambda value: self.click_element(ElementsIds.system_type_monophase_xpath, By.XPATH) if ('monofase' in value) else self.click_element(ElementsIds.system_type_triphase_xpath, By.XPATH),
             'consumption': lambda consumption: self.input_consumption(consumption),
             'consumption_period': lambda period: self.click_consumption_period(period),
             'electrical_grid': lambda electrical_grid: self.click_electrical_grid(electrical_grid),
@@ -72,7 +74,7 @@ class SolarEdge():
             self.street = value
 
             self.input_keys_element(
-                ElementsIds.address_id, f'{self.street}, {self.city}, {self.country}\n')
+                ElementsIds.address_id, f'{self.street}, {self.city}, {self.country}\n', By.XPATH)
 
     def input_consumption(self, consumption):
         self.input_keys_element(
@@ -106,9 +108,7 @@ class SolarEdge():
         time.sleep(5)
         self.click_element(ElementsIds.autocomplete_panels_xpath, By.XPATH)
 
-    def input_storage(self):
-        self.click_element(ElementsIds.storage_section_xpath, By.XPATH)
-        time.sleep(5)
+    def input_storage(self):        
         self.input_keys_element(
             ElementsIds.min_self_usage_xpath, '50', By.XPATH)
         self.input_keys_element(
@@ -194,13 +194,20 @@ class ElementsIds:
 
     new_project_xpath = "//a[@href='/sites/create']"
 
+    name_id = 'first-name'
+    surname_id = 'last-name'
+    company_id = 'company'
+    notes_id = 'notes'
+
+    create_button_xpath = "//button[contains(text(), 'Crea')]"
+
     residential_xpath = "//button[@value='residential']"
     commercial_xpath = "//button[@value='commercial']"
 
     project_name_id = 'project-name'
-    address_id = 'autocomplete1'
+    address_id = "//input[@data-testid='address-input-autocomplete-input']"
 
-    consumption_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[1]/div/div/div/div/input'
+    consumption_xpath = "//input[@data-testid='consumption-input']"
 
     consumption_period_dropdown_id = 'Periodo'
     consumption_yearly_xpath = "//li[@data-value='ANNUALLY']"
@@ -223,13 +230,6 @@ class ElementsIds:
 
     power_factor_xpath = '/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/div/div[1]/div/fieldset/div/div[3]/div/div/div/div[2]/div[2]/div[2]/div[1]/div/div/div/div/input'
 
-    name_id = 'first-name'
-    surname_id = 'last-name'
-    company_id = 'company'
-    notes_id = 'notes'
-
-    create_button_xpath = "//button[contains(text(), 'Crea')]"
-
     usage_profile_xpath = "/html/body/div[1]/div[3]/div/div/div/div/div/div[2]/div[2]/div/div[1]/div[2]/div[1]/div/div/div/div"
     usage_profile_cost_xpath = "/html/body/div[3]/div[3]/div/div[1]/div[1]/div/div/div/div[3]"
     apply_usage_profile_xpath = "/html/body/div[3]/div[3]/div/div[2]/button[2]"
@@ -238,10 +238,13 @@ class ElementsIds:
     autocomplete_panels_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[1]/div[2]/div/div/div/div/div[3]/span/div/span[1]/span[1]/input'
     apply_positioning_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/button[2]'
 
+    system_type_monophase_xpath = "//span[contains(text(), 'Monofase')]"
+    system_type_triphase_xpath = "//span[contains(text(), 'Trifase')]"
+
     min_self_usage_xpath = "//input[@data-testid='min-self-consumption-slider-input']"
     min_self_usage_capacity_xpath = "//input[@data-testid='min-storage-capacity-slider-input']"
 
-    apply_battery_xpath = '/html/body/div[1]/div[3]/div/div/div/div[3]/div[3]/button'
+    apply_battery_xpath = "//button[contains(text(), 'Applica in Progettazione Elettrica')]"
 
     automatic_cabling_xpath = '/html/body/div[1]/div[3]/div/div/div/div/div/div[1]/div[2]/div[1]/div[2]/div/div[1]/fieldset/div/fieldset/div[1]/div[6]/div/div/div/div/div/div[1]/div/span[1]/span[1]/input'
 

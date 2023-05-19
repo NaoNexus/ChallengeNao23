@@ -34,6 +34,8 @@ inputs = ['new_project',
           'street',
           'city',
           # 'zip', DEPRECATED: not used anymore
+          'system_type',
+          'self_usage',
           'consumption',
           'consumption_period',
           # 'electrical_grid', DEPRECATED: automatically selected when consumption is inserted
@@ -44,5 +46,5 @@ inputs = ['new_project',
           'notes',
           'consumption_provider',]
 
-inputs_without_file = ['new_project', 'info_section', 'consumption_section', 'modelling_section', 'positioning_section', 'apply_positioning',
+inputs_without_file = ['new_project', 'self_usage', 'info_section', 'consumption_section', 'modelling_section', 'positioning_section', 'apply_positioning',
                        'storage_section', 'electrical_section', 'financial_section', 'report_section', 'create_project', 'consumption_provider',]
