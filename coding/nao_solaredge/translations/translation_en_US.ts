@@ -216,6 +216,24 @@
         </message>
     </context>
     <context>
+        <name>behavior_1/behavior.xar:/NAO question and user answer (11)/Animated Say</name>
+        <message>
+            <location filename="behavior_1/behavior.xar" line="0"/>
+            <source>e stato salvato</source>
+            <comment>Text</comment>
+            <translation type="unfinished">e stato salvato</translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/NAO question and user answer (11)/Animated Say (2)</name>
+        <message>
+            <location filename="behavior_1/behavior.xar" line="0"/>
+            <source></source>
+            <comment>Question text</comment>
+            <translation></translation>
+        </message>
+    </context>
+    <context>
         <name>behavior_1/behavior.xar:/NAO question and user answer (2)/Animated Say</name>
         <message>
             <location filename="behavior_1/behavior.xar" line="0"/>
