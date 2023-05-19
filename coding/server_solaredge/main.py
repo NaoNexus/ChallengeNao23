@@ -1,4 +1,3 @@
-from threading import Thread
 from helpers.config_helper import Config
 from helpers.logging_helper import logger
 from helpers.solaredge_helper import SolarEdge
@@ -32,7 +31,12 @@ def recording_input(Input):
                 if (uploaded_file and uploaded_file.filename != ''):
                     path = f'recordings/recording.wav'
                     uploaded_file.save(path)
-                    speech_recognition = SpeechRecognition(path)
+
+                    while True:
+                        speech_recognition = SpeechRecognition(path)
+
+                        if (speech_recognition.result != None or speech_recognition.result != ''):
+                            break
 
                     solar_edge.input(Input, speech_recognition.result)
 
@@ -60,7 +64,8 @@ def recording_input(Input):
     else:
         logger.error('No input was specified')
         return jsonify({'code': 500, 'message': 'Input is invalid'}), 500
-    
+
+
 @app.route('/api/input_text/<string:Input>', methods=['POST'])
 def text_input(Input):
     if Input != '' and Input != None and Input in utilities.inputs:
@@ -98,6 +103,7 @@ def text_input(Input):
         logger.error('No input was specified')
         return jsonify({'code': 500, 'message': 'Input is invalid'}), 500
 
+
 @app.route('/api/recognise', methods=['POST'])
 def recording():
     try:
@@ -106,7 +112,12 @@ def recording():
         if (uploaded_file and uploaded_file.filename != ''):
             path = f'recordings/recording.wav'
             uploaded_file.save(path)
-            speech_recognition = SpeechRecognition(path)
+
+            while True:
+                speech_recognition = SpeechRecognition(path)
+
+                if (speech_recognition.result != None or speech_recognition.result != ''):
+                    break
 
             return jsonify({'code': 200, 'message': 'OK', 'result': speech_recognition.result}), 200
         else:

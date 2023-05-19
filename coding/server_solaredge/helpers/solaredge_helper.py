@@ -143,6 +143,7 @@ class SolarEdge():
         self.click_element(ElementsIds.usage_profile_xpath, By.XPATH)
         time.sleep(5)
         self.click_element(ElementsIds.usage_profile_cost_xpath, By.XPATH)
+        time.sleep(2)
         self.click_element(ElementsIds.apply_usage_profile_xpath, By.XPATH)
 
     def click_electrical_grid(self, period):
